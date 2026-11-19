@@ -1,5 +1,17 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+
+// секции ниже первого экрана грузятся лениво — пролистываем страницу до конца, чтобы они появились
+async function scrollThrough(page: Page) {
+  await page.evaluate(async () => {
+    for (let y = 0; y <= document.documentElement.scrollHeight; y += 500) {
+      window.scrollTo(0, y)
+      await new Promise((r) => setTimeout(r, 120))
+    }
+    window.scrollTo(0, 0)
+  })
+  await page.locator('#contact h2').waitFor()
+}
 
 const viewports = [
   { name: 'desktop', width: 1440, height: 900 },
@@ -17,6 +29,7 @@ for (const vp of viewports) {
       page.on('pageerror', (e) => errors.push(String(e)))
       await page.goto('/')
       await expect(page.locator('h1')).toBeVisible()
+      await scrollThrough(page)
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
       )
@@ -27,6 +40,7 @@ for (const vp of viewports) {
     test('нет нарушений доступности (axe)', async ({ page }) => {
       await page.goto('/')
       await expect(page.locator('h1')).toBeVisible()
+      await scrollThrough(page)
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
       expect(results.violations.map((v) => `${v.id}: ${v.help}`)).toEqual([])
     })
@@ -49,6 +63,34 @@ test('ссылка SoundCloud ведёт на настоящий адрес', as
 
 test('карточка проекта содержит ссылки на код и демо', async ({ page }) => {
   await page.goto('/')
+  await scrollThrough(page)
   const card = page.locator('.card', { hasText: 'Game Studio Website' })
   await expect(card.getByRole('link')).toHaveCount(2)
+})
+
+test('нижние секции не грузятся, пока не подъехали к экрану', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('h1')).toBeVisible()
+  await expect(page.locator('#contact h2')).toHaveCount(0)
+  await page.locator('#contact').scrollIntoViewIfNeeded()
+  await expect(page.locator('#contact h2')).toBeVisible()
+})
+
+test('кот не заходит на японскую плашку на разных размерах окна', async ({ page }) => {
+  const sizes = [
+    [1920, 1080],
+    [1440, 700],
+    [1366, 768],
+    [1280, 720],
+    [820, 1100],
+    [390, 844],
+    [360, 640],
+  ]
+  for (const [width, height] of sizes) {
+    await page.setViewportSize({ width, height })
+    await page.goto('/')
+    const jp = await page.locator('.jp').boundingBox()
+    const cat = await page.locator('.cat').boundingBox()
+    expect(cat!.y, `${width}x${height}`).toBeGreaterThanOrEqual(jp!.y + jp!.height + 8)
+  }
 })

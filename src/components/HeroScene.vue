@@ -37,8 +37,8 @@ import spark from '../assets/img/spark.webp'
       <img
         class="main"
         :src="character"
-        width="1998"
-        height="1404"
+        width="2664"
+        height="1872"
         fetchpriority="high"
         alt="Иллюстрация: Богдан в шапке с кошачьими ушками на фоне города"
       />

@@ -6,6 +6,11 @@ import coverGameStudio from '../assets/img/cover-game-studio.webp'
 
 export type Lang = 'ru' | 'en'
 
+export interface Bi {
+  ru: string
+  en: string
+}
+
 export interface Project {
   title: string
   ru: string
@@ -13,7 +18,34 @@ export interface Project {
   tech: string[]
   repo?: string
   demo?: string
-  cover: string
+  /** картинка обложки; у заглушек не нужна — рисуется градиентом по hue */
+  cover?: string
+  /** true — заглушка «скоро», без ссылок */
+  soon?: boolean
+  /** оттенок градиента для заглушки (0–360) */
+  hue?: number
+}
+
+export interface SkillGroup {
+  name: Bi
+  items: string[]
+}
+
+export interface Track {
+  title: string
+  length: string
+}
+
+export interface Job {
+  period: string
+  role: Bi
+  company: Bi
+  text: Bi
+}
+
+export interface Service {
+  title: Bi
+  text: Bi
 }
 
 export type Texts = Record<string, string>
@@ -21,6 +53,10 @@ export type Texts = Record<string, string>
 export interface Site {
   contacts: Record<'email' | 'github' | 'linkedin' | 'telegram' | 'whatsapp' | 'soundcloud', string>
   projects: Project[]
+  skills: SkillGroup[]
+  tracks: Track[]
+  jobs: Job[]
+  services: Service[]
   t: Record<Lang, Texts>
 }
 
@@ -46,6 +82,47 @@ export const site: Site = {
       demo: 'https://game-studio-site.onrender.com',
       cover: coverGameStudio,
     },
+    // ↓ заглушки: замени на свои проекты (soon: true убирает ссылки и ставит бейдж «Скоро»)
+    {
+      title: 'Project 02',
+      ru: 'Здесь появится описание проекта: что делает и для кого.',
+      en: 'A short description goes here: what it does and who it is for.',
+      tech: ['Vue', 'TypeScript'],
+      soon: true,
+      hue: 232,
+    },
+    {
+      title: 'Project 03',
+      ru: 'Здесь появится описание проекта: что делает и для кого.',
+      en: 'A short description goes here: what it does and who it is for.',
+      tech: ['Node.js', 'PostgreSQL'],
+      soon: true,
+      hue: 250,
+    },
+    {
+      title: 'Project 04',
+      ru: 'Здесь появится описание проекта: что делает и для кого.',
+      en: 'A short description goes here: what it does and who it is for.',
+      tech: ['React', 'Prisma'],
+      soon: true,
+      hue: 205,
+    },
+    {
+      title: 'Project 05',
+      ru: 'Здесь появится описание проекта: что делает и для кого.',
+      en: 'A short description goes here: what it does and who it is for.',
+      tech: ['Vue', 'Redis'],
+      soon: true,
+      hue: 262,
+    },
+    {
+      title: 'Project 06',
+      ru: 'Здесь появится описание проекта: что делает и для кого.',
+      en: 'A short description goes here: what it does and who it is for.',
+      tech: ['TypeScript', 'Node.js'],
+      soon: true,
+      hue: 220,
+    },
     // {
     //   title: "Название",
     //   ru: "Описание по-русски.",
@@ -55,6 +132,94 @@ export const site: Site = {
     //   demo: "https://...",
     //   cover: coverGameStudio
     // },
+  ],
+
+  // ── навыки (заглушка: поправь под себя) ─────────────────────
+  skills: [
+    {
+      name: { ru: 'Фронтенд', en: 'Frontend' },
+      items: ['Vue 3', 'React', 'TypeScript', 'HTML & CSS', 'Vite'],
+    },
+    {
+      name: { ru: 'Бэкенд и данные', en: 'Backend & data' },
+      items: ['Node.js', 'PostgreSQL', 'Prisma', 'Redis', 'REST API'],
+    },
+    {
+      name: { ru: 'Аналитика', en: 'Analysis' },
+      items: ['Требования', 'UML', 'BPMN', 'Документация API', 'SQL'],
+    },
+    {
+      name: { ru: 'Инструменты', en: 'Tools' },
+      items: ['Git', 'GitHub Actions', 'Playwright', 'Vitest', 'ИИ-агенты'],
+    },
+  ],
+
+  // ── треки (заглушка: замени названиями своих релизов) ───────
+  tracks: [
+    { title: 'Track 01', length: '3:12' },
+    { title: 'Track 02', length: '2:48' },
+    { title: 'Track 03', length: '3:41' },
+    { title: 'Track 04', length: '2:57' },
+  ],
+
+  // ── опыт (заглушка: впиши свои места работы) ────────────────
+  jobs: [
+    {
+      period: '2025 — now',
+      role: { ru: 'Системный аналитик и фронтенд-разработчик', en: 'Systems analyst & frontend developer' },
+      company: { ru: 'Название компании', en: 'Company name' },
+      text: {
+        ru: 'Здесь коротко: чем занимался, какие задачи решал и что получилось.',
+        en: 'A short note: what you did, which problems you solved and what came out of it.',
+      },
+    },
+    {
+      period: '2024',
+      role: { ru: 'Фуллстек-разработчик', en: 'Fullstack developer' },
+      company: { ru: 'Название компании или проект', en: 'Company or project name' },
+      text: {
+        ru: 'Здесь коротко: чем занимался, какие задачи решал и что получилось.',
+        en: 'A short note: what you did, which problems you solved and what came out of it.',
+      },
+    },
+    {
+      period: '2023',
+      role: { ru: 'Первые проекты', en: 'First projects' },
+      company: { ru: 'Учёба и свои работы', en: 'Learning & side projects' },
+      text: {
+        ru: 'Здесь коротко: с чего начинал и чему научился.',
+        en: 'A short note: where you started and what you learned.',
+      },
+    },
+  ],
+
+  // ── «что делаю» для блока About (заглушка) ──────────────────
+  services: [
+    {
+      title: { ru: 'Интерфейсы', en: 'Interfaces' },
+      text: {
+        ru: 'Аккуратная вёрстка и фронтенд на Vue и React.',
+        en: 'Clean markup and frontend in Vue and React.',
+      },
+    },
+    {
+      title: { ru: 'Серверная часть', en: 'Backend' },
+      text: {
+        ru: 'API, базы данных, интеграции и платежи.',
+        en: 'APIs, databases, integrations and payments.',
+      },
+    },
+    {
+      title: { ru: 'Системный анализ', en: 'Systems analysis' },
+      text: {
+        ru: 'Разбираю сложные системы и описываю их понятно.',
+        en: 'Breaking down complex systems and documenting them clearly.',
+      },
+    },
+    {
+      title: { ru: 'Музыка', en: 'Music' },
+      text: { ru: 'Пишу и выпускаю треки сам.', en: 'Writing and releasing tracks myself.' },
+    },
   ],
 
   // ── тексты сайта ────────────────────────────────────────────
@@ -74,6 +239,14 @@ export const site: Site = {
       scroll: 'Листай вниз',
       p_title: 'Работы',
       p_sub: 'Что я собрал и выложил.',
+      p_badge: 'Скоро',
+      s_title: 'Стек',
+      s_sub: 'С чем я работаю.',
+      m_tracks: 'Треки',
+      m_play: 'Слушать',
+      e_title: 'Опыт',
+      e_sub: 'Где работал и что делал.',
+      a_do: 'Что делаю',
       p_repo: 'Код',
       p_demo: 'Открыть',
       p_soon: 'Скоро новый проект',
@@ -106,6 +279,14 @@ export const site: Site = {
       scroll: 'Scroll down',
       p_title: 'Projects',
       p_sub: 'Things I built and shipped.',
+      p_badge: 'Soon',
+      s_title: 'Skills',
+      s_sub: 'What I work with.',
+      m_tracks: 'Tracks',
+      m_play: 'Play',
+      e_title: 'Experience',
+      e_sub: 'Where I worked and what I did.',
+      a_do: 'What I do',
       p_repo: 'Code',
       p_demo: 'Live demo',
       p_soon: 'New project soon',

@@ -12,13 +12,19 @@ describe('данные сайта', () => {
       }
     }
   })
-  it('у каждого проекта есть название, описания, стек и обложка', () => {
+  it('у каждого проекта есть название, описания и стек; у настоящего (не заглушки) ещё и обложка', () => {
     for (const p of site.projects) {
       expect(p.title).toBeTruthy()
       expect(p.ru).toBeTruthy()
       expect(p.en).toBeTruthy()
       expect(p.tech.length).toBeGreaterThan(0)
-      expect(p.cover).toBeTruthy()
+      if (!p.soon) expect(p.cover).toBeTruthy()
+    }
+  })
+  it('у заглушек нет ссылок на код и демо', () => {
+    for (const p of site.projects.filter((x) => x.soon)) {
+      expect(p.repo).toBeUndefined()
+      expect(p.demo).toBeUndefined()
     }
   })
   it('все контакты заполнены (ссылка на SoundCloud не заглушка)', () => {
