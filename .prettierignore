@@ -1,0 +1,7 @@
+dist
+node_modules
+playwright-report
+test-results
+src/styles/main.css
+src/data/socials.ts
+package-lock.json
