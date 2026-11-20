@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useLang } from '../composables/useLang'
+import BrandMark from './BrandMark.vue'
 
 const { t } = useLang()
 const year = new Date().getFullYear()
@@ -7,7 +8,7 @@ const year = new Date().getFullYear()
 
 <template>
   <footer class="wrap foot">
-    <span class="brand"><span class="sp" aria-hidden="true">✦</span>1234</span>
+    <RouterLink class="brand" to="/" aria-label="1234"><BrandMark :size="26" />1234</RouterLink>
     <span class="footmeta">
       <span>{{ t('foot') }}</span>
       <span>© {{ year }} Bogdan Korzun</span>

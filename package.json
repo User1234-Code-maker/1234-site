@@ -12,10 +12,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
-    "vue": "3.5.45"
+    "vue": "3.5.45",
+    "vue-router": "5.5.1"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- ушки -->
+  <path d="M7 30 6 6 27 15Z" fill="#2B72E0" stroke="#14205C" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M57 30 58 6 37 15Z" fill="#2B72E0" stroke="#14205C" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M11 22 10.5 12 20 16.5Z" fill="#6DB8FF"/>
+  <path d="M53 22 53.5 12 44 16.5Z" fill="#6DB8FF"/>
+  <!-- шапка: купол с меховой кромкой -->
+  <path d="M6 48C5 29 14 14 32 14S59 29 58 48C58 54 54 57 48 57H16C10 57 6 54 6 48Z" fill="#2F7DEA" stroke="#14205C" stroke-width="3" stroke-linejoin="round"/>
+  <!-- фактура меха -->
+  <path d="M15 24c3-3 6-4.5 9-5M44 21c2 1 4 2.5 5 4.5" stroke="#6DB8FF" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M10 38v5M54 36v6M13 49l2 2M51 49l-2 2" stroke="#1B54B8" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- светлая вставка спереди (как на арте: широкая, с «холмиком» сверху) -->
+  <path d="M10.5 49C10.5 38 16 31 23 30C28 29.2 31 31.4 35 30.2C43 28.4 53.5 36 53.5 49C53.5 51.2 52 52.5 50 52.5H14C12 52.5 10.5 51.2 10.5 49Z" fill="#F4BF94" stroke="#14205C" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M17 41c3-5 8-8 13-8" stroke="#FFDDBB" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M38 36.5l6 .6M24 46l5-.4" stroke="#C98E66" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- меховая кромка -->
+  <path d="M13 51.8h38" stroke="#FFEBD6" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

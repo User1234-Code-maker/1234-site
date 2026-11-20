@@ -43,9 +43,11 @@ const tagLines = computed(() => t('tag').split('\n'))
       <img v-for="s in stack" :key="s.name" :src="s.src" :alt="s.name" height="34" />
     </div>
     <div class="acts">
-      <a class="pill" href="#projects">{{ t('cta_projects') }} <span aria-hidden="true">→</span></a>
-      <a class="listen" href="#music"
-        ><b aria-hidden="true">▶</b> <span>{{ t('cta_music') }}</span></a
+      <RouterLink class="pill" to="/projects"
+        >{{ t('cta_projects') }} <span aria-hidden="true">→</span></RouterLink
+      >
+      <RouterLink class="listen" to="/music"
+        ><b aria-hidden="true">▶</b> <span>{{ t('cta_music') }}</span></RouterLink
       >
     </div>
     <span class="scroll"

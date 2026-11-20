@@ -20,6 +20,7 @@ const { t } = useLang()
     </div>
     <p class="mailtext">
       <a :href="hrefFor('mail')">{{ site.contacts.email }}</a>
+      · <RouterLink to="/contact">{{ t('nav_contact') }}</RouterLink>
     </p>
   </section>
 </template>

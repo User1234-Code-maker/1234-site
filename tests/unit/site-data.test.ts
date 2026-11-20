@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { site } from '../../src/data/site'
+import { categories, projects } from '../../src/data/projects'
+import { releases } from '../../src/data/music'
 
 describe('данные сайта', () => {
   it('у русской и английской версий одинаковые ключи текстов', () => {
@@ -12,19 +14,42 @@ describe('данные сайта', () => {
       }
     }
   })
-  it('у каждого проекта есть название, описания и стек; у настоящего (не заглушки) ещё и обложка', () => {
-    for (const p of site.projects) {
+  it('у каждой категории есть название и хотя бы один проект', () => {
+    for (const c of categories) {
+      expect(site.t.ru[`cat_${c}`], c).toBeTruthy()
+      expect(
+        projects.some((p) => p.category === c),
+        c,
+      ).toBe(true)
+    }
+  })
+  it('у проектов уникальные slug, описания, стек и схема', () => {
+    expect(new Set(projects.map((p) => p.slug)).size).toBe(projects.length)
+    for (const p of projects) {
       expect(p.title).toBeTruthy()
       expect(p.ru).toBeTruthy()
       expect(p.en).toBeTruthy()
       expect(p.tech.length).toBeGreaterThan(0)
-      if (!p.soon) expect(p.cover).toBeTruthy()
+      expect(p.arch.length).toBeGreaterThan(1)
+      expect(categories).toContain(p.category)
     }
   })
-  it('у заглушек нет ссылок на код и демо', () => {
-    for (const p of site.projects.filter((x) => x.soon)) {
-      expect(p.repo).toBeUndefined()
-      expect(p.demo).toBeUndefined()
+  it('демонстрационные проекты без ссылок, настоящие со ссылкой', () => {
+    for (const p of projects) {
+      if (p.sample) {
+        expect(p.repo).toBeUndefined()
+        expect(p.demo).toBeUndefined()
+      } else {
+        expect(p.repo || p.demo).toBeTruthy()
+      }
+    }
+  })
+  it('релизы: уникальные id, треки, корректные даты и формат длины', () => {
+    expect(new Set(releases.map((r) => r.id)).size).toBe(releases.length)
+    for (const r of releases) {
+      expect(Number.isNaN(Date.parse(r.date)), r.id).toBe(false)
+      expect(r.tracks.length).toBeGreaterThan(0)
+      for (const t of r.tracks) expect(t.length).toMatch(/^\d+:\d{2}$/)
     }
   })
   it('все контакты заполнены (ссылка на SoundCloud не заглушка)', () => {

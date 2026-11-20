@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import cloudA from '../assets/img/cloud-a.webp'
 import cloudASm from '../assets/img/cloud-a-sm.webp'
 import cloudB from '../assets/img/cloud-b.webp'
@@ -8,6 +9,10 @@ import cloudCSm from '../assets/img/cloud-c-sm.webp'
 import character from '../assets/img/character.webp'
 import characterSm from '../assets/img/character-sm.webp'
 import cat from '../assets/img/cat.png'
+import { useHeroCat } from '../composables/useHeroCat'
+
+const catEl = ref<HTMLImageElement | null>(null)
+useHeroCat(catEl)
 import spark from '../assets/img/spark.webp'
 </script>
 
@@ -53,7 +58,7 @@ import spark from '../assets/img/spark.webp'
   <div class="layer l-dust" data-par="16" aria-hidden="true"></div>
   <div class="layer l-deco" data-par="30">
     <span class="deco jp" aria-hidden="true"><i class="a"></i>ゲームと音楽<i class="b"></i></span>
-    <img class="deco cat" :src="cat" alt="" aria-hidden="true" width="342" height="294" />
+    <img ref="catEl" class="deco cat" :src="cat" alt="" aria-hidden="true" width="342" height="294" />
     <img class="deco sp1" :src="spark" alt="" aria-hidden="true" width="368" height="368" />
     <img class="deco sp2" :src="spark" alt="" aria-hidden="true" width="368" height="368" />
     <img class="deco sp3" :src="spark" alt="" aria-hidden="true" width="368" height="368" />
