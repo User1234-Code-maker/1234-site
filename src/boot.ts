@@ -13,9 +13,15 @@ function ready(img: HTMLImageElement | null) {
 export function finishBoot() {
   const el = document.getElementById('boot')
   const root = document.documentElement
-  if (!el) return
+  const enter = (delay: number) =>
+    window.setTimeout(() => {
+      root.classList.add('hero-in')
+      root.classList.remove('hero-pre')
+    }, delay)
+  if (!el) return enter(0)
   if (root.classList.contains('no-boot')) {
     el.remove()
+    enter(0)
     return
   }
 
@@ -32,6 +38,7 @@ export function finishBoot() {
       /* без localStorage заставка просто покажется снова */
     }
     el.classList.add('out')
+    enter(260)
     root.classList.remove('booting')
     window.setTimeout(() => el.remove(), 900)
   }

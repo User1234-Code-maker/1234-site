@@ -10,18 +10,24 @@ export const skills: SkillGroup[] = [
   },
   {
     name: { ru: 'Аналитика', en: 'Analysis' },
-    items: ['Требования', 'UML', 'BPMN', 'Документация API', 'SQL'],
+    items: [
+      { ru: 'Требования', en: 'Requirements' },
+      'UML',
+      'BPMN',
+      { ru: 'Документация API', en: 'API docs' },
+      'SQL',
+    ],
   },
   {
     name: { ru: 'Инструменты', en: 'Tools' },
-    items: ['Git', 'GitHub Actions', 'Playwright', 'Vitest', 'ИИ-агенты'],
+    items: ['Git', 'GitHub Actions', 'Playwright', 'Vitest', { ru: 'ИИ-агенты', en: 'AI agents' }],
   },
 ]
 
 /** Заглушки опыта: впиши свои места работы */
 export const jobs: Job[] = [
   {
-    period: '2025 — now',
+    period: { ru: '2025 — по настоящее время', en: '2025 — now' },
     role: { ru: 'Системный аналитик и фронтенд-разработчик', en: 'Systems analyst & frontend developer' },
     company: { ru: 'Музыкальный лейбл', en: 'Music label' },
     text: {
@@ -30,7 +36,7 @@ export const jobs: Job[] = [
     },
   },
   {
-    period: '2024',
+    period: { ru: '2024', en: '2024' },
     role: { ru: 'Фуллстек-разработчик', en: 'Fullstack developer' },
     company: { ru: 'Свои проекты', en: 'Own projects' },
     text: {

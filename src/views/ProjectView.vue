@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import LazyImg from '../components/LazyImg.vue'
 import PageShell from '../components/PageShell.vue'
 import { useLang } from '../composables/useLang'
+import { tx } from '../utils/i18n'
 import { vReveal } from '../directives/reveal'
 import { projectBySlug, projects } from '../data/projects'
 import NotFoundView from './NotFoundView.vue'
@@ -72,12 +73,12 @@ const next = computed(() => projects[(idx.value + 1) % projects.length]!)
       <section v-reveal class="wrap pj-sec" aria-labelledby="arch-t">
         <h2 id="arch-t">{{ t('p_arch') }}</h2>
         <ol class="arch stagger">
-          <li v-for="(n, i) in project.arch" :key="n.label" :style="{ '--i': i }">
-            <b>{{ n.label }}</b>
+          <li v-for="(n, i) in project.arch" :key="tx(n.label, 'en')" :style="{ '--i': i }">
+            <b>{{ tx(n.label, lang) }}</b>
             <small v-if="n.note">{{ n.note[lang] }}</small>
           </li>
         </ol>
-        <p class="hint">{{ t('p_arch_note') }}</p>
+        <p class="arch-note">{{ t('p_arch_note') }}</p>
       </section>
 
       <section v-reveal class="wrap pj-sec" aria-labelledby="shots-t">

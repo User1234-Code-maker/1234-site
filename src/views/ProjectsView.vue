@@ -35,7 +35,7 @@ const count = (c: Category | 'all') =>
       </div>
       <Transition name="grid" mode="out-in">
         <div :key="active" class="cards big" aria-live="polite">
-          <ProjectCard v-for="(p, i) in shown" :key="p.slug" :project="p" :index="i" />
+          <ProjectCard v-for="(p, i) in shown" :key="p.slug" :project="p" :index="i" priority />
           <p v-if="!shown.length" class="empty">{{ t('p_empty') }}</p>
         </div>
       </Transition>

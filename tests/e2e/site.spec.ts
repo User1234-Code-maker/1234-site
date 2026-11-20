@@ -72,7 +72,7 @@ test.describe('функциональность', () => {
   test('язык остаётся при переходе на другую страницу', async ({ page }) => {
     await page.goto('/')
     await page.getByRole('button', { name: 'RU' }).click()
-    await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Работы' }).click()
+    await page.locator('header nav').getByRole('link', { name: 'Работы' }).click()
     await expect(page).toHaveURL(/\/projects$/)
     await expect(page.locator('h1')).toHaveText('Работы')
   })
@@ -103,6 +103,7 @@ test.describe('функциональность', () => {
 
   test('фильтр проектов показывает только выбранную категорию', async ({ page }) => {
     await page.goto('/projects')
+    await expect(page.locator('.pcard').first()).toBeVisible()
     const all = await page.locator('.pcard').count()
     await page.getByRole('button', { name: /Telegram Bots/ }).click()
     await expect(page.locator('.pcard')).toHaveCount(2)
@@ -256,5 +257,24 @@ test.describe('заставка', () => {
     await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Projects' }).click()
     await expect(page.locator('h1')).toHaveText('Projects')
     await expect(page.locator('#boot')).toHaveCount(0)
+  })
+})
+
+test.describe('игровой слой и котик', () => {
+  test('игровой canvas и котик есть на странице, ошибок нет', async ({ page }) => {
+    const errors: string[] = []
+    page.on('pageerror', (e) => errors.push(String(e)))
+    await page.goto('/')
+    await expect(page.locator('.starfield')).toBeAttached()
+    for (let i = 0; i < 10; i++) await page.mouse.move(200 + i * 80, 300 + (i % 3) * 50)
+    await expect(page.locator('.pcat')).toBeAttached()
+    expect(errors).toEqual([])
+  })
+
+  test('смена языка анимируется и меняет заголовок', async ({ page }) => {
+    await page.goto('/')
+    await page.getByRole('button', { name: 'RU' }).click()
+    await expect(page.locator('h1')).toContainText('Фуллстек-разработчик')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
   })
 })

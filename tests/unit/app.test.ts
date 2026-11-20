@@ -34,6 +34,7 @@ describe('App', () => {
       .findAll('.lang button')
       .find((b) => b.text() === 'RU')!
       .trigger('click')
+    await new Promise((r) => setTimeout(r, 400))
     await nextTick()
     expect(w.get('h1').text()).toContain('Фуллстек-разработчик')
     expect(document.documentElement.lang).toBe('ru')

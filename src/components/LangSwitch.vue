@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useLang } from '../composables/useLang'
 
-const { lang, setLang } = useLang()
+const { lang, setLang, t } = useLang()
 </script>
 
 <template>
-  <span class="lang" role="group" aria-label="Language">
+  <span class="lang" role="group" :aria-label="t('aria_lang')">
     <button type="button" :class="{ on: lang === 'ru' }" :aria-pressed="lang === 'ru'" @click="setLang('ru')">
       RU
     </button>

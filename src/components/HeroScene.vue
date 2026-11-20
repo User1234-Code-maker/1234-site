@@ -9,7 +9,10 @@ import cloudCSm from '../assets/img/cloud-c-sm.webp'
 import character from '../assets/img/character.webp'
 import characterSm from '../assets/img/character-sm.webp'
 import cat from '../assets/img/cat.png'
+import { useLang } from '../composables/useLang'
 import { useHeroCat } from '../composables/useHeroCat'
+
+const { t } = useLang()
 
 const catEl = ref<HTMLImageElement | null>(null)
 useHeroCat(catEl)
@@ -45,7 +48,7 @@ import spark from '../assets/img/spark.webp'
         width="2664"
         height="1872"
         fetchpriority="high"
-        alt="Иллюстрация: Богдан в шапке с кошачьими ушками на фоне города"
+        :alt="t('hero_alt')"
       />
     </picture>
   </div>

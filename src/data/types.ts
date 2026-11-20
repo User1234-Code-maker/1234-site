@@ -8,7 +8,7 @@ export interface Bi {
 export type Category = 'web' | 'erp' | 'bots' | 'ai' | 'lab'
 
 export interface ArchNode {
-  label: string
+  label: string | Bi
   note?: Bi
 }
 
@@ -38,7 +38,7 @@ export interface Project {
 
 export interface SkillGroup {
   name: Bi
-  items: string[]
+  items: Array<string | Bi>
 }
 
 export type ReleaseKind = 'album' | 'single' | 'ep'
@@ -62,7 +62,7 @@ export interface Release {
 }
 
 export interface Job {
-  period: string
+  period: Bi
   role: Bi
   company: Bi
   text: Bi

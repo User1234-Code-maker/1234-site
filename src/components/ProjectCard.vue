@@ -5,7 +5,7 @@ import { vTilt } from '../directives/tilt'
 import type { Project } from '../data/types'
 import LazyImg from './LazyImg.vue'
 
-const props = defineProps<{ project: Project; index?: number }>()
+const props = defineProps<{ project: Project; index?: number; priority?: boolean }>()
 const { lang, t } = useLang()
 const p = computed(() => props.project)
 </script>
@@ -24,7 +24,7 @@ const p = computed(() => props.project)
       tabindex="-1"
     >
       <div class="thumb" :class="{ ph: !p.cover }">
-        <LazyImg v-if="p.cover" :src="p.cover" :width="1160" :height="308" :eager="index === 0" />
+        <LazyImg v-if="p.cover" :src="p.cover" :width="1160" :height="308" :eager="priority && index === 0" />
         <template v-else>
           <span class="ph-art" aria-hidden="true"><i></i><i></i><i></i></span>
           <span class="ph-title" aria-hidden="true">{{ p.title }}</span>

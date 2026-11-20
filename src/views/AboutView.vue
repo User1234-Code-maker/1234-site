@@ -4,6 +4,7 @@ import PageHead from '../components/PageHead.vue'
 import PageShell from '../components/PageShell.vue'
 import { useLang } from '../composables/useLang'
 import { jobs, milestones, services, skills } from '../data/about'
+import { tx } from '../utils/i18n'
 import { vReveal } from '../directives/reveal'
 import { vTilt } from '../directives/tilt'
 import charSm from '../assets/img/character-sm.webp'
@@ -48,7 +49,7 @@ const stack = [
       </div>
     </section>
 
-    <section v-reveal class="wrap sec-tight duo" aria-label="Development and music">
+    <section v-reveal class="wrap sec-tight duo" :aria-label="t('aria_duo')">
       <article v-tilt class="duo-card tilt">
         <span class="duo-ic" aria-hidden="true">{ }</span>
         <h3>{{ t('a_dev_t') }}</h3>
@@ -79,7 +80,7 @@ const stack = [
         <div v-for="(g, i) in skills" :key="g.name.en" v-tilt class="skill tilt" :style="{ '--i': i }">
           <h3>{{ g.name[lang] }}</h3>
           <ul>
-            <li v-for="item in g.items" :key="item">{{ item }}</li>
+            <li v-for="item in g.items" :key="tx(item, 'en')">{{ tx(item, lang) }}</li>
           </ul>
         </div>
       </div>
@@ -95,9 +96,9 @@ const stack = [
     <section v-reveal class="wrap sec-tight" aria-labelledby="exp-t">
       <h2 id="exp-t" class="h2">{{ t('a_exp_t') }}</h2>
       <ol class="timeline stagger">
-        <li v-for="(j, i) in jobs" :key="j.period" :style="{ '--i': i }">
+        <li v-for="(j, i) in jobs" :key="j.period.en" :style="{ '--i': i }">
           <span class="dot" aria-hidden="true"></span>
-          <time class="period">{{ j.period }}</time>
+          <time class="period">{{ j.period[lang] }}</time>
           <h3>{{ j.role[lang] }}</h3>
           <p class="co">{{ j.company[lang] }}</p>
           <p>{{ j.text[lang] }}</p>

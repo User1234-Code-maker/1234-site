@@ -32,7 +32,7 @@ watch(
 <template>
   <header :class="{ 'menu-open': open }">
     <RouterLink class="brand" to="/" :aria-label="`1234, ${t('nav_home')}`"><BrandMark />1234</RouterLink>
-    <nav aria-label="Main">
+    <nav :aria-label="t('aria_main')">
       <RouterLink
         v-for="l in links"
         :key="l.to"
@@ -57,7 +57,13 @@ watch(
         <span></span><span></span>
       </button>
     </div>
-    <nav id="mobile-menu" class="mobile-menu" :aria-hidden="!open" :inert="!open" aria-label="Menu">
+    <nav
+      id="mobile-menu"
+      class="mobile-menu"
+      :aria-hidden="!open"
+      :inert="!open"
+      :aria-label="t('aria_menu')"
+    >
       <RouterLink to="/" :class="{ on: isHome }">{{ t('nav_home') }}</RouterLink>
       <RouterLink v-for="l in links" :key="l.to" :to="l.to" :class="{ on: !isHome && isOn(l.to) }">{{
         t(l.key)
