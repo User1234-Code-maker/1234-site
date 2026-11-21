@@ -4,6 +4,7 @@ import PageShell from '../components/PageShell.vue'
 import ProjectVisual from '../components/ProjectVisual.vue'
 import SceneEyebrow from '../components/SceneEyebrow.vue'
 import UiIcon from '../components/UiIcon.vue'
+import PixelPal from '../components/PixelPal.vue'
 import { useLang } from '../composables/useLang'
 import { categories, projects } from '../data/projects'
 import type { Category } from '../data/types'
@@ -47,18 +48,21 @@ const count = (c: Category | 'all') =>
 
     <section class="wrap blk-first" aria-labelledby="gal-t">
       <h2 id="gal-t" class="sr-only">{{ t('p_title') }}</h2>
-      <div class="filters" role="group" :aria-label="t('f_label')">
-        <button
-          v-for="c in ['all', ...categories] as const"
-          :key="c"
-          type="button"
-          class="fchip"
-          :class="{ on: active === c }"
-          :aria-pressed="active === c"
-          @click="active = c"
-        >
-          {{ t(`cat_${c}`) }}<small>{{ count(c) }}</small>
-        </button>
+      <div class="filters-row">
+        <div class="filters" role="group" :aria-label="t('f_label')">
+          <button
+            v-for="c in ['all', ...categories] as const"
+            :key="c"
+            type="button"
+            class="fchip"
+            :class="{ on: active === c }"
+            :aria-pressed="active === c"
+            @click="active = c"
+          >
+            {{ t(`cat_${c}`) }}<small>{{ count(c) }}</small>
+          </button>
+        </div>
+        <PixelPal name="peek" :scale="4" class="pal-filters" />
       </div>
 
       <TransitionGroup tag="div" name="gal" class="gallery" aria-live="polite">

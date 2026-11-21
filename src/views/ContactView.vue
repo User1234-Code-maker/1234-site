@@ -4,6 +4,7 @@ import PageShell from '../components/PageShell.vue'
 import SceneEyebrow from '../components/SceneEyebrow.vue'
 import ToriiArt from '../components/ToriiArt.vue'
 import UiIcon from '../components/UiIcon.vue'
+import PixelPal from '../components/PixelPal.vue'
 import { useLang } from '../composables/useLang'
 import { site } from '../data/site'
 import { socials } from '../data/socials'
@@ -78,7 +79,8 @@ const channels = computed(() =>
     </template>
 
     <section class="wrap blk-first" aria-labelledby="ch-t">
-      <h2 id="ch-t" class="blk-h">{{ t('c_channels') }}</h2>
+      <h2 id="ch-t" class="blk-h">{{ t('c_channels') }} <PixelPal name="heart" :scale="4" /></h2>
+      <PixelPal name="peek" :scale="4" class="pal-ct" />
       <ul v-reveal class="ct-grid stagger">
         <li
           v-for="(c, i) in channels"

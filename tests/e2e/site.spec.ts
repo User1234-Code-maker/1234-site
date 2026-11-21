@@ -127,7 +127,9 @@ test.describe('функциональность', () => {
     await page.getByRole('button', { name: 'Singles' }).click()
     await expect(page.locator('.mu-rel')).toHaveCount(3)
     await page.locator('.mu-rel-btn').first().click()
-    await expect(page.locator('.tl-row')).toHaveCount(1)
+    // у сингла нет отдельного треклиста: плеер с волной во всю ширину
+    await expect(page.locator('.mu-player.single')).toBeVisible()
+    await expect(page.locator('.tl-row')).toHaveCount(0)
     const hrefs = await page
       .locator('.mu-plats a')
       .evaluateAll((els) => els.map((e) => (e as HTMLAnchorElement).href))

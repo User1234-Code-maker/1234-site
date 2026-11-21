@@ -3,6 +3,7 @@ import { ref } from 'vue'
 export type Theme = 'light' | 'dark'
 const KEY = 'theme'
 
+// Светлая — по умолчанию при каждом новом заходе; тёмная помнится до закрытия вкладки.
 // Тема выставляется ещё в index.html до первой отрисовки (без вспышки), здесь только читаем
 const theme = ref<Theme>(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light')
 
@@ -10,7 +11,7 @@ function apply(next: Theme) {
   theme.value = next
   document.documentElement.dataset.theme = next
   try {
-    localStorage.setItem(KEY, next)
+    sessionStorage.setItem(KEY, next)
   } catch {
     /* приватный режим — просто не запомним */
   }

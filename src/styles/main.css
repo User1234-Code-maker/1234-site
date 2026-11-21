@@ -187,6 +187,8 @@ h1 em{font-style:normal;color:var(--violet)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 :focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:8px}
+/* кольцо фокуса только при работе с клавиатуры (класс kbd ставит main.ts): после клика мышью его нет */
+html:not(.kbd) :focus-visible{outline:none}
 
 /* ─────────── остальные секции ─────────── */
 .rest{position:relative;background:linear-gradient(180deg,#E7EAFD 0%,#EDEAFB 45%,#E6E9FD 100%);padding:10px 0 0;overflow:hidden}

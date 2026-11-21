@@ -5,14 +5,14 @@ import cloudB from '../assets/img/cloud-b.webp'
 import cloudBSm from '../assets/img/cloud-b-sm.webp'
 import cloudC from '../assets/img/cloud-c.webp'
 import cloudCSm from '../assets/img/cloud-c-sm.webp'
-import character from '../assets/img/character.webp'
-import characterSm from '../assets/img/character-sm.webp'
+import { useCharacter } from '../composables/useCharacter'
 import cat from '../assets/img/cat.png'
 import { useLang } from '../composables/useLang'
 
 const { t } = useLang()
 
 import spark from '../assets/img/spark.webp'
+const chara = useCharacter()
 </script>
 
 <template>
@@ -37,10 +37,10 @@ import spark from '../assets/img/spark.webp'
   <div class="layer l-wash"></div>
   <div class="layer l-char" data-par="20">
     <picture>
-      <source media="(max-width: 700px)" :srcset="characterSm" />
+      <source media="(max-width: 700px)" :srcset="chara.sm" />
       <img
         class="main"
-        :src="character"
+        :src="chara.src"
         width="2664"
         height="1872"
         fetchpriority="high"

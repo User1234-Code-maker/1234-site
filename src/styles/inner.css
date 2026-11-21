@@ -2806,3 +2806,413 @@
     transition: none;
   }
 }
+
+/* ═════════════ ПРАВКИ 21.11 ═════════════ */
+
+/* фон-иллюстрация на всю высоту страницы: облака из арта, бесшовно повторяются вниз */
+.page {
+  background:
+    url(../assets/img/backdrop-day.webp) center top / max(1400px, 100%) auto repeat-y,
+    var(--bg);
+}
+[data-theme='dark'] .page {
+  background:
+    url(../assets/img/backdrop-night.webp) center top / max(1400px, 100%) auto repeat-y,
+    var(--bg);
+}
+@media (max-width: 700px) {
+  .page {
+    background-image: url(../assets/img/backdrop-day-sm.webp);
+    background-size: 900px auto;
+  }
+  [data-theme='dark'] .page {
+    background-image: url(../assets/img/backdrop-night-sm.webp);
+  }
+}
+/* сцена не обрывается полосой: её слои растворяются прямо в облачный фон страницы */
+.sc-layers {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%);
+}
+.sc-fade {
+  display: none;
+}
+.page .w-cloud,
+.page .orb {
+  display: none;
+}
+
+/* меньше пустоты между разделами */
+:root {
+  --sec: clamp(44px, 5vw, 76px);
+}
+.page > .scene {
+  padding-bottom: clamp(36px, 5vw, 72px);
+}
+
+/* звёздочки сцены не налезают на текст */
+.sc-star.s1 {
+  left: auto;
+  right: 32%;
+  top: 14%;
+}
+.sc-star.s2 {
+  left: auto;
+  right: 6%;
+  bottom: 18%;
+}
+@media (max-width: 1100px) {
+  .sc-star.s1 {
+    right: 6%;
+    top: 46%;
+  }
+  .sc-star.s2 {
+    display: none;
+  }
+}
+
+/* отступы заголовков и чипов — один ритм */
+.blk-h {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.blk-h + .blk-hint {
+  margin: -16px 0 20px;
+}
+.path,
+.flow,
+.pd-shots,
+.mu-plats,
+.ct-grid,
+.jobs {
+  margin-top: 0;
+}
+.chip-row {
+  gap: 7px;
+}
+.chip-row > * {
+  line-height: 1.2;
+  padding: 7px 12px;
+}
+.pd-tags {
+  margin-top: 20px;
+}
+.gal-body .chip-row {
+  margin-top: 2px;
+}
+
+/* кнопки-«пилюли»: у <button> убираем системную рамку */
+button.pill {
+  border: 0;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* навыки: компактная сетка групп */
+.ab-skills-head {
+  margin-bottom: 22px;
+}
+.ab-skills-head .blk-h {
+  margin: 0;
+}
+.skill-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.skill-card {
+  padding: 20px 22px 22px;
+  border-radius: var(--r-l);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+}
+.skill-card h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.skill-card h3 small {
+  font-size: 12px;
+  color: var(--violet);
+}
+.blk-sub {
+  margin-top: 36px;
+}
+
+/* сингл: без пустого окна треклиста, волна во всю ширину */
+.mu-player {
+  position: relative;
+  align-items: start;
+}
+.mu-player.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mu-player.single .mu-info h2 {
+  font-size: clamp(44px, 6vw, 88px);
+}
+.mu-player.single .mu-wave .wave {
+  height: 72px;
+}
+.mu-time {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+.mu-player .tl {
+  align-self: start;
+}
+
+/* площадки: одинаковая высота, название в одну строку */
+.mu-plats {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+.mu-plats a {
+  height: 100%;
+  white-space: nowrap;
+}
+.mu-plats a span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* пиксельные друзья котика */
+.pal {
+  display: inline-block;
+  height: auto;
+  image-rendering: pixelated;
+  flex: none;
+  filter: drop-shadow(0 4px 8px rgb(30 42 107 / 0.25));
+}
+.blk-h .pal {
+  width: auto;
+  height: 0.7em;
+}
+.path-panel {
+  position: relative;
+}
+.pal-on-panel {
+  position: absolute;
+  right: 26px;
+  top: -36px;
+}
+.side-card {
+  overflow: visible;
+}
+.pal-corner {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  animation: floaty 4s ease-in-out infinite;
+}
+.pal-on-grid {
+  position: absolute;
+  right: 28px;
+  top: -41px;
+}
+.ab-band {
+  position: relative;
+}
+.pal-on-band {
+  position: absolute;
+  right: 112px;
+  top: -52px;
+}
+.pal-on-player {
+  position: absolute;
+  right: 40px;
+  top: -52px;
+}
+.filters-row {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+.filters-row .filters {
+  min-width: 0;
+}
+.pal-filters {
+  margin: 0 18px -28px 0;
+  position: relative;
+  z-index: 3;
+}
+.pd-facts {
+  position: relative;
+}
+.pal-on-facts {
+  position: absolute;
+  right: 30px;
+  top: -36px;
+}
+.pd-next-text .pal {
+  justify-self: start;
+  animation: swim 3s ease-in-out infinite;
+}
+@keyframes swim {
+  50% {
+    translate: 8px -3px;
+  }
+}
+.pal-ct {
+  position: absolute;
+  right: 72px;
+  margin-top: -66px;
+}
+.foot-pal {
+  margin-left: -8px;
+}
+@media (max-width: 700px) {
+  .pal-on-band {
+    right: 90px;
+    top: -46px;
+  }
+  .pal-filters,
+  .pal-on-grid {
+    display: none;
+  }
+  .pal-ct {
+    right: 24px;
+  }
+  .pal-corner {
+    right: 18px;
+    top: 18px;
+  }
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+  .mu-player.single .mu-info h2 {
+    font-size: 48px;
+  }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pal-corner,
+  .pd-next-text .pal {
+    animation: none;
+  }
+}
+
+/* у главной ниже Hero тот же облачный фон, что и на внутренних страницах (сам Hero не меняется) */
+.rest {
+  background:
+    linear-gradient(#e7eafd, rgb(231 234 253 / 0) 320px),
+    url(../assets/img/backdrop-day.webp) center top / max(1400px, 100%) auto repeat-y,
+    #e7eafd;
+}
+
+/* факты релиза */
+.mu-facts {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+.mu-facts div {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--r-m);
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+}
+.mu-facts dt {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--mute);
+}
+.mu-facts dd {
+  margin-top: 4px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.mu-player:not(.single) .mu-info {
+  align-self: center;
+}
+/* площадки: тянутся по строке, текст целиком */
+.mu-plats {
+  display: flex;
+  flex-wrap: wrap;
+}
+.mu-plats li {
+  flex: 1 1 170px;
+}
+.mu-plats a span {
+  overflow: visible;
+}
+/* опыт: карточки в две колонки вместо узкой линии с пустотой справа */
+.jobs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.jobs::before {
+  display: none;
+}
+.job {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'dot when' 'body body';
+  align-content: start;
+  gap: 10px 12px;
+  padding: 24px 26px;
+  border-radius: var(--r-l);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+}
+.job-when {
+  grid-area: when;
+  text-align: left;
+  padding: 0;
+  align-self: center;
+}
+.job-dot {
+  grid-area: dot;
+  margin: 0;
+}
+.job-body {
+  grid-area: body;
+}
+.pal-on-grid {
+  right: auto;
+  left: 34%;
+}
+@media (max-width: 700px) {
+  .jobs {
+    grid-template-columns: 1fr;
+  }
+  .job {
+    padding: 20px;
+  }
+  .mu-facts dd {
+    font-size: 20px;
+  }
+}
+
+/* главная ниже Hero: разделы ближе друг к другу */
+.rest .sec {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+@media (max-width: 600px) {
+  .rest .sec {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}

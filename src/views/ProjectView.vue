@@ -4,6 +4,7 @@ import LazyImg from '../components/LazyImg.vue'
 import PageShell from '../components/PageShell.vue'
 import ProjectVisual from '../components/ProjectVisual.vue'
 import UiIcon from '../components/UiIcon.vue'
+import PixelPal from '../components/PixelPal.vue'
 import { useLang } from '../composables/useLang'
 import { tx } from '../utils/i18n'
 import { vReveal } from '../directives/reveal'
@@ -68,6 +69,7 @@ const host = computed(() => {
       <!-- факты одной строкой -->
       <section class="wrap blk-first">
         <dl v-reveal class="pd-facts glass">
+          <PixelPal name="sleep" :scale="3" class="pal-on-facts" />
           <div>
             <dt>{{ t('p_role') }}</dt>
             <dd>{{ project.role[lang] }}</dd>
@@ -131,6 +133,7 @@ const host = computed(() => {
           <span class="pd-next-text">
             <small>{{ t('p_next') }}</small>
             <b>{{ tx(next.title, lang) }}</b>
+            <PixelPal name="fish" :scale="4" />
             <span class="pd-next-go">{{ t('p_open_case') }} <UiIcon name="arrow" :size="18" /></span>
           </span>
           <span class="pd-next-media"><ProjectVisual :project="next" /></span>

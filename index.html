@@ -19,6 +19,22 @@
       media="(min-width: 701px)"
     />
     </template>
+    <template id="home-preloads-dark">
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/src/assets/img/character-dark-sm.webp"
+      media="(max-width: 700px)"
+    />
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/src/assets/img/character-dark.webp"
+      media="(min-width: 701px)"
+    />
+    </template>
     <template id="pre-day">
       <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/src/assets/img/city-xs.webp" media="(max-width: 700px)" />
       <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/src/assets/img/city.webp" media="(min-width: 701px)" />
@@ -93,29 +109,27 @@
       (function () {
         var r = document.documentElement
         window.__bootT = performance.now()
-        // тема до первой отрисовки, чтобы не мигала светлая: сохранённый выбор, иначе светлая
+        // тема до первой отрисовки: каждый новый заход начинается со светлой,
+        // тёмная держится только до закрытия вкладки (sessionStorage)
         try {
-          r.dataset.theme = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
+          r.dataset.theme = sessionStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
         } catch (e) {
           r.dataset.theme = 'light'
         }
+        var isDark = r.dataset.theme === 'dark'
         if (r.dataset.theme === 'dark') document.querySelector('meta[name=theme-color]').content = '#0B1030'
         // предзагрузка картинок Hero только на главной
         if (location.pathname === '%BASE_URL%' || location.pathname + '/' === '%BASE_URL%') {
-          var t = document.getElementById('home-preloads')
+          var t = document.getElementById(isDark ? 'home-preloads-dark' : 'home-preloads')
           if (t) document.head.appendChild(t.content.cloneNode(true))
         } else {
           // на «Обо мне» самая крупная картинка — тот же персонаж, что на главной
           if (/\/about\/?$/.test(location.pathname)) {
-            var ta = document.getElementById('home-preloads')
+            var ta = document.getElementById(isDark ? 'home-preloads-dark' : 'home-preloads')
             if (ta) document.head.appendChild(ta.content.cloneNode(true))
           }
           // внутренние страницы: сразу грузим фон сцены (это самая большая картинка первого экрана)
-          var dark = false
-          try {
-            dark = localStorage.getItem('theme') === 'dark'
-          } catch (e) {}
-          var mood = dark ? 'night' : /\/(music|contact)\/?$/.test(location.pathname) ? 'dusk' : 'day'
+          var mood = isDark ? 'night' : /\/(music|contact)\/?$/.test(location.pathname) ? 'dusk' : 'day'
           var pt = document.getElementById('pre-' + mood)
           if (pt) document.head.appendChild(pt.content.cloneNode(true))
         }

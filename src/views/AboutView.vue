@@ -4,14 +4,14 @@ import PageShell from '../components/PageShell.vue'
 import SceneEyebrow from '../components/SceneEyebrow.vue'
 import UiIcon from '../components/UiIcon.vue'
 import TrackWave from '../components/TrackWave.vue'
+import PixelPal from '../components/PixelPal.vue'
 import { useLang } from '../composables/useLang'
 import { toggle, usePlayer } from '../composables/usePlayer'
 import { jobs, milestones, services, skills } from '../data/about'
 import { releases } from '../data/music'
 import { tx } from '../utils/i18n'
 import { vReveal } from '../directives/reveal'
-import charSm from '../assets/img/character-sm.webp'
-import chr from '../assets/img/character.webp'
+import { useCharacter } from '../composables/useCharacter'
 import icTs from '../assets/img/ic-ts.webp'
 import icReact from '../assets/img/ic-react.webp'
 import icNode from '../assets/img/ic-node.webp'
@@ -20,6 +20,7 @@ import icPrisma from '../assets/img/ic-prisma.webp'
 import icRedis from '../assets/img/ic-redis.webp'
 
 const { lang, t } = useLang()
+const chara = useCharacter()
 
 const cvHref = computed(
   () => `${import.meta.env.BASE_URL}cv/Bogdan-Korzun-CV-${lang.value === 'ru' ? 'RU' : 'EN'}.pdf`,
@@ -36,8 +37,6 @@ const serviceIcons = ['code', 'layers', 'grid', 'note'] as const
 
 // путь: открыт последний этап
 const step = ref(milestones.length - 1)
-// навыки: выбранная группа
-const group = ref(0)
 
 // мини-плеер альбома прямо на странице
 const album = releases.find((r) => r.kind === 'album') ?? releases[0]!
@@ -63,8 +62,8 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
       <div class="ab-art">
         <span class="ab-halo" aria-hidden="true"></span>
         <picture>
-          <source media="(max-width: 700px)" :srcset="charSm" />
-          <img class="ab-char" :src="chr" alt="" width="2664" height="1872" fetchpriority="high" />
+          <source media="(max-width: 700px)" :srcset="chara.sm" />
+          <img class="ab-char" :src="chara.src" alt="" width="2664" height="1872" fetchpriority="high" />
         </picture>
         <div class="ab-now glass">
           <small>{{ t('a_now') }}</small>
@@ -92,6 +91,7 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
           <h3>{{ t('a_music_t') }}</h3>
           <p>{{ t('a_music_p') }}</p>
           <span class="side-go">{{ t('m_title') }} <UiIcon name="arrow" :size="18" /></span>
+          <PixelPal name="note" :scale="4" class="pal-corner" />
         </RouterLink>
       </div>
     </section>
@@ -127,6 +127,7 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
             role="tabpanel"
             :aria-labelledby="`ms-tab-${step}`"
           >
+            <PixelPal name="sleep" :scale="3" class="pal-on-panel" />
             <span class="path-panel-y" aria-hidden="true">{{ milestones[step]!.year }}</span>
             <div>
               <h3>{{ milestones[step]!.title[lang] }}</h3>
@@ -148,37 +149,17 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
           </li>
         </ul>
       </div>
-      <div class="skills-board glass">
-        <div class="skill-tabs" role="tablist" :aria-label="t('a_skills_t')">
-          <button
-            v-for="(g, i) in skills"
-            :id="`sk-tab-${i}`"
-            :key="g.name.en"
-            type="button"
-            role="tab"
-            :aria-selected="group === i"
-            aria-controls="sk-panel"
-            :class="{ on: group === i }"
-            @click="group = i"
-          >
+      <!-- все группы сразу, компактной сеткой: без вкладок и пустот -->
+      <div class="skill-grid stagger">
+        <article v-for="(g, i) in skills" :key="g.name.en" class="skill-card" :style="{ '--i': i }">
+          <h3>
             {{ g.name[lang] }}<small>{{ g.items.length }}</small>
-          </button>
-        </div>
-        <Transition name="swap" mode="out-in">
-          <div
-            id="sk-panel"
-            :key="group"
-            class="skill-panel"
-            role="tabpanel"
-            :aria-labelledby="`sk-tab-${group}`"
-          >
-            <ul class="skill-chips">
-              <li v-for="(item, i) in skills[group]!.items" :key="tx(item, 'en')" :style="{ '--i': i }">
-                {{ tx(item, lang) }}
-              </li>
-            </ul>
-          </div>
-        </Transition>
+          </h3>
+          <ul class="chip-row">
+            <li v-for="item in g.items" :key="tx(item, 'en')">{{ tx(item, lang) }}</li>
+          </ul>
+        </article>
+        <PixelPal name="peek" :scale="4" class="pal-on-grid" />
       </div>
 
       <h3 class="blk-sub">{{ t('a_do') }}</h3>
@@ -232,6 +213,7 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
           <UiIcon :name="albumPlaying ? 'pause' : 'play'" :size="22" />
         </button>
         <TrackWave class="ab-band-wave" :playing="albumPlaying" :bars="56" />
+        <PixelPal name="music" :scale="4" class="pal-on-band" />
       </div>
     </section>
   </PageShell>

@@ -6,7 +6,8 @@ import SceneEyebrow from '../components/SceneEyebrow.vue'
 import TrackList from '../components/TrackList.vue'
 import UiIcon from '../components/UiIcon.vue'
 import TrackWave from '../components/TrackWave.vue'
-import { seek, toggle, usePlayer } from '../composables/usePlayer'
+import PixelPal from '../components/PixelPal.vue'
+import { fmt, seek, toggle, usePlayer } from '../composables/usePlayer'
 import { useLang } from '../composables/useLang'
 import { artistName, genreLabel, platforms, releases } from '../data/music'
 import type { ReleaseKind } from '../data/types'
@@ -52,6 +53,14 @@ const pick = (id: string) => {
   document.getElementById('release-main')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 const sc = hrefFor('soundcloud')
+// факты релиза считаются из данных: число треков и общая длительность
+const totalMin = computed(() => {
+  const sec = release.value.tracks.reduce((a, tr) => {
+    const [m, s2] = (tr.length ?? '0:0').split(':').map(Number)
+    return a + (m ?? 0) * 60 + (s2 ?? 0)
+  }, 0)
+  return Math.round(sec / 60)
+})
 const seedOf = (id: string) => [...id].reduce((a, c) => a + c.charCodeAt(0), 0)
 </script>
 
@@ -89,7 +98,8 @@ const seedOf = (id: string) => [...id].reduce((a, c) => a + c.charCodeAt(0), 0)
 
     <!-- плеер выбранного релиза -->
     <section id="release-main" class="wrap blk-first" :aria-label="t('m_featured')">
-      <div class="mu-player glass">
+      <div class="mu-player glass" :class="{ single: release.tracks.length === 1 }">
+        <PixelPal name="music" :scale="4" class="pal-on-player" />
         <div class="mu-info">
           <p class="mu-kind">
             <span>{{ t(`k_${release.kind}`) }}</span><span>{{ date(release.date) }}</span>
@@ -110,13 +120,30 @@ const seedOf = (id: string) => [...id].reduce((a, c) => a + c.charCodeAt(0), 0)
               <TrackWave :playing="relPlaying" :progress="progress" :seed="seedOf(release.id)" :bars="72" />
             </span>
           </div>
+          <p v-if="release.tracks.length === 1" class="mu-time">
+            {{ isCur ? fmt(player.time) + ' / ' : '' }}{{ release.tracks[0]!.length }}
+          </p>
+          <dl class="mu-facts">
+            <div>
+              <dt>{{ t('m_tracks') }}</dt>
+              <dd>{{ release.tracks.length }}</dd>
+            </div>
+            <div>
+              <dt>{{ t('m_length') }}</dt>
+              <dd>{{ totalMin }} {{ t('m_min') }}</dd>
+            </div>
+            <div>
+              <dt>{{ t('p_year') }}</dt>
+              <dd>{{ release.date.slice(0, 4) }}</dd>
+            </div>
+          </dl>
           <div v-if="release.links?.length" class="mu-links">
             <a v-for="l in release.links" :key="l.name" :href="l.url" target="_blank" rel="noopener"
               >{{ l.name }} <UiIcon name="ext" :size="14"
             /></a>
           </div>
         </div>
-        <TrackList :release="release" />
+        <TrackList v-if="release.tracks.length > 1" :release="release" />
       </div>
     </section>
 
@@ -161,7 +188,7 @@ const seedOf = (id: string) => [...id].reduce((a, c) => a + c.charCodeAt(0), 0)
     </section>
 
     <section v-reveal class="wrap blk" aria-labelledby="plat-t">
-      <h2 id="plat-t" class="blk-h">{{ t('m_listen_on') }}</h2>
+      <h2 id="plat-t" class="blk-h">{{ t('m_listen_on') }} <PixelPal name="note" :scale="4" /></h2>
       <ul class="mu-plats stagger">
         <li v-for="(p, i) in platforms" :key="p.name.en" :style="{ '--i': i }">
           <a :href="p.url" target="_blank" rel="noopener"

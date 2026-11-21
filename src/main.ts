@@ -8,6 +8,13 @@ import './styles/pages.css'
 import './styles/inner.css'
 import './styles/dark.css'
 
+// кольцо фокуса показываем, только когда человек ходит клавишами (Tab, стрелки), а не мышью или пальцем
+const root = document.documentElement
+addEventListener('keydown', (e) => {
+  if (e.key === 'Tab' || e.key.startsWith('Arrow')) root.classList.add('kbd')
+})
+addEventListener('pointerdown', () => root.classList.remove('kbd'))
+
 const app = createApp(App).use(router)
 router.isReady().then(() => {
   app.mount('#app')
