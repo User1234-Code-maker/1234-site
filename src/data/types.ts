@@ -7,7 +7,7 @@ export interface Bi {
 
 export type Category = 'web' | 'erp' | 'bots' | 'ai' | 'lab'
 
-export interface ArchNode {
+interface ArchNode {
   label: string | Bi
   note?: Bi
 }
@@ -55,7 +55,7 @@ export interface Track {
   src?: string
 }
 
-export interface ReleaseLink {
+interface ReleaseLink {
   name: string
   url: string
 }

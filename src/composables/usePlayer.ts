@@ -15,7 +15,7 @@ const state = reactive({
 
 let audio: HTMLAudioElement | null = null
 
-export const trackUrl = (track: Track) => `${import.meta.env.BASE_URL}${track.src ?? ''}`
+const trackUrl = (track: Track) => `${import.meta.env.BASE_URL}${track.src ?? ''}`
 export const fmt = (sec: number) => {
   if (!Number.isFinite(sec) || sec < 0) return '0:00'
   const s = Math.floor(sec)

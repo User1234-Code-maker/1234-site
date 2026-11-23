@@ -77,9 +77,9 @@
         fill:rgba(120,140,225,0);animation:bdraw 1.2s ease-out .35s forwards,bfill .6s ease 1.1s forwards}
       .b-cloud{width:46vw;height:16vw;max-width:620px;max-height:200px;border-radius:50%;filter:blur(26px);opacity:0;
         background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));animation:bfade 1s ease .5s forwards}
-      .c1{left:-6vw;top:12%}.c2{right:-8vw;top:34%;animation-delay:.75s}
+      .b-cloud.c1{left:-6vw;top:12%}.b-cloud.c2{right:-8vw;top:34%;animation-delay:.75s}
       .b-star{width:22px;height:22px;fill:#fff;filter:drop-shadow(0 0 8px rgba(124,92,255,.9));opacity:0;scale:.2;animation:bstar .6s ease 1.05s forwards}
-      .s1{left:22%;top:26%}.s2{right:24%;top:62%;width:16px;height:16px;animation-delay:1.25s}
+      .b-star.s1{left:22%;top:26%}.b-star.s2{right:24%;top:62%;width:16px;height:16px;animation-delay:1.25s}
       .b-center{position:absolute;left:50%;top:46%;translate:-50% -50%;display:flex;flex-direction:column;align-items:center;gap:18px}
       .b-cap{position:relative!important;width:clamp(96px,16vw,140px);height:auto;overflow:visible}
       .b-cap .cl path{stroke-dasharray:1;stroke-dashoffset:1;animation:bdraw .95s cubic-bezier(.5,0,.2,1) .2s forwards}
@@ -152,7 +152,11 @@
       property="og:description"
       content="Build cool shit. Make good music. Projects, music and contacts."
     />
-    <meta property="og:image" content="%BASE_URL%og.jpg" />
+    <meta property="og:url" content="https://user1234-code-maker.github.io/portfolio/" />
+    <!-- мессенджеры и соцсети берут превью только по полному адресу -->
+    <meta property="og:image" content="https://user1234-code-maker.github.io/portfolio/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>

@@ -1,0 +1,141 @@
+/* Страница 404.
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+.pg-nf > .scene {
+  min-height: min(900px, calc(100 * var(--sh, 1svh)));
+}
+.pg-nf .page-main {
+  padding-bottom: 20px;
+}
+.nf-num {
+  display: flex;
+  font-size: clamp(110px, 16vw, 230px);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 0.85;
+}
+.nf-num span {
+  background: linear-gradient(170deg, var(--cap), var(--violet) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nf-num .nf-0 {
+  display: inline-block;
+  animation: wobble 6s ease-in-out infinite;
+}
+@keyframes wobble {
+  0%,
+  100% {
+    rotate: -6deg;
+    translate: 0 0;
+  }
+  50% {
+    rotate: 8deg;
+    translate: 0 -10px;
+  }
+}
+.nf-title {
+  margin-top: 18px;
+  font-size: clamp(32px, 3.6vw, 52px);
+}
+.nf-scene {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.nf-island {
+  position: relative;
+  width: min(420px, 80%);
+  animation: floaty 6s ease-in-out infinite;
+}
+.nf-rock {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: #8f8ee0;
+  filter: drop-shadow(0 30px 30px rgb(30 42 107 / 0.35));
+}
+.nf-rock .grass {
+  fill: #b8f0c8;
+}
+.nf-rock .shade {
+  fill: #6f6cc8;
+}
+.nf-rock .root {
+  fill: none;
+  stroke: #6f6cc8;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+[data-theme='dark'] .nf-rock {
+  fill: #3a3a8a;
+}
+[data-theme='dark'] .nf-rock .shade {
+  fill: #2a2a6a;
+}
+[data-theme='dark'] .nf-rock .root {
+  stroke: #2a2a6a;
+}
+[data-theme='dark'] .nf-rock .grass {
+  fill: #6bd6a0;
+}
+.nf-cat {
+  position: absolute;
+  left: 40%;
+  bottom: 74%;
+  width: 26%;
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 14px rgb(30 42 107 / 0.35));
+}
+.nf-sign {
+  position: absolute;
+  left: 66%;
+  bottom: 96%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  box-shadow: var(--btn-glow);
+  animation: floaty 3.4s ease-in-out infinite reverse;
+}
+@media (max-width: 1100px) {
+  .nf-island {
+    width: min(320px, 70%);
+    margin-top: 40px;
+  }
+}
+@media (max-width: 700px) {
+  .pg-nf > .scene {
+    min-height: 0;
+  }
+  .nf-num {
+    font-size: 120px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nf-island,
+  .nf-sign,
+  .nf-num .nf-0 {
+    animation: none !important;
+  }
+}
+/* на планшете и телефоне сцена 404 по высоте содержимого, заголовок — как у остальных страниц */
+@media (max-width: 1100px) {
+  .pg-nf > .scene {
+    min-height: 0;
+  }
+}
+@media (max-width: 700px) {
+  .nf-title {
+    font-size: clamp(40px, 12vw, 56px);
+  }
+}

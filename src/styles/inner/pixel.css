@@ -1,0 +1,83 @@
+/* Пиксельные друзья котика (PixelPal).
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+/* пиксельные друзья котика */
+.pal {
+  display: inline-block;
+  height: auto;
+  image-rendering: pixelated;
+  flex: none;
+  filter: drop-shadow(0 4px 8px rgb(30 42 107 / 0.25));
+}
+.blk-h .pal {
+  width: auto;
+  height: 0.7em;
+}
+.pal-on-panel {
+  position: absolute;
+  right: 26px;
+  top: -36px;
+}
+.pal-corner {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  animation: floaty 4s ease-in-out infinite;
+}
+.pal-on-grid {
+  position: absolute;
+  top: -41px;
+  right: auto;
+  left: 34%;
+}
+.pal-on-band {
+  position: absolute;
+  right: 112px;
+  top: -52px;
+}
+.pal-on-player {
+  position: absolute;
+  right: 40px;
+  top: -52px;
+}
+.pal-filters {
+  margin: 0 18px -28px 0;
+  position: relative;
+  z-index: 3;
+}
+.pal-on-facts {
+  position: absolute;
+  right: 30px;
+  top: -36px;
+}
+.pal-ct {
+  position: absolute;
+  right: 72px;
+  margin-top: -66px;
+}
+.foot-pal {
+  margin-left: -8px;
+}
+@media (max-width: 700px) {
+  .pal-on-band {
+    right: 90px;
+    top: -46px;
+  }
+  .pal-filters,
+  .pal-on-grid {
+    display: none;
+  }
+  .pal-ct {
+    right: 24px;
+  }
+  .pal-corner {
+    right: 18px;
+    top: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pal-corner {
+    animation: none;
+  }
+}

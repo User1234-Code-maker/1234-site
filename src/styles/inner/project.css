@@ -1,0 +1,418 @@
+/* Страница отдельного проекта.
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+.pd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--mute);
+}
+.pd-meta span + span::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  vertical-align: middle;
+}
+.pd-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+  transition: translate 0.2s;
+}
+.pd-back:hover {
+  translate: -3px 0;
+}
+.pd-nda {
+  color: var(--violet);
+}
+.pd-title {
+  margin-top: 12px;
+  font-size: clamp(40px, 5.2vw, 76px);
+}
+.pd-tags {
+  margin-top: 20px;
+}
+.pd-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.pd-frame {
+  position: relative;
+  width: min(680px, 100%);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+  box-shadow:
+    var(--shadow-l),
+    0 0 80px -20px hsl(var(--h) 90% 60% / 0.45);
+  rotate: -1.5deg;
+  transition: rotate 0.6s var(--ease-out);
+}
+.pd-stage:hover .pd-frame {
+  rotate: 0deg;
+}
+.pd-frame .pv {
+  aspect-ratio: 1600 / 760;
+}
+.fr-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--mute);
+  border-bottom: 1px solid var(--hair);
+}
+.fr-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--hair);
+}
+.fr-bar i:nth-child(1) {
+  background: #ff8a8a;
+}
+.fr-bar i:nth-child(2) {
+  background: #ffd36e;
+}
+.fr-bar i:nth-child(3) {
+  background: #78d98f;
+}
+.fr-bar span {
+  flex: 1;
+  margin-left: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--glass);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.fr-app .pd-frame .pv,
+.fr-phone .pd-frame .pv {
+  aspect-ratio: 16 / 11;
+}
+.fr-phone .pd-frame {
+  width: min(620px, 100%);
+  border-radius: var(--r-xl);
+}
+.pd-facts {
+  display: grid;
+  grid-template-columns: 1.3fr 0.6fr 0.9fr 1.6fr;
+  gap: 20px;
+  padding: 24px 28px;
+  position: relative;
+}
+.pd-facts dt {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--mute);
+}
+.pd-facts dd {
+  margin-top: 6px;
+  font-weight: 800;
+  line-height: 1.4;
+}
+.wrap.pd-about {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1.5fr);
+  gap: 24px 48px;
+  align-items: start;
+}
+.pd-long {
+  font-size: clamp(18px, 1.55vw, 21px);
+  line-height: 1.65;
+  font-weight: 500;
+  max-width: 64ch;
+}
+.pd-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 26px;
+  padding: 18px 20px;
+  border-radius: var(--r-m);
+  color: var(--soft);
+  line-height: 1.55;
+  max-width: 64ch;
+}
+.pd-note .ico {
+  flex: none;
+  color: var(--violet);
+  margin-top: 2px;
+}
+/* архитектура */
+.flow {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 30px;
+  list-style: none;
+  padding: 0;
+}
+.flow::before {
+  content: '';
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 50%;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--violet) 0 8px, transparent 8px 14px);
+  opacity: 0.45;
+}
+.flow::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  top: calc(50% - 5px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 16px var(--violet);
+  animation: pulse-run 4s linear infinite;
+}
+@keyframes pulse-run {
+  from {
+    translate: 0 0;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  to {
+    translate: calc(min(1440px, 100vw) * 0.8) 0;
+    opacity: 0;
+  }
+}
+.flow li {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 4px;
+  padding: 20px 22px;
+  border-radius: var(--r-m);
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+}
+.flow-n {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--violet);
+}
+.flow b {
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.flow small {
+  font-size: 13px;
+  color: var(--soft);
+}
+/* скриншоты: у каждого проекта своя раскладка */
+.pd-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.pd-shot {
+  margin: 0;
+  border-radius: var(--r-l);
+  overflow: hidden;
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-m);
+  background: var(--glass);
+}
+.pd-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.pd-shots .pd-shot:first-child {
+  grid-column: 1 / -1;
+}
+/* портфолио: лента со снапом, листается вбок */
+.shots-portfolio-site {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+}
+.shots-portfolio-site .pd-shot {
+  flex: 0 0 min(78%, 860px);
+  scroll-snap-align: start;
+}
+/* игровая студия: тёмная «витрина» под цвет самого сайта */
+.shots-game-studio-website {
+  padding: 22px;
+  border-radius: var(--r-xl);
+  background: radial-gradient(80% 60% at 70% 0%, rgb(255 140 40 / 0.22), transparent 70%), #0e0f16;
+}
+.shots-game-studio-website .pd-shot {
+  border-color: rgb(255 255 255 / 0.08);
+}
+.pd-game-studio-website .pd-frame {
+  box-shadow:
+    var(--shadow-l),
+    0 0 90px -20px rgb(255 140 40 / 0.5);
+}
+/* следующий проект */
+.pd-next {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 28px;
+  padding: 18px 18px 18px 38px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  transition:
+    translate 0.35s var(--ease),
+    box-shadow 0.35s;
+}
+.pd-next:hover {
+  translate: 0 -5px;
+  box-shadow: var(--shadow-l), var(--glow);
+}
+.pd-next-text {
+  display: grid;
+  gap: 10px;
+}
+.pd-next small {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mute);
+}
+.pd-next b {
+  font-size: clamp(28px, 3.4vw, 48px);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+}
+.pd-next-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: var(--violet);
+}
+.pd-next-go .ico {
+  transition: translate 0.25s var(--ease);
+}
+.pd-next:hover .pd-next-go .ico {
+  translate: 4px 0;
+}
+.pd-next-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--r-l);
+  overflow: hidden;
+}
+.pd-next-media .pv {
+  transition: scale 0.7s var(--ease-out);
+}
+.pd-next:hover .pd-next-media .pv {
+  scale: 1.05;
+}
+@media (max-width: 1100px) {
+  .pd-stage {
+    position: relative;
+    inset: auto;
+    padding: 10px 0 40px;
+  }
+  .fr-browser .pd-frame,
+  .fr-app .pd-frame,
+  .fr-phone .pd-frame {
+    width: 100%;
+  }
+  .pd-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wrap.pd-about {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .pd-title {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+  .pd-facts {
+    padding: 20px;
+  }
+  .flow {
+    grid-auto-flow: row;
+    gap: 12px;
+  }
+  .flow::before {
+    left: 30px;
+    right: auto;
+    top: 6%;
+    bottom: 6%;
+    width: 2px;
+    height: auto;
+    background: repeating-linear-gradient(180deg, var(--violet) 0 8px, transparent 8px 14px);
+  }
+  .flow::after {
+    display: none;
+  }
+  .pd-shots {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .shots-game-studio-website {
+    padding: 12px;
+  }
+  .shots-portfolio-site .pd-shot {
+    flex-basis: 88%;
+  }
+  .pd-next {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow::after {
+    animation: none !important;
+  }
+}
+.flow,
+.pd-shots {
+  margin-top: 0;
+}
+.pd-next-text .pal {
+  justify-self: start;
+  animation: swim 3s ease-in-out infinite;
+}
+@keyframes swim {
+  50% {
+    translate: 8px -3px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-next-text .pal {
+    animation: none;
+  }
+}

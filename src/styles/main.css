@@ -293,15 +293,6 @@ html:not(.kbd) :focus-visible{outline:none}
 .skills,.services{display:grid;grid-template-columns:1fr;gap:22px}
 @media (min-width:720px){.skills,.services{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1180px){.skills,.services{grid-template-columns:repeat(4,1fr)}}
-.skill,.service{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);border-radius:26px;padding:24px;
- box-shadow:0 14px 34px -22px rgba(30,42,107,.55)}
-.skill h3{font-weight:800;font-size:19px;letter-spacing:-.02em;margin-bottom:16px}
-.skill ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.skill li{font:800 13px Mn;color:var(--ink);background:rgba(170,186,255,.3);padding:7px 12px;border-radius:999px}
-.sub-h{margin:48px 0 20px;font-weight:800;font-size:22px;letter-spacing:-.03em}
-
-.service h4{font-weight:800;font-size:18px;letter-spacing:-.02em;margin-bottom:8px}
-.service p{font-size:15px;line-height:1.5;color:var(--soft)}
 
 /* музыка: проигрыватель с пластинкой и список треков */
 
@@ -321,24 +312,8 @@ html:not(.kbd) :focus-visible{outline:none}
  transition:background .2s,transform .2s,box-shadow .2s}
 .tracks a:hover{background:#fff;transform:translateX(4px);box-shadow:0 12px 26px -18px rgba(30,42,107,.6)}
 .tracks .n{color:var(--soft);font-variant-numeric:tabular-nums}
-.tracks .len{color:var(--soft);font-weight:500;font-size:14px}
-.tracks .go{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;font-size:10px;
- opacity:0;scale:.8;transition:opacity .2s,scale .2s}
-.tracks a:hover .go,.tracks a:focus-visible .go{opacity:1;scale:1}
-@media (hover:none){.tracks .go{opacity:1;scale:1}}
 
 /* опыт: вертикальная линия времени */
-.timeline{list-style:none;padding:0 0 0 30px;position:relative;display:flex;flex-direction:column;gap:30px;max-width:760px}
-.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;transform-origin:top;
- background:linear-gradient(#6B5BD6,rgba(107,91,214,.12));transition:scale 1s ease .2s}
-.reveal:not(.in) .timeline::before{scale:1 0}
-.timeline li{position:relative}
-.timeline .dot{position:absolute;left:-30px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;
- border:3px solid var(--violet);box-shadow:0 0 0 5px rgba(107,91,214,.18)}
-.timeline .period{display:block;font:800 13px Mn;color:#5A4BC4;margin-bottom:6px}
-.timeline h3{font-weight:800;font-size:20px;letter-spacing:-.02em}
-.timeline .co{font-weight:800;color:var(--soft);margin:2px 0 8px;font-size:15px}
-.timeline li>p:last-child{font-size:16px;line-height:1.55;color:#39407A;max-width:60ch}
 
 /* мягкие световые пятна на фоне нижней части */
 .orb{position:absolute;border-radius:50%;filter:blur(64px);opacity:.55;pointer-events:none;z-index:0;animation:float 22s ease-in-out infinite alternate}

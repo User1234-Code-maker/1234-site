@@ -5,7 +5,7 @@ import { finishBoot } from './boot'
 import './styles/tokens.css'
 import './styles/main.css'
 import './styles/pages.css'
-import './styles/inner.css'
+import './styles/inner/index.css'
 import './styles/dark.css'
 
 // кольцо фокуса показываем, только когда человек ходит клавишами (Tab, стрелки), а не мышью или пальцем

@@ -1,0 +1,693 @@
+/* Страница «Обо мне».
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+.ab-art {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  inset: -30px -44px 0 0;
+}
+.ab-halo {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 72%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0));
+}
+.ab-char {
+  position: relative;
+  width: auto;
+  filter: drop-shadow(-18px 10px 34px rgba(58, 70, 150, 0.26));
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, rgb(0 0 0 / 0.6) 76%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 58%, rgb(0 0 0 / 0.6) 76%, transparent 96%);
+  height: min(620px, calc(66 * var(--sh, 1svh)));
+}
+.ab-now {
+  position: absolute;
+  left: -2%;
+  display: grid;
+  gap: 3px;
+  padding: 16px 20px;
+  border-radius: var(--r-m);
+  max-width: 250px;
+  background: var(--glass-hi);
+  animation: floaty 7s ease-in-out infinite;
+  z-index: 2;
+}
+.ab-now small {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--violet);
+}
+.ab-now b {
+  font-size: 15px;
+}
+.ab-now span {
+  font-size: 13px;
+  color: var(--soft);
+  line-height: 1.35;
+}
+@keyframes floaty {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+.wrap.ab-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 80px);
+  align-items: start;
+}
+.ab-big {
+  margin-top: 20px;
+  font-size: clamp(21px, 2vw, 28px);
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  max-width: 34ch;
+}
+.ab-sides {
+  display: grid;
+  gap: 16px;
+}
+.side-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  padding: 26px 28px;
+  transition:
+    translate 0.3s var(--ease),
+    box-shadow 0.3s;
+  overflow: visible;
+}
+.side-card:hover {
+  translate: 0 -4px;
+  box-shadow: var(--shadow-l), var(--glow);
+}
+.side-ic {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(140deg, #3b82f6, #1e2a6b);
+  box-shadow: var(--shadow-s);
+  margin-bottom: 6px;
+}
+.side-card.alt .side-ic {
+  background: linear-gradient(140deg, #a78bfa, #6b5bd6);
+}
+.side-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.side-card p {
+  color: var(--soft);
+  line-height: 1.55;
+  font-size: 15px;
+}
+.side-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--violet);
+}
+.side-card:hover .side-go .ico {
+  translate: 3px 0;
+}
+.side-go .ico {
+  transition: translate 0.25s var(--ease);
+}
+
+/* путь: горизонтальная шкала */
+.path {
+  --fill: 0;
+  position: relative;
+  margin-top: 34px;
+}
+.path-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 11px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--hair);
+}
+.path-track i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--cap), var(--violet));
+  transform-origin: left;
+  transform: scaleX(var(--fill));
+  transition: transform 0.6s var(--ease-out);
+}
+.path-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.path-steps button {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+  width: 100%;
+  padding: 0 12px 0 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.path-dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 3px solid var(--hair);
+  background: var(--bg);
+  transition:
+    border-color 0.3s,
+    background 0.3s,
+    scale 0.3s var(--ease);
+}
+.past .path-dot {
+  border-color: var(--cap);
+}
+.on .path-dot {
+  border-color: var(--violet);
+  background: var(--violet);
+  scale: 1.15;
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--violet) 22%, transparent);
+}
+.path-year {
+  margin-top: 8px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--mute);
+  transition: color 0.3s;
+}
+.on .path-year,
+.path-steps button:hover .path-year {
+  color: var(--ink);
+}
+.path-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--soft);
+  line-height: 1.35;
+}
+.path-panel {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  margin-top: 28px;
+  padding: 28px 32px;
+  position: relative;
+}
+.path-panel-y {
+  font-size: clamp(54px, 7vw, 92px);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  background: linear-gradient(160deg, var(--cap), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.path-panel h3 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.path-panel p {
+  margin-top: 8px;
+  color: var(--soft);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* навыки */
+.ab-skills-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px 30px;
+  margin-bottom: 22px;
+}
+.tech-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+.tech-tile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+  transition:
+    translate 0.25s var(--ease),
+    box-shadow 0.25s;
+}
+.tech-tile img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+.tech-tile span {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    translate 0.2s;
+}
+.tech-tile:hover {
+  translate: 0 -4px;
+}
+.tech-tile:hover span {
+  opacity: 1;
+  translate: -50% 0;
+}
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+.services-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+}
+.service-card {
+  padding: 22px;
+  border-radius: var(--r-m);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  transition: translate 0.25s var(--ease);
+}
+.service-card:hover {
+  translate: 0 -3px;
+}
+.service-ic {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: var(--violet);
+  background: color-mix(in srgb, var(--violet) 14%, transparent);
+  margin-bottom: 14px;
+}
+.service-card h4 {
+  font-size: 16px;
+  font-weight: 800;
+}
+.service-card p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+
+/* опыт */
+.jobs {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.jobs::before {
+  content: '';
+  position: absolute;
+  left: 230px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(var(--cap), var(--violet), transparent);
+  opacity: 0.5;
+  display: none;
+}
+.job {
+  position: relative;
+  display: grid;
+  align-content: start;
+  padding: 24px 26px;
+  border-radius: var(--r-l);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+}
+.job-when {
+  padding-top: 3px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--mute);
+  align-self: center;
+}
+.job-dot {
+  justify-self: center;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--violet);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--violet) 16%, transparent);
+  margin: 0;
+}
+.job:first-child .job-dot {
+  background: var(--violet);
+}
+.job-body {
+  max-width: 64ch;
+}
+.job-body h3 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.job-co {
+  margin-top: 3px;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--violet);
+}
+.job-body p:last-child {
+  margin-top: 10px;
+  color: var(--soft);
+  line-height: 1.6;
+}
+
+/* музыкальная полоса */
+.ab-band {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: 'cover text play' 'cover wave wave';
+  align-items: center;
+  gap: 14px 28px;
+  padding: 22px 30px 22px 22px;
+  position: relative;
+}
+.ab-band-cover {
+  grid-area: cover;
+  width: 132px;
+  height: 132px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: var(--shadow-m);
+}
+.ab-band-text {
+  grid-area: text;
+}
+.ab-band h2 {
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+.ab-band p {
+  margin-top: 6px;
+  color: var(--soft);
+}
+.ab-band .play-round {
+  grid-area: play;
+}
+.ab-band-wave {
+  grid-area: wave;
+}
+@media (max-width: 1100px) {
+  .ab-now {
+    left: 0;
+    bottom: 10%;
+  }
+  .wrap.ab-story {
+    grid-template-columns: 1fr;
+  }
+  .ab-big {
+    max-width: none;
+  }
+  .ab-sides {
+    grid-template-columns: 1fr 1fr;
+  }
+  .services-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .ab-now {
+    padding: 12px 14px;
+    max-width: 190px;
+    bottom: 2%;
+  }
+  .ab-sides,
+  .services-row {
+    grid-template-columns: 1fr;
+  }
+  .ab-big {
+    font-size: 20px;
+  }
+  .path-title {
+    display: none;
+  }
+  .path-year {
+    font-size: 22px;
+  }
+  .path-steps button {
+    min-height: 64px;
+  }
+  .path-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 22px;
+  }
+  .ab-skills-head {
+    align-items: start;
+  }
+  .tech-tiles {
+    gap: 8px;
+  }
+  .tech-tile {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+  .tech-tile img {
+    width: 28px;
+    height: 28px;
+  }
+  .tech-tile span {
+    display: none;
+  }
+  .jobs::before {
+    left: 7px;
+  }
+  .job {
+    grid-template-columns: 30px minmax(0, 1fr);
+    grid-template-areas: 'dot when' 'dot body';
+    gap: 6px 0;
+    padding: 20px;
+  }
+  .job-when {
+    grid-area: when;
+    text-align: left;
+    padding: 0;
+  }
+  .job-dot {
+    grid-area: dot;
+    justify-self: start;
+  }
+  .job-body {
+    grid-area: body;
+  }
+  .ab-band {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas: 'cover play' 'text text' 'wave wave';
+    padding: 18px;
+  }
+  .ab-band-cover {
+    width: 84px;
+    height: 84px;
+  }
+  .ab-band .play-round {
+    justify-self: end;
+  }
+}
+/* точки опыта «вспыхивают», когда строка появляется */
+.job.reveal .job-dot {
+  scale: 0;
+  transition: scale 0.5s var(--ease-out) 0.2s;
+}
+.job.reveal.in .job-dot {
+  scale: 1;
+}
+@keyframes sc-par {
+  to {
+    translate: 0 12%;
+  }
+}
+@keyframes sc-par-fast {
+  to {
+    translate: 0 30%;
+  }
+}
+@keyframes sc-art-par {
+  to {
+    translate: 0 -40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-now {
+    animation: none !important;
+  }
+  .side-card {
+    transition: none;
+  }
+}
+.path,
+.jobs {
+  margin-top: 0;
+}
+
+/* навыки: компактная сетка групп */
+.ab-skills-head .blk-h {
+  margin: 0;
+}
+.skill-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.skill-card {
+  padding: 20px 22px 22px;
+  border-radius: var(--r-l);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+}
+.skill-card h3 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.skill-card h3 small {
+  font-size: 12px;
+  color: var(--violet);
+}
+@media (max-width: 700px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* опыт: карточки в две колонки вместо узкой линии с пустотой справа */
+.job {
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas: 'dot when' 'body body';
+  gap: 10px 12px;
+  background: var(--glass);
+}
+.job-when {
+  grid-area: when;
+  text-align: left;
+  padding: 0;
+}
+.job-dot {
+  grid-area: dot;
+}
+.job-body {
+  grid-area: body;
+}
+@media (max-width: 700px) {
+  .jobs {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* «Обо мне»: персонаж мягко растворяется и уходит в облака */
+.ab-cloud {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 -10px 30px rgb(255 255 255 / 0.5));
+}
+.ab-cloud.a {
+  width: 78%;
+  right: 6%;
+  bottom: -6%;
+}
+.ab-cloud.b {
+  width: 70%;
+  right: -10%;
+  bottom: -2%;
+  opacity: 0.95;
+}
+[data-theme='dark'] .ab-cloud {
+  filter: brightness(0.42) saturate(1.5) hue-rotate(8deg);
+}
+.ab-now {
+  bottom: 18%;
+}
+@media (max-width: 1100px) {
+  .ab-art {
+    inset: 0 -26px 0;
+  }
+  .ab-char {
+    height: 460px;
+  }
+}
+@media (max-width: 700px) {
+  .ab-char {
+    height: 380px;
+  }
+}

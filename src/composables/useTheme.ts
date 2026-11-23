@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 
-export type Theme = 'light' | 'dark'
+type Theme = 'light' | 'dark'
 const KEY = 'theme'
 
 // Светлая — по умолчанию при каждом новом заходе; тёмная помнится до закрытия вкладки.
@@ -19,7 +19,7 @@ function apply(next: Theme) {
 
 // Плавная смена: браузер сам делает перекрёстное растворение старого и нового кадра (View Transitions).
 // Где этого API нет или включён reduced-motion — тема меняется сразу.
-export function setTheme(next: Theme) {
+function setTheme(next: Theme) {
   if (next === theme.value) return
   const doc = document as Document & { startViewTransition?: (cb: () => void) => unknown }
   if (doc.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

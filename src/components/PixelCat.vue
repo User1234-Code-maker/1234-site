@@ -4,6 +4,8 @@ import { useRoute } from 'vue-router'
 import { useLang } from '../composables/useLang'
 import { reducedMotion } from '../utils/pageScroll'
 import { usePlayer } from '../composables/usePlayer'
+import { useCatSpeech } from '../composables/useCatSpeech'
+import { catSpots as spots } from '../data/cat'
 import catUrl from '../assets/img/cat.png'
 
 // Пасхалка: котик на внутренних страницах. Сидит в своём месте, выглядывает с края,
@@ -12,23 +14,13 @@ import catUrl from '../assets/img/cat.png'
 const route = useRoute()
 const { t } = useLang()
 
-type Spot = { side: 'left' | 'right'; bottom: string; peek: boolean }
-const spots: Record<string, Spot> = {
-  home: { side: 'right', bottom: '30vh', peek: false },
-  projects: { side: 'right', bottom: '22vh', peek: true },
-  project: { side: 'left', bottom: '0px', peek: false },
-  music: { side: 'left', bottom: '34vh', peek: true },
-  about: { side: 'right', bottom: '0px', peek: false },
-  contact: { side: 'right', bottom: '46vh', peek: true },
-  'not-found': { side: 'left', bottom: '0px', peek: false },
-}
 const spot = computed(() => spots[String(route.name)])
 const heroW = ref(0) // на главной котик такого же размера, как был в Hero
 const flip = computed(() => (free.value ? faceRight.value : spot.value?.side === 'left'))
 
 const el = ref<HTMLElement | null>(null)
 const hop = ref(false)
-const said = ref('')
+const { said, sayMood, startScream, stopScream, startChatter, hush } = useCatSpeech(t)
 const out = ref(false)
 const free = ref(false) // котика уже перетащили: он живёт там, куда его положили
 const dragging = ref(false)
@@ -36,13 +28,10 @@ const sleepy = ref(false)
 const walking = ref(false) // котик неспеша идёт сам
 const faceRight = ref(false)
 const below = ref(false) // у верхнего края пузырь рисуется под котиком
-let sayTimer = 0
-let screamTimer = 0
 let sleepTimer = 0
 let raf = 0
 let moveRaf = 0
 let wanderTimer = 0
-let chatTimer = 0
 const player = usePlayer()
 let lastReact = 0
 
@@ -57,21 +46,8 @@ let grabY = 0
 let pressed = false
 let moved = false
 
-const curious = ['cat_curious_1', 'cat_curious_2', 'cat_curious_3']
-const idle = ['cat_idle_1', 'cat_idle_2', 'cat_idle_3', 'cat_idle_4', 'cat_idle_5']
-const listening = ['cat_music_1', 'cat_music_2']
-const lines = ['cat_line_1', 'cat_line_2', 'cat_line_3', 'cat_line_4']
-const screams = ['cat_scream_1', 'cat_scream_2', 'cat_scream_3']
-const landings = ['cat_land_1', 'cat_land_2', 'cat_land_3']
-const pick = (list: string[]) => t(list[Math.floor(Math.random() * list.length)]!)
-
-function sayFor(text: string, ms: number) {
-  said.value = text
-  window.clearTimeout(sayTimer)
-  sayTimer = window.setTimeout(() => (said.value = ''), ms)
-}
 function say() {
-  sayFor(pick(lines), 1800)
+  sayMood('click', 1800)
   jump()
 }
 function jump() {
@@ -152,7 +128,6 @@ function onWalkEnd(e: TransitionEvent) {
 }
 function wander() {
   window.clearTimeout(wanderTimer)
-  window.clearTimeout(chatTimer)
   wanderTimer = window.setTimeout(
     async () => {
       if (!dragging.value && !sleepy.value && !walking.value && !document.hidden && el.value) {
@@ -184,10 +159,10 @@ function onPageDown(e: PointerEvent) {
     jump()
   } else if (roll < 0.7) {
     if (free.value) faceRight.value = toRight
-    sayFor(pick(curious), 1700)
+    sayMood('curious', 1700)
   } else {
     // подходит, но не вплотную
-    sayFor(pick(curious), 1500)
+    sayMood('curious', 1500)
     const gap = toRight ? -90 : 90
     walkTo(e.clientX + gap - r.width / 2, e.clientY - r.height / 2)
   }
@@ -221,14 +196,7 @@ function startDrag() {
   px = r.left
   py = r.top
   place()
-  screamLoop()
-}
-
-// Пока котика несут, он орёт «ааа»: фраза меняется раз в ~0,7 с, больше ничего не крутится.
-function screamLoop() {
-  window.clearTimeout(sayTimer)
-  said.value = pick(screams)
-  screamTimer = window.setTimeout(screamLoop, 700)
+  startScream() // пока несут, котик орёт «ааа»
 }
 
 function onMoveDrag(e: PointerEvent) {
@@ -252,13 +220,13 @@ function onUp() {
   if (!pressed) return
   pressed = false
   if (!moved) return say()
-  window.clearTimeout(screamTimer)
+  stopScream()
   cancelAnimationFrame(moveRaf)
   moveRaf = 0
   clamp()
   place()
   dragging.value = false
-  sayFor(pick(landings), 1600)
+  sayMood('land', 1600)
   rest()
 }
 
@@ -282,7 +250,7 @@ function onKey(e: KeyboardEvent) {
   py += d[1]
   clamp()
   place()
-  sayFor(pick(screams), 900)
+  sayMood('scream', 900)
   rest()
 }
 
@@ -344,20 +312,6 @@ function onRoute(name: unknown) {
   void nextTick().then(adoptHero)
 }
 
-// Время от времени котик что-нибудь бормочет сам. Если играет музыка, иногда комментирует её.
-function chatter() {
-  window.clearTimeout(chatTimer)
-  chatTimer = window.setTimeout(
-    () => {
-      if (!dragging.value && !sleepy.value && !said.value && !document.hidden && el.value) {
-        sayFor(pick(player.playing && Math.random() < 0.6 ? listening : idle), 3600)
-      }
-      chatter()
-    },
-    22000 + Math.random() * 28000,
-  )
-}
-
 function onResize() {
   if (!free.value) return
   clamp()
@@ -370,7 +324,11 @@ onMounted(() => {
   window.addEventListener('pointerdown', onPageDown, { passive: true })
   rest()
   wander()
-  chatter()
+  // время от времени котик бормочет сам; если играет музыка — иногда комментирует её
+  startChatter(
+    () => !dragging.value && !sleepy.value && !!el.value,
+    () => player.playing,
+  )
   onRoute(route.name)
 })
 onBeforeUnmount(() => {
@@ -381,15 +339,13 @@ onBeforeUnmount(() => {
   window.clearTimeout(wanderTimer)
   cancelAnimationFrame(raf)
   cancelAnimationFrame(moveRaf)
-  window.clearTimeout(sayTimer)
-  window.clearTimeout(screamTimer)
   window.clearTimeout(sleepTimer)
 })
 watch(
   () => route.name,
   (name) => {
     out.value = false
-    said.value = ''
+    hush()
     onRoute(name)
   },
 )

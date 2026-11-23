@@ -1,4 +1,4 @@
-export interface Social {
+interface Social {
   key: 'github' | 'linkedin' | 'telegram' | 'whatsapp' | 'soundcloud'
   label: string
   path: string

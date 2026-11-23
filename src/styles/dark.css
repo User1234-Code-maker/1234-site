@@ -169,7 +169,9 @@
 
 /* ─────────── главная: секции ниже Hero ─────────── */
 [data-theme='dark'] .rest {
-  background: linear-gradient(180deg, #0b1030 0%, #0e1238 45%, #0b1030 100%);
+  background:
+    url(../assets/img/backdrop-night.webp) center top / max(1400px, 100%) auto repeat-y,
+    #0b1030;
 }
 [data-theme='dark'] .rest-grid {
   opacity: 0.6;
@@ -295,11 +297,6 @@
   filter: drop-shadow(0 0 8px rgb(150 160 255 / 0.4));
 }
 /* у главной под Hero тот же ночной облачный фон */
-[data-theme='dark'] .rest {
-  background:
-    url(../assets/img/backdrop-night.webp) center top / max(1400px, 100%) auto repeat-y,
-    #0b1030;
-}
 
 /* телефон и планшет: низ персонажа плавно уходит в ночное небо, без светлой полосы и среза */
 @media (max-width: 1100px) {

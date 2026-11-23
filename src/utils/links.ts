@@ -1,6 +1,6 @@
 import { site } from '../data/site'
 
-export type LinkKey = keyof typeof site.contacts | 'mail'
+type LinkKey = keyof typeof site.contacts | 'mail'
 
 export function hrefFor(key: LinkKey): string {
   return key === 'mail' ? `mailto:${site.contacts.email}` : site.contacts[key] || '#'

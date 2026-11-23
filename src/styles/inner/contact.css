@@ -1,0 +1,278 @@
+/* Страница «Контакты».
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+.pg-contact .sc-city {
+  width: min(1700px, 96%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 55%);
+  mask-image: linear-gradient(to right, transparent 0, #000 55%);
+}
+.ct-lantern {
+  width: 14px;
+  height: 20px;
+  border-radius: 7px;
+  background: radial-gradient(circle at 50% 40%, #fff3c4, #ffb84d 60%, #ff8a3d);
+  box-shadow: 0 0 18px 6px rgb(255 180 80 / 0.55);
+  animation: sway 5s ease-in-out infinite;
+  transform-origin: 50% -20px;
+}
+.ct-lantern.l1 {
+  right: 34%;
+  bottom: 30%;
+}
+.ct-lantern.l2 {
+  right: 30%;
+  bottom: 34%;
+  animation-delay: -1.4s;
+}
+.ct-lantern.l3 {
+  right: 12%;
+  bottom: 28%;
+  animation-delay: -2.8s;
+}
+@keyframes sway {
+  0%,
+  100% {
+    rotate: -4deg;
+  }
+  50% {
+    rotate: 4deg;
+  }
+}
+.pg-contact .sc-title {
+  font-size: clamp(40px, 5.4vw, 80px);
+}
+.ct-mail {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+  padding: 10px 10px 10px 16px;
+  border-radius: 999px;
+  max-width: 640px;
+}
+.ct-mail-ic {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(140deg, var(--cap), var(--violet));
+}
+.ct-mail-addr {
+  flex: 1;
+  min-width: 0;
+  font-weight: 800;
+  font-size: clamp(15px, 1.3vw, 18px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ct-mail-addr:hover {
+  color: var(--violet);
+}
+.ct-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 999px;
+  font:
+    800 14px Mn,
+    system-ui,
+    sans-serif;
+  color: var(--ink);
+  background: var(--glass-hi);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    scale 0.15s;
+}
+.ct-copy:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.ct-copy:active {
+  scale: 0.95;
+}
+.ct-copy.ok {
+  background: #2fc27a;
+  color: #fff;
+}
+.ct-fail {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--soft);
+}
+.ct-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+  list-style: none;
+  padding: 0;
+}
+/* необычная раскладка: Telegram и GitHub крупнее, остальные компактнее */
+.ct-grid li {
+  grid-column: span 2;
+  order: 2;
+}
+.ct-grid .ct-telegram,
+.ct-grid .ct-github {
+  grid-column: span 3;
+  order: 1;
+}
+.ct-grid .ct-telegram {
+  order: 0;
+}
+.ct-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  min-height: 96px;
+  padding: 20px 22px;
+  border-radius: var(--r-l);
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition:
+    translate 0.3s var(--ease),
+    box-shadow 0.3s,
+    border-color 0.3s;
+}
+.ct-telegram .ct-card,
+.ct-github .ct-card {
+  min-height: 130px;
+}
+.ct-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    70% 120% at 0% 50%,
+    color-mix(in srgb, var(--tint) 22%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.ct-card:hover {
+  translate: 0 -4px;
+  border-color: color-mix(in srgb, var(--tint) 45%, transparent);
+  box-shadow:
+    var(--shadow-m),
+    0 0 40px -16px var(--tint);
+}
+.ct-card:hover::before {
+  opacity: 1;
+}
+.ct-ic {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  color: #fff;
+  background: var(--tint);
+  box-shadow: 0 12px 24px -12px var(--tint);
+}
+.ct-txt {
+  position: relative;
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.ct-txt b {
+  font-size: 18px;
+}
+.ct-telegram b,
+.ct-github b {
+  font-size: 22px;
+}
+.ct-txt small {
+  font-size: 13.5px;
+  color: var(--soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ct-go {
+  position: relative;
+  margin-left: auto;
+  color: var(--mute);
+  transition:
+    translate 0.25s var(--ease),
+    color 0.25s;
+}
+.ct-card:hover .ct-go {
+  translate: 3px -3px;
+  color: var(--tint);
+}
+@media (max-width: 1100px) {
+  .pg-contact .sc-city {
+    width: 130%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 45%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 45%);
+  }
+  .ct-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .ct-grid li,
+  .ct-grid .ct-telegram,
+  .ct-grid .ct-github {
+    grid-column: span 1;
+  }
+  .ct-lantern.l1 {
+    right: 24%;
+    bottom: 22%;
+  }
+  .ct-lantern.l2 {
+    right: 18%;
+    bottom: 26%;
+  }
+  .ct-lantern.l3 {
+    right: 4%;
+    bottom: 18%;
+  }
+}
+@media (max-width: 700px) {
+  .ct-mail {
+    flex-wrap: wrap;
+    border-radius: var(--r-l);
+    padding: 12px;
+  }
+  .ct-mail-addr {
+    flex-basis: calc(100% - 60px);
+  }
+  .ct-copy {
+    width: 100%;
+    justify-content: center;
+  }
+  .ct-grid {
+    grid-template-columns: 1fr;
+  }
+  .ct-card,
+  .ct-telegram .ct-card,
+  .ct-github .ct-card {
+    min-height: 84px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-lantern {
+    animation: none !important;
+  }
+}
+.ct-grid {
+  margin-top: 0;
+}

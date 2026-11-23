@@ -4,7 +4,7 @@
    Тексты проектов, релизов и опыта лежат в соседних файлах:
    projects.ts, music.ts, about.ts.
    ───────────────────────────────────────────────────────────── */
-export type Texts = Record<string, string>
+type Texts = Record<string, string>
 
 export const texts: Record<'ru' | 'en', Texts> = {
   ru: {

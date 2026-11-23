@@ -1,0 +1,401 @@
+/* Страница «Музыка».
+   Цвета — только из tokens.css, поэтому тёмная тема работает сама.
+   Анимируем только transform / opacity / translate / scale. */
+
+.mu-hero {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+.mu-sleeve {
+  position: relative;
+  width: min(440px, 78%);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  translate: -12% 0;
+}
+.mu-sleeve .rcover {
+  position: relative;
+  z-index: 2;
+}
+.mu-sleeve .rc-art {
+  border-radius: 22px;
+  box-shadow:
+    var(--shadow-l),
+    0 0 90px -24px rgb(160 120 255 / 0.6);
+}
+.mu-disc {
+  position: absolute;
+  z-index: 1;
+  top: 4%;
+  left: 4%;
+  width: 92%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #f4f1ff 0 7%, #1a1d3a 7.5% 15%, transparent 15.5%),
+    repeating-radial-gradient(circle, #15172e 0 2px, #22264a 2px 4px);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+  translate: 34% 0;
+  transition: translate 0.8s var(--ease-out);
+}
+.mu-disc i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 30deg,
+    transparent 0 40deg,
+    rgb(255 255 255 / 0.12) 60deg,
+    transparent 80deg 220deg,
+    rgb(255 255 255 / 0.08) 240deg,
+    transparent 260deg
+  );
+}
+.mu-sleeve:hover .mu-disc,
+.spinning .mu-disc {
+  translate: 46% 0;
+}
+.spinning .mu-disc i {
+  animation: spin 2.4s linear infinite;
+}
+.mu-player {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 28px 44px;
+  padding: clamp(22px, 3vw, 38px);
+  border-radius: var(--r-xl);
+  scroll-margin-top: 24px;
+  position: relative;
+  align-items: start;
+}
+.mu-kind,
+.mu-rel-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--violet);
+}
+.mu-kind span + span::before,
+.mu-rel-meta span + span::before {
+  content: '·';
+  margin-right: 8px;
+  color: var(--mute);
+}
+.mu-info h2 {
+  margin-top: 10px;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+.mu-genres {
+  margin-top: 10px;
+  font-weight: 800;
+  color: var(--soft);
+}
+.mu-blurb {
+  margin-top: 16px;
+  color: var(--soft);
+  line-height: 1.6;
+  max-width: 54ch;
+}
+.mu-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 26px;
+}
+.mu-wave {
+  flex: 1;
+  min-width: 0;
+}
+.mu-wave.live {
+  cursor: pointer;
+}
+.mu-wave .wave {
+  height: 54px;
+}
+.mu-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.mu-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  border: 1.5px solid var(--hair);
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+.mu-links a:hover {
+  border-color: var(--violet);
+  background: var(--glass-hi);
+}
+/* трек-лист в обеих темах */
+.page .tl-row {
+  background: var(--glass-hi);
+  border-color: var(--glass-line);
+}
+.page .tl-row:hover,
+.page .tl-row.on {
+  background: var(--glass-hi);
+}
+[data-theme='dark'] .tl-row:hover,
+[data-theme='dark'] .tl-row.on {
+  background: rgb(60 70 150 / 0.55);
+}
+.mu-disco-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+.mu-disco-head .filters {
+  margin: 0;
+}
+.mu-releases {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+}
+.mu-rel-btn {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mu-rel-cover {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  transition: translate 0.35s var(--ease);
+}
+.mu-rel-btn:hover .mu-rel-cover {
+  translate: 0 -6px;
+}
+.mu-rel-play {
+  position: absolute;
+  z-index: 3;
+  right: 12px;
+  bottom: 12px;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  box-shadow: var(--btn-glow);
+  opacity: 0;
+  scale: 0.8;
+  transition:
+    opacity 0.25s,
+    scale 0.25s var(--ease);
+}
+.mu-rel-btn:hover .mu-rel-play,
+.mu-rel-btn:focus-visible .mu-rel-play {
+  opacity: 1;
+  scale: 1;
+}
+.mu-rel.cur .rc-art {
+  outline: 3px solid var(--violet);
+  outline-offset: 4px;
+}
+.mu-rel-btn b {
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.mu-rel-btn small {
+  font-size: 13px;
+  color: var(--soft);
+}
+.mu-plats {
+  gap: 12px;
+  margin-top: 26px;
+  list-style: none;
+  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  flex-wrap: wrap;
+}
+.mu-plats a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 22px;
+  border-radius: var(--r-m);
+  font-weight: 800;
+  font-size: 17px;
+  background: var(--glass);
+  border: 1px solid var(--glass-line);
+  transition:
+    translate 0.25s var(--ease),
+    background 0.25s,
+    color 0.25s;
+  height: 100%;
+  white-space: nowrap;
+}
+.mu-plats a:hover {
+  translate: 0 -3px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+}
+@media (max-width: 1100px) {
+  .mu-player {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mu-releases {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mu-sleeve {
+    width: min(340px, 70%);
+    translate: -14% 0;
+  }
+}
+@media (max-width: 700px) {
+  .mu-sleeve {
+    width: 64%;
+    translate: -16% 0;
+  }
+  .mu-info h2 {
+    font-size: 48px;
+  }
+  .mu-ctrl {
+    gap: 12px;
+  }
+  .mu-releases {
+    gap: 14px;
+  }
+  .mu-rel-play {
+    opacity: 1;
+    scale: 0.85;
+    width: 44px;
+    height: 44px;
+  }
+}
+.mu-plats {
+  margin-top: 0;
+}
+
+/* сингл: без пустого окна треклиста, волна во всю ширину */
+.mu-player.single {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mu-player.single .mu-info h2 {
+  font-size: clamp(44px, 6vw, 88px);
+}
+.mu-player.single .mu-wave .wave {
+  height: 72px;
+}
+.mu-time {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mute);
+  font-variant-numeric: tabular-nums;
+}
+.mu-player .tl {
+  align-self: start;
+}
+
+/* площадки: одинаковая высота, название в одну строку */
+.mu-plats a span {
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+@media (max-width: 700px) {
+  .mu-player.single .mu-info h2 {
+    font-size: 48px;
+  }
+}
+
+/* факты релиза */
+.mu-facts {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+.mu-facts div {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: var(--r-m);
+  background: var(--glass-hi);
+  border: 1px solid var(--glass-line);
+}
+.mu-facts dt {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--mute);
+}
+.mu-facts dd {
+  margin-top: 4px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.mu-player:not(.single) .mu-info {
+  align-self: center;
+}
+/* площадки: тянутся по строке, текст целиком */
+.mu-plats {
+  display: flex;
+}
+.mu-plats li {
+  flex: 1 1 170px;
+}
+@media (max-width: 700px) {
+  .mu-facts dd {
+    font-size: 20px;
+  }
+}
+/* на телефоне ряд фильтров дискографии листается вбок и выходит под края экрана */
+@media (max-width: 700px) {
+  .mu-disco-head .filters {
+    margin: 0 -20px 22px;
+  }
+}
+
+/* анимация <Transition name="cover"> */
+.cover-enter-active {
+  transition:
+    opacity 0.45s ease,
+    translate 0.6s var(--ease-out);
+}
+.cover-leave-active {
+  transition:
+    opacity 0.2s ease,
+    translate 0.2s ease;
+}
+.cover-enter-from {
+  opacity: 0;
+  translate: calc(-12% - 30px) 0;
+}
+.cover-leave-to {
+  opacity: 0;
+  translate: calc(-12% + 20px) 0;
+}

@@ -1,0 +1,11 @@
+/* Внутренние страницы 1234. Главная живёт в main.css и здесь не меняется.
+   Порядок важен: база → сцена → страницы → спрайты. */
+@import './base.css';
+@import './scene.css';
+@import './about.css';
+@import './projects.css';
+@import './project.css';
+@import './music.css';
+@import './contact.css';
+@import './notfound.css';
+@import './pixel.css';
