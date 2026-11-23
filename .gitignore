@@ -5,3 +5,6 @@ dist
 playwright-report
 test-results
 .vite
+
+# служебная папка для переноса файлов, не часть проекта
+_to_delete/
