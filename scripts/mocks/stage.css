@@ -1,0 +1,61 @@
+/* подача «как на Dribbble»: тёмная сцена, свет, зерно */
+.stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #06080f;
+}
+.stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 50%, #000, transparent);
+  mask-image: radial-gradient(70% 70% at 50% 50%, #000, transparent);
+}
+.win {
+  position: absolute;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #0c0f18;
+  box-shadow:
+    0 0 0 1px #ffffff14,
+    0 1px 0 0 #ffffff22 inset,
+    0 60px 120px -20px #000,
+    0 30px 60px -30px #000c;
+}
+.float {
+  position: absolute;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #1a1f30ee, #10131eee);
+  box-shadow:
+    0 0 0 1px #ffffff1a,
+    0 1px 0 #ffffff26 inset,
+    0 40px 80px -20px #000d;
+  backdrop-filter: blur(12px);
+}
+.ic {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}

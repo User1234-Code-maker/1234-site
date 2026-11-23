@@ -1,0 +1,564 @@
+<!-- общее окно ERP: вставляется в обложку через iframe -->
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" /><link
+  rel="stylesheet"
+  href="stage.css"
+/>
+<style>
+  body {
+    background: #0b0e17;
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    font-size: 13px;
+  }
+  .side {
+    background: #0e121c;
+    border-right: 1px solid #1a1f2d;
+    padding: 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 8px 20px;
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: -0.3px;
+  }
+  .logo i {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    background: conic-gradient(from 200deg, #2f6bff, #8a5cff, #2fd3ff, #2f6bff);
+    box-shadow: 0 0 24px #2f6bff88;
+  }
+  .sec {
+    font-size: 10.5px;
+    letter-spacing: 1.4px;
+    color: #5d6580;
+    padding: 14px 10px 6px;
+    font-weight: 700;
+  }
+  .it {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 9px;
+    color: #a3abc2;
+    font-weight: 500;
+  }
+  .it.on {
+    background: linear-gradient(90deg, #2f6bff26, #2f6bff08);
+    color: #fff;
+    box-shadow: inset 2px 0 0 #4d82ff;
+  }
+  .it b {
+    margin-left: auto;
+    font-size: 10.5px;
+    background: #1c2236;
+    color: #8fa0d8;
+    padding: 1px 7px;
+    border-radius: 9px;
+    font-weight: 600;
+  }
+  .me {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background: #121726;
+  }
+  .me span:first-child {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffb36b, #ff6b9a);
+  }
+  .me b {
+    display: block;
+    font-size: 12.5px;
+  }
+  .me small {
+    color: #6c7590;
+    font-size: 11px;
+  }
+  .main {
+    padding: 18px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .crumb {
+    color: #6c7590;
+  }
+  .crumb b {
+    color: #dfe4f2;
+    font-weight: 600;
+  }
+  .search {
+    margin-left: auto;
+    width: 260px;
+    height: 34px;
+    border-radius: 10px;
+    background: #121726;
+    border: 1px solid #1d2335;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    color: #5d6580;
+  }
+  .search kbd {
+    margin-left: auto;
+    font-family: M;
+    font-size: 10.5px;
+    color: #7b84a0;
+    border: 1px solid #262d42;
+    border-radius: 5px;
+    padding: 0 5px;
+  }
+  .btn {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: #2f6bff;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 8px 20px -8px #2f6bff;
+  }
+  .h {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .h h1 {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+  }
+  .h p {
+    color: #7b84a0;
+    margin-top: 4px;
+  }
+  .seg {
+    display: flex;
+    background: #121726;
+    border: 1px solid #1d2335;
+    border-radius: 10px;
+    padding: 3px;
+  }
+  .seg span {
+    padding: 5px 12px;
+    border-radius: 7px;
+    color: #8a93ad;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .seg .on {
+    background: #222a40;
+    color: #fff;
+  }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .k {
+    background: #10141f;
+    border: 1px solid #1a2030;
+    border-radius: 14px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .k small {
+    color: #7b84a0;
+    font-weight: 600;
+    font-size: 11.5px;
+  }
+  .k strong {
+    display: block;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin: 6px 0 2px;
+  }
+  .k em {
+    font-style: normal;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #3ee08f;
+  }
+  .k svg {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+  }
+  .row2 {
+    display: grid;
+    grid-template-columns: 1.65fr 1fr;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: #10141f;
+    border: 1px solid #1a2030;
+    border-radius: 14px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .lg {
+    display: flex;
+    gap: 14px;
+    font-size: 11.5px;
+    color: #8a93ad;
+    font-weight: 600;
+  }
+  .lg i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+  .tr {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-top: 1px solid #182033;
+  }
+  .tr:first-of-type {
+    border: 0;
+  }
+  .cv {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    flex: none;
+  }
+  .tr b {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .tr small {
+    color: #6c7590;
+    font-size: 11px;
+  }
+  .tr .up {
+    margin-left: auto;
+    text-align: right;
+    font-weight: 700;
+    font-size: 12.5px;
+  }
+  .tr .up small {
+    display: block;
+    color: #3ee08f;
+    font-weight: 700;
+  }
+  .tier {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 7px;
+    background: #ff8a3d1f;
+    color: #ff9b57;
+    border: 1px solid #ff8a3d40;
+  }
+  .pl {
+    display: grid;
+    grid-template-columns: 78px 1fr 44px;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #a3abc2;
+    font-weight: 600;
+  }
+  .pl i {
+    height: 7px;
+    border-radius: 9px;
+    background: #1a2134;
+    overflow: hidden;
+  }
+  .pl b {
+    display: block;
+    height: 100%;
+    border-radius: 9px;
+  }
+  .pl small {
+    text-align: right;
+    color: #dfe4f2;
+    font-weight: 700;
+  }
+  .tip {
+    position: absolute;
+    left: 66%;
+    top: 62px;
+    background: #1b2134;
+    border: 1px solid #2a3250;
+    border-radius: 9px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: #a3abc2;
+    box-shadow: 0 10px 24px -8px #000;
+  }
+  .tip b {
+    color: #fff;
+  }
+  .dot {
+    position: absolute;
+    left: calc(77% - 2px);
+    top: 112px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff4d5e;
+    border: 3px solid #10141f;
+    box-shadow: 0 0 0 4px #ff4d5e33;
+  }
+</style>
+<aside class="side">
+  <div class="logo"><i></i>0to8 ERP</div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="7" height="7" rx="2" />
+      <rect x="14" y="3" width="7" height="7" rx="2" />
+      <rect x="3" y="14" width="7" height="7" rx="2" />
+      <rect x="14" y="14" width="7" height="7" rx="2" /></svg
+    >Обзор
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6" /></svg
+    >Финансы
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <path d="M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z" /></svg
+    >AI-Ассистент
+  </div>
+  <div class="sec">КАТАЛОГ</div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M3 20c.8-3.5 3.2-5 6-5s5.2 1.5 6 5M16 4.5a3.5 3.5 0 0 1 0 7M21 20c-.4-2-1.4-3.4-3-4.2" /></svg
+    >Артисты<b>1 204</b>
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="3" /></svg
+    >Релизы<b>9 418</b>
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M12 3v9l7.8 4.5M21 12a9 9 0 1 1-9-9" /></svg>Сплиты
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4" /></svg>Дистрибуция
+  </div>
+  <div class="sec">МАРКЕТИНГ</div>
+  <div class="it on">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>Viberate Данные
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <rect x="3" y="5" width="18" height="14" rx="3" />
+      <path d="M3 10h18" /></svg
+    >Промо расходы
+  </div>
+  <div class="it">
+    <svg class="ic" viewBox="0 0 24 24">
+      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+      <path d="M14 3v5h5M9 13h6M9 17h4" /></svg
+    >Отчёты
+  </div>
+  <div class="me">
+    <span></span><span><b>Bogdan</b><small>Системный аналитик</small></span>
+  </div>
+</aside>
+<main class="main">
+  <div class="top">
+    <span class="crumb">Маркетинг &nbsp;/&nbsp; <b>Viberate Данные</b></span>
+    <span class="search"
+      ><svg class="ic" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-4-4" /></svg
+      >Трек, артист, ISRC<kbd>⌘K</kbd></span
+    >
+    <span class="btn"
+      ><svg class="ic" viewBox="0 0 24 24" style="width: 15px">
+        <path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7" /></svg
+      >Обновить</span
+    >
+  </div>
+  <div class="h">
+    <div>
+      <h1>Viberate Данные</h1>
+      <p>Ежедневная статистика по площадкам · синхронизация сегодня в 09:30</p>
+    </div>
+    <div class="seg"><span>7 дн</span><span class="on">30 дн</span><span>90 дн</span><span>Год</span></div>
+  </div>
+  <div class="kpis">
+    <div class="k">
+      <small>Треков в наблюдении</small><strong>9 418</strong><em>+126 за неделю</em>
+      <svg width="74" height="28">
+        <path
+          d="M0 24 L12 20 L24 22 L36 14 L48 16 L60 8 L74 4"
+          fill="none"
+          stroke="#4d82ff"
+          stroke-width="2"
+        />
+      </svg>
+    </div>
+    <div class="k">
+      <small>Всего стримов</small><strong>11,6 млрд</strong><em>↑ 4,2%</em>
+      <svg width="74" height="28">
+        <path
+          d="M0 22 L12 18 L24 20 L36 12 L48 13 L60 6 L74 7"
+          fill="none"
+          stroke="#3ee08f"
+          stroke-width="2"
+        />
+      </svg>
+    </div>
+    <div class="k">
+      <small>За 24 часа</small><strong>87,3 млн</strong><em>↑ 64,2 млн к среднему</em>
+      <svg width="74" height="28">
+        <path
+          d="M0 20 L12 22 L24 14 L36 18 L48 9 L60 12 L74 3"
+          fill="none"
+          stroke="#3ee08f"
+          stroke-width="2"
+        />
+      </svg>
+    </div>
+    <div class="k">
+      <small>Прорывы / Звёзды</small
+      ><strong
+        ><span style="color: #ff9b57">614</span><span style="color: #3a4260"> / </span
+        ><span style="color: #7da2ff">1 938</span></strong
+      ><em style="color: #8a93ad">тир 3+ / стабильные</em>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="card">
+      <span class="tip">14 ноя · <b>31,8 млн</b></span>
+      <h3>
+        Стримы по площадкам
+        <span class="lg"
+          ><span><i style="background: #3ee08f"></i>Spotify</span
+          ><span><i style="background: #ff4d5e"></i>YouTube</span
+          ><span><i style="background: #ff9b57"></i>SoundCloud</span></span
+        >
+      </h3>
+      <svg viewBox="0 0 600 230" preserveAspectRatio="none" width="100%" style="margin-top: 10px; flex: 1">
+        <defs>
+          <linearGradient id="a1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ff4d5e" stop-opacity=".35" />
+            <stop offset="1" stop-color="#ff4d5e" stop-opacity="0" />
+          </linearGradient>
+          <linearGradient id="a2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#3ee08f" stop-opacity=".3" />
+            <stop offset="1" stop-color="#3ee08f" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <g stroke="#1a2134"><path d="M0 40H600M0 95H600M0 150H600M0 205H600" /></g>
+        <path
+          d="M0 150 C40 140 70 120 110 126 S180 92 220 98 S300 60 340 70 S420 40 460 52 S540 22 600 30 V230 H0Z"
+          fill="url(#a1)"
+        />
+        <path
+          d="M0 150 C40 140 70 120 110 126 S180 92 220 98 S300 60 340 70 S420 40 460 52 S540 22 600 30"
+          fill="none"
+          stroke="#ff4d5e"
+          stroke-width="2.5"
+          vector-effect="non-scaling-stroke"
+        />
+        <path
+          d="M0 180 C50 176 90 160 130 164 S200 140 250 146 S330 118 380 124 S470 100 520 96 S570 84 600 80 V230 H0Z"
+          fill="url(#a2)"
+        />
+        <path
+          d="M0 180 C50 176 90 160 130 164 S200 140 250 146 S330 118 380 124 S470 100 520 96 S570 84 600 80"
+          fill="none"
+          stroke="#3ee08f"
+          stroke-width="2.5"
+          vector-effect="non-scaling-stroke"
+        />
+        <path
+          d="M0 205 C60 202 120 198 180 196 S300 186 360 188 S480 176 600 172"
+          fill="none"
+          stroke="#ff9b57"
+          stroke-width="2.5"
+          vector-effect="non-scaling-stroke"
+        />
+      </svg>
+    </div>
+    <div class="card">
+      <h3>Топ прорывов <span class="lg">за сутки</span></h3>
+      <div style="margin-top: 8px">
+        <div class="tr">
+          <span class="cv" style="background: linear-gradient(135deg, #ff6b9a, #7b5cff)"></span
+          ><span><b>Night Drive (Ultra Slowed)</b><small>KAIRO</small></span
+          ><span class="up">1,4 млн<small>+312%</small></span>
+        </div>
+        <div class="tr">
+          <span class="cv" style="background: linear-gradient(135deg, #2fd3ff, #2f6bff)"></span
+          ><span><b>FUNK VELOZ</b><small>NØRTE</small></span
+          ><span class="up">986 тыс.<small>+204%</small></span>
+        </div>
+        <div class="tr">
+          <span class="cv" style="background: linear-gradient(135deg, #ffcf5c, #ff6b3d)"></span
+          ><span><b>Luz de Neón</b><small>Valen Ríos</small></span
+          ><span class="up">744 тыс.<small>+176%</small></span>
+        </div>
+        <div class="tr">
+          <span class="cv" style="background: linear-gradient(135deg, #3ee08f, #0e7c6b)"></span
+          ><span><b>MONTAGEM SOL</b><small>DJ Arpo</small></span
+          ><span class="up">602 тыс.<small>+141%</small></span>
+        </div>
+        <div class="tr">
+          <span class="cv" style="background: linear-gradient(135deg, #c9d2ff, #5d6bff)"></span
+          ><span><b>Velvet Hours</b><small>MIRA</small></span
+          ><span class="up">451 тыс.<small>+118%</small></span>
+        </div>
+      </div>
+      <h3 style="margin-top: auto; padding-top: 14px; border-top: 1px solid #182033">Площадка-лидер</h3>
+      <div class="pl">
+        <span>Spotify</span><i><b style="width: 58%; background: #3ee08f"></b></i><small>3 118</small>
+      </div>
+      <div class="pl">
+        <span>YouTube</span><i><b style="width: 100%; background: #ff4d5e"></b></i><small>5 402</small>
+      </div>
+      <div class="pl">
+        <span>SoundCloud</span><i><b style="width: 14%; background: #ff9b57"></b></i><small>736</small>
+      </div>
+    </div>
+  </div>
+</main>

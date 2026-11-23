@@ -163,9 +163,69 @@
     background: #2a2d34;
     font-size: 22px;
   }
+  body {
+    padding-top: 50px;
+  }
+  .v {
+    height: 440px;
+    background: linear-gradient(180deg, #0a0b1e, #2a1650 55%, #ff5f8f 92%, #ffb36b);
+  }
+  .v::before {
+    display: none;
+  }
+  .v p {
+    left: 18px;
+    top: 40px;
+  }
+  .v i {
+    right: 18px;
+    top: 48px;
+  }
+  .act span {
+    width: 76px;
+    height: 76px;
+  }
+  .tb {
+    height: 48px;
+    font-size: 16px;
+  }
+  .v p,
+  .v i {
+    z-index: 1;
+  }
 </style>
-<div class="tb">0to8 AR Scouts Bot <span>⋮ ✕</span></div>
+<div class="tb">
+  <span style="color: #fff; font-size: 15px; letter-spacing: 0">✕ Закрыть</span>0to8 Scouts<span>⋯</span>
+</div>
 <div class="v">
+  <svg
+    viewBox="0 0 390 440"
+    preserveAspectRatio="none"
+    style="position: absolute; inset: 0; width: 100%; height: 100%"
+  >
+    <circle cx="270" cy="250" r="70" fill="#ffd1e0" opacity=".85" />
+    <circle cx="270" cy="250" r="110" fill="#ff8fb5" opacity=".15" />
+    <g fill="#fff" opacity=".7">
+      <circle cx="40" cy="60" r="1.5" />
+      <circle cx="120" cy="30" r="1" />
+      <circle cx="330" cy="80" r="1.5" />
+      <circle cx="200" cy="110" r="1" />
+      <circle cx="80" cy="150" r="1.2" />
+    </g>
+    <path
+      d="M0 440V330h26v-40h22v60h18v-90h30v100h16v-60h24v80h20v-120h30v130h18v-50h26v-30h28v70h22v-40h30v60h30V440Z"
+      fill="#180c2e"
+    />
+    <g fill="#ffd37a" opacity=".8">
+      <rect x="80" y="280" width="4" height="5" />
+      <rect x="88" y="300" width="4" height="5" />
+      <rect x="190" y="250" width="4" height="5" />
+      <rect x="198" y="270" width="4" height="5" />
+      <rect x="200" y="300" width="4" height="5" />
+      <rect x="318" y="320" width="4" height="5" />
+    </g>
+    <path d="M0 440V380h40v-20h40v30h50v-16h60v26h40v-12h70v22h90V440Z" fill="#07040f" />
+  </svg>
   <p>Songs that sound like a summer night in 2009</p>
   <i>♪</i>
 </div>

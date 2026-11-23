@@ -167,8 +167,8 @@ const host = computed(() => {
           <figure v-for="(s, i) in project.shots" :key="s" class="pd-shot" :style="{ '--i': i }">
             <LazyImg
               :src="s"
-              :width="phoneShots ? 390 : 1200"
-              :height="phoneShots ? 844 : 750"
+              :width="phoneShots ? 470 : 1200"
+              :height="phoneShots ? 940 : 750"
               :alt="`${tx(project.title, lang)} · ${i + 1}`"
             />
           </figure>

@@ -15,6 +15,8 @@ import shot3 from '../assets/img/shot-portfolio-3.webp'
 import ndaErp from '../assets/img/nda-erp-dashboard.webp'
 import ndaErpLogin from '../assets/img/nda-erp-login.webp'
 import ndaHitviro from '../assets/img/nda-hitviro-campaigns.webp'
+import ndaHitviroApp from '../assets/img/nda-hitviro-app.webp'
+import ndaErpApp from '../assets/img/nda-erp-app.webp'
 import ndaBots from '../assets/img/nda-bots-cover.webp'
 import ndaBotsMenu from '../assets/img/nda-bots-menu.webp'
 import ndaBotsRadar from '../assets/img/nda-bots-radar.webp'
@@ -29,7 +31,7 @@ const list: Project[] = [
     slug: 'label-erp',
     // экраны перерисованы по мотивам, данные на них выдуманные
     cover: ndaErp,
-    shots: [ndaErpLogin, ndaErp],
+    shots: [ndaErpApp, ndaErpLogin],
     title: { ru: 'ERP для музыкального лейбла', en: 'ERP for a music label' },
     category: 'erp',
     ru: 'Внутренняя ERP музыкального лейбла: дистрибуция, поддержка, документы и доска задач.',
@@ -59,6 +61,7 @@ I take part as a systems analyst and frontend developer: I set the tasks and bui
     slug: 'hitviro',
     // экраны перерисованы по мотивам, данные на них выдуманные
     cover: ndaHitviro,
+    shots: [ndaHitviroApp],
     title: { ru: 'Hitviro: платформа клиппинга', en: 'Hitviro: clipping platform' },
     category: 'web',
     visual: 'platform',

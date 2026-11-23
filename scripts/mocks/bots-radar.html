@@ -185,8 +185,13 @@
     color: #9aa2b5;
     padding-top: 10px;
   }
+  .nav span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .nav span::before {
-    content: '';
+    content: none;
     display: block;
     width: 20px;
     height: 20px;
@@ -229,6 +234,17 @@
     border-radius: 10px;
     background: linear-gradient(135deg, #2b3550, #151a26);
     flex: none;
+  }
+  .nav {
+    height: 86px;
+    padding-top: 10px;
+  }
+  .nav .ic {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 </style>
 <div class="bar">
@@ -282,5 +298,37 @@
   </div>
 </div>
 <div class="nav">
-  <span class="on">Обзор</span><span>Список</span><span>История</span><span>Сигналы</span>
+  <span class="on"
+    ><svg class="ic" viewBox="0 0 24 24" style="width: 22px; height: 22px; margin: 0 auto 4px">
+      <path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" /></svg
+    >Обзор</span
+  ><span
+    ><svg class="ic" viewBox="0 0 24 24" style="width: 22px; height: 22px; margin: 0 auto 4px">
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M3 20c.8-3.5 3.2-5 6-5s5.2 1.5 6 5M16 4.5a3.5 3.5 0 0 1 0 7M21 20c-.4-2-1.4-3.4-3-4.2" /></svg
+    >Список</span
+  ><span
+    ><svg class="ic" viewBox="0 0 24 24" style="width: 22px; height: 22px; margin: 0 auto 4px">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" /></svg
+    >История</span
+  ><span style="position: relative"
+    ><svg class="ic" viewBox="0 0 24 24" style="width: 22px; height: 22px; margin: 0 auto 4px">
+      <path d="M5 12a7 7 0 0 1 14 0M8.5 12a3.5 3.5 0 0 1 7 0" />
+      <circle cx="12" cy="12" r="1.2" />
+      <path d="M12 13v7" /></svg
+    >Сигналы<b
+      style="
+        position: absolute;
+        top: -6px;
+        left: 54%;
+        background: #e0335f;
+        color: #fff;
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: 9px;
+      "
+      >99+</b
+    ></span
+  >
 </div>

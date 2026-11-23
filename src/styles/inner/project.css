@@ -278,7 +278,10 @@
   grid-column: auto;
 }
 .shots-telegram-bots .pd-shot {
-  border-radius: 28px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
 }
 /* игровая студия: тёмная «витрина» под цвет самого сайта */
 .shots-game-studio-website {

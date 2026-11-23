@@ -1,355 +1,192 @@
-<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" />
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" /><link
+  rel="stylesheet"
+  href="stage.css"
+/>
 <style>
-  body {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    background: #0d1018;
+  .app {
+    width: 1180px;
+    height: 760px;
+    left: 300px;
+    top: 150px;
+    transform: perspective(2600px) rotateX(14deg) rotateY(16deg) rotateZ(-3deg);
+    transform-origin: 60% 50%;
   }
-  .side {
-    border-right: 1px solid #1c2130;
-    padding: 26px 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .app iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
-  .brand {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .brand b {
-    font-weight: 800;
-    font-size: 34px;
-    letter-spacing: -1px;
-    background: linear-gradient(90deg, #8d8cff, #7aa6ff 35%, #ff8bd0 55%, #ffd36e 70%, #8d8cff);
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-  .bell {
-    width: 26px;
-    height: 26px;
-    border: 2px solid #9aa2b5;
-    border-radius: 10px 10px 6px 6px;
-    position: relative;
-  }
-  .bell::after {
-    content: '5';
+  .vid {
     position: absolute;
-    right: -14px;
-    top: -14px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #7d7bff;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 800;
-    display: grid;
-    place-items: center;
-  }
-  .new {
-    background: #9d9bff;
-    color: #141626;
-    font-weight: 700;
-    font-size: 17px;
-    padding: 14px;
-    border-radius: 14px;
-    text-align: center;
-  }
-  .it {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 14px;
-    font-size: 17px;
-    color: #d7dbe6;
-    font-weight: 500;
-  }
-  .it i {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #9aa2b5;
-    border-radius: 50%;
-  }
-  .it.on {
-    color: #9d9bff;
-  }
-  .it.on i {
-    border-color: #9d9bff;
-  }
-  .foot {
-    margin-top: auto;
-  }
-  .acc {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    border-top: 1px solid #1c2130;
-    padding-top: 18px;
-    margin-top: 10px;
-  }
-  .acc span:first-child {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #e44aa8;
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-  }
-  .acc b {
-    display: block;
-  }
-  .acc small {
-    color: #8f97ab;
-  }
-  .main {
-    padding: 30px 38px;
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+    width: 190px;
+    height: 330px;
+    border-radius: 26px;
     overflow: hidden;
+    box-shadow:
+      0 0 0 1px #ffffff22,
+      0 40px 80px -20px #000;
   }
-  h1 {
-    font-size: 54px;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-    line-height: 1;
-    transform: scaleX(1.12);
-    transform-origin: left;
-    color: #f2efe6;
+  .vid .bg {
+    position: absolute;
+    inset: 0;
   }
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+  .vid .meta {
+    z-index: 1;
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
   }
-  .st {
-    border: 1px solid #232838;
-    border-radius: 18px;
-    padding: 20px 22px;
-    background: #121621;
-  }
-  .st strong {
+  .vid b {
     display: block;
-    font-size: 34px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
-  .st small {
-    color: #8f97ab;
     font-size: 15px;
   }
-  .tools {
-    display: flex;
-    gap: 14px;
+  .vid small {
+    font-size: 12px;
+    color: #ffffffcc;
   }
-  .search {
-    flex: 0 0 460px;
-    border: 1px solid #2a2f40;
-    border-radius: 14px;
-    padding: 14px 18px;
-    color: #7f879b;
-    font-size: 17px;
-  }
-  .tabs {
-    display: flex;
-    gap: 4px;
-    background: #171b27;
-    border-radius: 14px;
-    padding: 5px;
-  }
-  .tabs span {
-    padding: 9px 18px;
-    border-radius: 10px;
-    color: #c9cedb;
-    font-size: 16px;
-  }
-  .tabs span.on {
-    background: #222738;
-    color: #fff;
+  .vid .v {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #0008;
+    font-size: 12px;
     font-weight: 700;
+    backdrop-filter: blur(6px);
   }
-  .tabs small {
-    color: #8f97ab;
-    margin-left: 6px;
+  .f1 {
+    left: 70px;
+    top: 700px;
+    padding: 18px 20px;
+    width: 290px;
   }
-  .tbl {
-    border: 1px solid #232838;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #11151f;
+  .f1 small {
+    color: #a29fb8;
+    font-weight: 600;
   }
-  .hd,
-  .r {
-    display: grid;
-    grid-template-columns: 2fr 1.25fr 0.8fr 0.75fr 0.6fr 2.1fr;
+  .f1 strong {
+    display: block;
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 4px 0;
+  }
+  .f1 em {
+    font-style: normal;
+    color: #57e0a0;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .f2 {
+    right: 90px;
+    bottom: 70px;
+    padding: 14px 18px;
+    display: flex;
     align-items: center;
     gap: 12px;
-    padding: 0 24px;
+    border-radius: 16px;
   }
-  .hd {
-    height: 52px;
-    color: #8f97ab;
-    font-size: 14.5px;
-    border-bottom: 1px solid #20253a;
-  }
-  .r {
-    height: 92px;
-    border-bottom: 1px solid #1d2232;
-    font-size: 15.5px;
-  }
-  .tk {
+  .f2 .av {
     display: flex;
-    align-items: center;
-    gap: 14px;
   }
-  .tk b {
-    display: block;
-    font-weight: 700;
+  .f2 .av i {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #15131f;
+    margin-left: -8px;
   }
-  .tk small {
-    color: #8f97ab;
+  .f2 b {
     font-size: 14px;
+  }
+  .f2 small {
     display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
-  }
-  .tk .cov {
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-  }
-  .s {
-    color: #c9cedb;
-  }
-  .s::before {
-    content: '●';
-    color: #6f7588;
-    margin-right: 8px;
-    font-size: 11px;
-  }
-  .s.w::before {
-    color: #e6c45a;
-  }
-  .num {
-    font-weight: 700;
-    text-align: right;
-  }
-  .mut {
-    color: #9aa2b5;
-    text-align: right;
-  }
-  .sp small {
-    display: block;
-    height: 6px;
-    background: #22283a;
-    border-radius: 9px;
-    margin-top: 8px;
-    width: 72%;
-  }
-  .sp small i {
-    display: block;
-    height: 100%;
-    background: #7d7bff;
-    border-radius: 9px;
-  }
-  .btn {
-    white-space: nowrap;
-    border: 1.5px solid #e9ebf2;
-    border-radius: 12px;
-    padding: 8px 16px;
-    font-weight: 700;
-    font-size: 14.5px;
-    margin-left: auto;
+    color: #a29fb8;
+    font-size: 12px;
   }
 </style>
-<aside class="side">
-  <div class="brand"><b>HITVIRO</b><span class="bell"></span></div>
-  <div class="new">+ Новая кампания</div>
-  <div class="it on"><i></i>Кампании</div>
-  <div class="it"><i style="border-radius: 6px"></i>Сообщения</div>
-  <div class="foot">
-    <div class="it"><i></i>Помощь</div>
-    <div class="acc">
-      <span>D</span><span><b>Demo Records</b><small>Мой аккаунт</small></span>
-    </div>
+<div class="stage">
+  <div
+    class="glow"
+    style="width: 900px; height: 700px; left: -200px; top: -300px; background: #7b5cff; opacity: 0.45"
+  ></div>
+  <div
+    class="glow"
+    style="width: 800px; height: 600px; right: -200px; bottom: -260px; background: #ff4fb0; opacity: 0.35"
+  ></div>
+  <div class="grid"></div>
+  <div class="win app"><iframe src="hitviro-app.html"></iframe></div>
+  <div class="vid" style="left: 80px; top: 250px; rotate: -8deg">
+    <div
+      class="bg"
+      style="
+        background:
+          radial-gradient(60% 40% at 60% 35%, #ff9bd6, transparent),
+          linear-gradient(180deg, #5a2fd0, #ff7ad1 70%, #1a0f33);
+      "
+    ></div>
+    <svg
+      viewBox="0 0 190 330"
+      preserveAspectRatio="none"
+      style="position: absolute; inset: 0; width: 100%; height: 100%"
+    >
+      <circle cx="120" cy="120" r="34" fill="#fff3" />
+      <path
+        d="M0 330V240h18v-30h16v40h14v-60h20v70h12v-40h18v55h16v-80h22v90h14v-35h20v-20h20V330Z"
+        fill="#0b0716cc"
+      />
+      <path d="M0 330V270h24v-14h20v30h30v-24h26v36h22v-18h30v-10h18v30h20V330Z" fill="#05030b" /></svg
+    ><span class="v">▶ 1,4 млн</span>
+    <div class="meta"><b>@neon.edits</b><small>Luz de Neón · 0:15</small></div>
   </div>
-</aside>
-<main class="main">
-  <h1>Кампании</h1>
-  <div class="stats">
-    <div class="st"><strong>8,4 млн</strong><small>просмотров</small></div>
-    <div class="st"><strong>187</strong><small>роликов</small></div>
-    <div class="st"><strong>$1 512,40</strong><small>потрачено из $1 880,00</small></div>
+  <div class="vid" style="left: 1290px; top: 110px; rotate: 7deg; width: 170px; height: 300px">
+    <div
+      class="bg"
+      style="
+        background:
+          radial-gradient(50% 35% at 45% 38%, #ffd27a, transparent),
+          linear-gradient(180deg, #2a0f3a, #e0453a 65%, #2a0f1a);
+      "
+    ></div>
+    <svg
+      viewBox="0 0 190 330"
+      preserveAspectRatio="none"
+      style="position: absolute; inset: 0; width: 100%; height: 100%"
+    >
+      <circle cx="120" cy="120" r="34" fill="#fff3" />
+      <path
+        d="M0 330V240h18v-30h16v40h14v-60h20v70h12v-40h18v55h16v-80h22v90h14v-35h20v-20h20V330Z"
+        fill="#0b0716cc"
+      />
+      <path d="M0 330V270h24v-14h20v30h30v-24h26v36h22v-18h30v-10h18v30h20V330Z" fill="#05030b" /></svg
+    ><span class="v">▶ 864 тыс.</span>
+    <div class="meta"><b>@drive.mood</b><small>Night Drive · 0:12</small></div>
   </div>
-  <div class="tools">
-    <div class="search">⌕ &nbsp;Трек или артист</div>
-    <div class="tabs">
-      <span class="on">Все<small>7</small></span
-      ><span>Заявки<small>1</small></span
-      ><span>Идут<small>1</small></span
-      ><span>Закончены<small>5</small></span>
-    </div>
+  <div class="float f1">
+    <small>Просмотры кампании</small><strong>+1,2 млн</strong><em>за последние 7 дней</em>
+    <svg width="250" height="56" style="margin-top: 10px">
+      <defs>
+        <linearGradient id="h" x1="0" x2="1">
+          <stop offset="0" stop-color="#a79bff" />
+          <stop offset="1" stop-color="#ff7ad1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M0 48 C30 44 45 36 70 38 S110 22 140 26 S190 8 250 4"
+        fill="none"
+        stroke="url(#h)"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
   </div>
-  <div class="tbl">
-    <div class="hd">
-      <span>Трек</span><span>Статус</span><span>Период</span><span style="text-align: right">Просмотры</span
-      ><span style="text-align: right">$ за 1000</span><span>Потрачено</span>
-    </div>
-    <div class="r">
-      <span class="tk"
-        ><span class="cov" style="background: linear-gradient(135deg, #ff7ab6, #ff4f8b)"></span
-        ><span><b>LUZ DE NEÓN</b><small>Одобрите эдиторов, и пришлём…</small></span></span
-      ><span class="s w">подборка готова, ждёт вас</span
-      ><span class="mut" style="text-align: left">до 04.12</span><span class="num">—</span
-      ><span class="mut">—</span
-      ><span class="row"><span>бюджет $940</span><span class="btn">Посмотреть подборку</span></span>
-    </div>
-    <div class="r">
-      <span class="tk"
-        ><span class="cov" style="background: linear-gradient(135deg, #7ee07a, #2f8f4a)"></span
-        ><span><b>FUNK DEMO 12 - Slowed</b><small>Счёт пришлём в течение дня</small></span></span
-      ><span class="s w">ждёт оплаты</span><span class="mut" style="text-align: left">20.09–06.11</span
-      ><span class="num">1,2 млн</span><span class="mut">$0,48</span
-      ><span class="row sp"
-        ><span
-          >$581,20 из $610<small><i style="width: 95%"></i></small></span
-        ><span class="btn">Счёт</span></span
-      >
-    </div>
-    <div class="r">
-      <span class="tk"
-        ><span class="cov" style="background: linear-gradient(135deg, #ffa36b, #c2453a)"></span
-        ><span><b>DEMO TRACK 08 - Slowed</b><small>Demo Artist 08</small></span></span
-      ><span class="s">итог подведён 13.11</span><span class="mut" style="text-align: left">29.08–10.11</span
-      ><span class="num">864 тыс.</span><span class="mut">$0,57</span
-      ><span class="sp"
-        >$492,10 из $610,00<small><i style="width: 80%"></i></small
-      ></span>
-    </div>
-    <div class="r">
-      <span class="tk"
-        ><span class="cov" style="background: linear-gradient(135deg, #d26bff, #6a2fbf)"></span
-        ><span><b>FUNK DEMO 21 - Slowed</b><small>Demo Artist 21</small></span></span
-      ><span class="s">итог подведён 09.11</span><span class="mut" style="text-align: left">21.09–06.11</span
-      ><span class="num">2,3 млн</span><span class="mut">$0,13</span
-      ><span class="sp"
-        >$298,70 из $330,00<small><i style="width: 90%"></i></small
-      ></span>
-    </div>
-    <div class="r">
-      <span class="tk"
-        ><span class="cov" style="background: linear-gradient(135deg, #ffc27a, #d96a4a)"></span
-        ><span><b>MONTAGEM DEMO 04</b><small>Demo Artist 04</small></span></span
-      ><span class="s">итог подведён 03.10</span><span class="mut" style="text-align: left">20.09–01.10</span
-      ><span class="num">3,8 млн</span><span class="mut">$0,05</span
-      ><span class="sp"
-        >$172,30 из $190,00<small><i style="width: 91%"></i></small
-      ></span>
-    </div>
+  <div class="float f2">
+    <span class="av"
+      ><i style="background: linear-gradient(135deg, #ffb36b, #ff4f8b); margin-left: 0"></i
+      ><i style="background: linear-gradient(135deg, #7ee0b0, #2f6bff)"></i
+      ><i style="background: linear-gradient(135deg, #c48bff, #5a2fd0)"></i></span
+    ><span><b>38 авторов в подборке</b><small>одобрите — и ролики выйдут</small></span>
   </div>
-</main>
+</div>
