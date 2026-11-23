@@ -12,6 +12,8 @@ import { releases } from '../data/music'
 import { tx } from '../utils/i18n'
 import { vReveal } from '../directives/reveal'
 import { useCharacter } from '../composables/useCharacter'
+import cloudFront from '../assets/img/cloud-a-xs.webp'
+import cloudFront2 from '../assets/img/cloud-b-xs.webp'
 import icTs from '../assets/img/ic-ts.webp'
 import icReact from '../assets/img/ic-react.webp'
 import icNode from '../assets/img/ic-node.webp'
@@ -65,6 +67,9 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
           <source media="(max-width: 700px)" :srcset="chara.sm" />
           <img class="ab-char" :src="chara.src" alt="" width="2664" height="1872" fetchpriority="high" />
         </picture>
+        <!-- облака перед низом персонажа: он «выходит» из неба, а не висит обрезанной фоткой -->
+        <img class="ab-cloud a" :src="cloudFront" alt="" width="600" height="303" decoding="async" />
+        <img class="ab-cloud b" :src="cloudFront2" alt="" width="600" height="213" decoding="async" />
         <div class="ab-now glass">
           <small>{{ t('a_now') }}</small>
           <b>{{ jobs[0]!.company[lang] }}</b>

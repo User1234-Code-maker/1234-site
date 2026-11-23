@@ -31,6 +31,19 @@ def tile(kind):
         c.putalpha(Image.fromarray(a.astype(np.uint8)))
         for dy in (-H,0,H):  # заворачиваем по вертикали, чтобы шов совпал
             img.alpha_composite(c,(x,yy+dy)) if 0<=yy+dy<H or (yy+dy<0 and yy+dy+c.height>0) else None
+    # полоса далёкого города в середине ленты: светлая днём, с огнями ночью
+    city=Image.open(D+('city.webp' if kind=='day' else 'city-night.webp')).convert('RGBA')
+    city=city.crop((0,int(city.height*0.45),city.width,city.height))
+    city=city.resize((W,int(city.height*W/city.width)),Image.LANCZOS)
+    if kind=='day':
+        ca=np.asarray(city).astype(np.float32)
+        ca[...,:3]=ca[...,:3]*0.55+np.array([214,222,251])*0.45
+        city=Image.fromarray(ca.clip(0,255).astype(np.uint8))
+    ch,cw=city.height,city.width
+    fy=np.clip(np.minimum(np.arange(ch)/(ch*0.55),(ch-1-np.arange(ch))/(ch*0.3)),0,1)[:,None]
+    al=(np.ones((ch,cw))*fy*(0.42 if kind=='day' else 0.55)*255).astype(np.uint8)
+    city.putalpha(Image.fromarray(al))
+    img.alpha_composite(city,(0,980))
     if kind=='night':
         from PIL import ImageDraw
         d=ImageDraw.Draw(img)
