@@ -7,9 +7,9 @@
 Fullstack-разработчик, системный аналитик и музыкант.
 Личный сайт в духе японского аниме-города: облака, ночной Токио, пиксельный котик.
 
-**[user1234-code-maker.github.io/portfolio](https://user1234-code-maker.github.io/portfolio/)**
+**[user1234-code-maker.github.io/1234-site](https://user1234-code-maker.github.io/1234-site/)**
 
-[![Deploy](https://github.com/User1234-Code-maker/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/User1234-Code-maker/portfolio/actions/workflows/deploy.yml)
+[![Deploy](https://github.com/User1234-Code-maker/1234-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/User1234-Code-maker/1234-site/actions/workflows/deploy.yml)
 ![Vue 3](https://img.shields.io/badge/Vue-3.5-42b883?logo=vuedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)

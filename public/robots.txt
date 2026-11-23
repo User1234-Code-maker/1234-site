@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://user1234-code-maker.github.io/portfolio/sitemap.xml
+Sitemap: https://user1234-code-maker.github.io/1234-site/sitemap.xml
