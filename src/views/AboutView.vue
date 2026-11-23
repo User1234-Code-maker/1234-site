@@ -14,12 +14,7 @@ import { vReveal } from '../directives/reveal'
 import { useCharacter } from '../composables/useCharacter'
 import cloudFront from '../assets/img/cloud-a-xs.webp'
 import cloudFront2 from '../assets/img/cloud-b-xs.webp'
-import icTs from '../assets/img/ic-ts.webp'
-import icReact from '../assets/img/ic-react.webp'
-import icNode from '../assets/img/ic-node.webp'
-import icPg from '../assets/img/ic-pg.webp'
-import icPrisma from '../assets/img/ic-prisma.webp'
-import icRedis from '../assets/img/ic-redis.webp'
+import { techIcons } from '../data/techIcons'
 
 const { lang, t } = useLang()
 const chara = useCharacter()
@@ -27,14 +22,6 @@ const chara = useCharacter()
 const cvHref = computed(
   () => `${import.meta.env.BASE_URL}cv/Bogdan-Korzun-CV-${lang.value === 'ru' ? 'RU' : 'EN'}.pdf`,
 )
-const stack = [
-  { name: 'TypeScript', src: icTs },
-  { name: 'React', src: icReact },
-  { name: 'Node.js', src: icNode },
-  { name: 'PostgreSQL', src: icPg },
-  { name: 'Prisma', src: icPrisma },
-  { name: 'Redis', src: icRedis },
-]
 const serviceIcons = ['code', 'layers', 'grid', 'note'] as const
 
 // путь: открыт последний этап
@@ -148,8 +135,26 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
       <div class="ab-skills-head">
         <h2 id="skills-t" class="blk-h">{{ t('a_skills_t') }}</h2>
         <ul class="tech-tiles stagger" :aria-label="t('a_stack_t')">
-          <li v-for="(s, i) in stack" :key="s.name" class="tech-tile" :style="{ '--i': i }">
-            <img :src="s.src" :alt="s.name" width="34" height="34" loading="lazy" decoding="async" />
+          <li v-for="(s, i) in techIcons" :key="s.name" class="tech-tile" :style="{ '--i': i }">
+            <img
+              :class="{ 'ic-swap': s.dark }"
+              :src="s.src"
+              :alt="s.name"
+              width="34"
+              height="34"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              v-if="s.dark"
+              class="ic-dk"
+              :src="s.dark"
+              :alt="s.name"
+              width="34"
+              height="34"
+              loading="lazy"
+              decoding="async"
+            />
             <span>{{ s.name }}</span>
           </li>
         </ul>

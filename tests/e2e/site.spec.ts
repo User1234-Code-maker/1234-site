@@ -229,7 +229,7 @@ test.describe('функциональность', () => {
   })
 
   test('друзья котика отвечают на клик, а страница проекта показывает подробности', async ({ page }) => {
-    await page.goto('/projects/hitviro')
+    await page.goto('/projects/game-studio-website')
     await expect(page.locator('.pd-long')).not.toHaveCount(1)
     await expect(page.locator('.pd-did li').first()).toBeVisible()
     await expect(page.locator('.pd-stack-g').first()).toBeVisible()
@@ -244,7 +244,7 @@ test.describe('функциональность', () => {
     await page.addInitScript(() => localStorage.setItem('lang', 'ru'))
     await page.goto('/projects/label-erp')
     const first = await page.locator('.pd-long').first().textContent()
-    expect(first).toContain('в\u00A0')
+    expect(first).toContain('и\u00A0')
   })
 
   test('ссылка SoundCloud в шапке ведёт на настоящий адрес', async ({ page }) => {

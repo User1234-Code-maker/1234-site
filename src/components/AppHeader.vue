@@ -4,10 +4,15 @@ import { useRoute } from 'vue-router'
 import { useLang } from '../composables/useLang'
 import { hrefFor } from '../utils/links'
 import navAbout from '../assets/pixel/nav-about.svg'
+import navAboutLt from '../assets/pixel/nav-about-lt.svg'
 import navContact from '../assets/pixel/nav-contact.svg'
+import navContactLt from '../assets/pixel/nav-contact-lt.svg'
 import navHome from '../assets/pixel/nav-home.svg'
+import navHomeLt from '../assets/pixel/nav-home-lt.svg'
 import navMusic from '../assets/pixel/nav-music.svg'
+import navMusicLt from '../assets/pixel/nav-music-lt.svg'
 import navProjects from '../assets/pixel/nav-projects.svg'
+import navProjectsLt from '../assets/pixel/nav-projects-lt.svg'
 import BrandMark from './BrandMark.vue'
 import LangSwitch from './LangSwitch.vue'
 import SocialLinks from './SocialLinks.vue'
@@ -18,10 +23,10 @@ const route = useRoute()
 const open = ref(false)
 
 const links = [
-  { to: '/about', key: 'nav_about', icon: navAbout },
-  { to: '/projects', key: 'nav_projects', icon: navProjects },
-  { to: '/music', key: 'nav_music', icon: navMusic },
-  { to: '/contact', key: 'nav_contact', icon: navContact },
+  { to: '/about', key: 'nav_about', icon: navAbout, lt: navAboutLt },
+  { to: '/projects', key: 'nav_projects', icon: navProjects, lt: navProjectsLt },
+  { to: '/music', key: 'nav_music', icon: navMusic, lt: navMusicLt },
+  { to: '/contact', key: 'nav_contact', icon: navContact, lt: navContactLt },
 ]
 
 // на главной, как в утверждённом макете, подчёркнут «Обо мне»
@@ -72,12 +77,24 @@ watch(
       :aria-label="t('aria_menu')"
     >
       <RouterLink to="/" :class="{ on: isHome }">
-        <img class="mm-ico" :src="navHome" alt="" aria-hidden="true" width="34" height="34" />{{
-          t('nav_home')
-        }}
+        <span class="mm-ico" aria-hidden="true"
+          ><img class="lt-off" :src="navHome" alt="" width="30" height="30" /><img
+            class="lt-on"
+            :src="navHomeLt"
+            alt=""
+            width="30"
+            height="30" /></span
+        >{{ t('nav_home') }}
       </RouterLink>
       <RouterLink v-for="l in links" :key="l.to" :to="l.to" :class="{ on: !isHome && isOn(l.to) }">
-        <img class="mm-ico" :src="l.icon" alt="" aria-hidden="true" width="34" height="34" />{{ t(l.key) }}
+        <span class="mm-ico" aria-hidden="true"
+          ><img class="lt-off" :src="l.icon" alt="" width="30" height="30" /><img
+            class="lt-on"
+            :src="l.lt"
+            alt=""
+            width="30"
+            height="30" /></span
+        >{{ t(l.key) }}
       </RouterLink>
       <div class="menu-contact">
         <a class="pill" :href="hrefFor('mail')">{{ t('talk') }}</a>

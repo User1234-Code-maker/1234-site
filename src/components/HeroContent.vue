@@ -2,23 +2,9 @@
 import { computed } from 'vue'
 import { useLang } from '../composables/useLang'
 import { splitFirstWord } from '../utils/links'
-import icTs from '../assets/img/ic-ts.webp'
-import icReact from '../assets/img/ic-react.webp'
-import icNode from '../assets/img/ic-node.webp'
-import icPg from '../assets/img/ic-pg.webp'
-import icPrisma from '../assets/img/ic-prisma.webp'
-import icRedis from '../assets/img/ic-redis.webp'
+import { techIcons } from '../data/techIcons'
 
 const { t } = useLang()
-
-const stack = [
-  { name: 'TypeScript', src: icTs },
-  { name: 'React', src: icReact },
-  { name: 'Node.js', src: icNode },
-  { name: 'PostgreSQL', src: icPg },
-  { name: 'Prisma', src: icPrisma },
-  { name: 'Redis', src: icRedis },
-]
 
 const h1b = computed(() => splitFirstWord(t('h1b')))
 const tagLines = computed(() => t('tag').split('\n'))
@@ -40,7 +26,10 @@ const tagLines = computed(() => t('tag').split('\n'))
     </p>
     <div class="rule"></div>
     <div class="stack">
-      <img v-for="s in stack" :key="s.name" :src="s.src" :alt="s.name" height="34" />
+      <template v-for="s in techIcons" :key="s.name">
+        <img :class="{ 'ic-swap': s.dark }" :src="s.src" :alt="s.name" height="34" />
+        <img v-if="s.dark" class="ic-dk" :src="s.dark" :alt="s.name" height="34" />
+      </template>
     </div>
     <div class="acts">
       <RouterLink class="pill" to="/projects"

@@ -82,26 +82,37 @@
   }
 }
 
-/* стикеры в мобильном меню: пиксельная иконка на мягкой плашке, видна на любом фоне */
+/* стикеры в мобильном меню: пиксельная иконка без плашки.
+   Тёмный контур на светлом фоне, светло-лавандовый на тёмном и у выбранного пункта. */
 .mobile-menu a {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 .mm-ico {
+  position: relative;
   flex: none;
-  box-sizing: border-box;
-  width: 34px;
-  height: 34px;
-  padding: 5px;
-  border-radius: 11px;
-  background: #eef2ff;
-  object-fit: contain;
-  image-rendering: pixelated;
+  display: block;
+  width: 30px;
+  height: 30px;
   transition: transform 0.2s;
 }
-[data-theme='dark'] .mm-ico {
-  background: #dfe6ff;
+.mm-ico img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.mm-ico .lt-on,
+[data-theme='dark'] .mm-ico .lt-off,
+.mobile-menu a.on .mm-ico .lt-off {
+  display: none;
+}
+[data-theme='dark'] .mm-ico .lt-on,
+.mobile-menu a.on .mm-ico .lt-on {
+  display: block;
 }
 .mobile-menu a:hover .mm-ico,
 .mobile-menu a:focus-visible .mm-ico {

@@ -61,7 +61,12 @@ ICONS = {
     ],
 }
 
+# светлый контур для тёмной темы и для выбранного пункта: тёмно-синий там не виден
+LIGHT_OUTLINE = '#B9C4FF'
+
 for name, rows in ICONS.items():
+  for suffix, outline in (('', PAL['#']), ('-lt', LIGHT_OUTLINE)):
+    pal = {**PAL, '#': outline}
     w, h = len(rows[0]), len(rows)
     assert all(len(r) == w for r in rows), name
     rects = []
@@ -75,9 +80,9 @@ for name, rows in ICONS.items():
             e = x
             while e < w and row[e] == c:
                 e += 1
-            rects.append(f'<rect x="{x}" y="{y}" width="{e - x}" height="1" fill="{PAL[c]}"/>')
+            rects.append(f'<rect x="{x}" y="{y}" width="{e - x}" height="1" fill="{pal[c]}"/>')
             x = e
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" shape-rendering="crispEdges">'
            + ''.join(rects) + '</svg>')
-    (OUT / f'{name}.svg').write_text(svg)
-    print(name, w, h)
+    (OUT / f'{name}{suffix}.svg').write_text(svg)
+    print(name + suffix, w, h)

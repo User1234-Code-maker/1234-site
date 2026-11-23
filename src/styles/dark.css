@@ -318,3 +318,14 @@
     );
   }
 }
+
+/* логотип со своим вариантом для тёмной темы (Prisma): показываем нужный */
+img.ic-dk {
+  display: none;
+}
+[data-theme='dark'] img.ic-dk {
+  display: block;
+}
+[data-theme='dark'] .ic-swap {
+  display: none;
+}

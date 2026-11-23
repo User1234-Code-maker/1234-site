@@ -21,105 +21,24 @@ export const projects: Project[] = [
     slug: 'label-erp',
     title: { ru: 'ERP для музыкального лейбла', en: 'ERP for a music label' },
     category: 'erp',
-    ru: 'Внутренняя ERP лейбла: дистрибуция, поддержка, документы и доска задач. Таблицы на AG Grid, интерфейс на React 19.',
-    en: 'The label’s in-house ERP: distribution, support, documents and a task board. AG Grid tables, React 19 interface.',
+    ru: 'Внутренняя ERP музыкального лейбла: дистрибуция, поддержка, документы и доска задач.',
+    en: 'The in-house ERP of a music label: distribution, support, documents and a task board.',
     long: {
-      ru: `Внутренняя ERP-система музыкального лейбла Zero to Infinity: каталог релизов и треков, дистрибуция, поддержка, документы, финансы и кабинет артиста. Это монорепозиторий: интерфейс на React 19, серверная часть на NestJS (её пишут коллеги), данные в PostgreSQL и ClickHouse. В 2026 году я отвечаю за интерфейс и за постановку задач в разделах Distribution, Support, Documents и Troubleshooting.
+      ru: `Внутренняя ERP-система музыкального лейбла Zero to Infinity: каталог релизов, дистрибуция, поддержка, документы и кабинет артиста. Проект закрытый, поэтому без подробностей.
 
-Самая большая задача — сохранение состояния таблиц на AG Grid: версии схемы, защита от конфликтов при одновременной правке и синхронизация между вкладками. Я прошёл её целиком, от архитектурных решений и постановки до релиза в продакшен.
+Участвую как системный аналитик и фронтенд-разработчик: ставлю задачи и делаю интерфейс разделов Distribution, Support, Documents и Troubleshooting. Самая большая задача была про таблицы: сохранить их состояние, чтобы настройки не терялись между сессиями и вкладками. Прошёл её от идеи до релиза. Для разделов написал инструкции в Notion.`,
+      en: `The in-house ERP of the music label Zero to Infinity: release catalogue, distribution, support, documents and an artist cabinet. The project is closed, so no details.
 
-Troubleshooting — доска задач для команды. Канбан с приоритетом и сроком, переписка по задаче с файлами и голосовыми сообщениями, запросы данных у коллег, уведомления исполнителю и автору в Telegram. Доску я собирал в том же каркасе, что и раздел Documents, чтобы разделы выглядели и вели себя одинаково.
-
-Кроме новых разделов было несколько раундов доработок: исправил системные ошибки позиционирования, унифицировал компоненты, сделал адаптивную вёрстку и поддержку reduced motion. Для всех разделов написал инструкции в Notion.`,
-      en: `The in-house ERP of the music label Zero to Infinity: release and track catalogue, distribution, support, documents, finance and an artist cabinet. It is a monorepo: React 19 interface, NestJS backend (written by colleagues), data in PostgreSQL and ClickHouse. In 2026 I own the interface and the task breakdown for Distribution, Support, Documents and Troubleshooting.
-
-The biggest task was saving table state on AG Grid: schema versions, protection from conflicts during simultaneous edits and synchronisation between tabs. I carried it through from architecture decisions and task breakdown to the production release.
-
-Troubleshooting is a task board for the team. A kanban with priority and deadline, a thread per task with files and voice messages, data requests to colleagues, and Telegram notices to the assignee and the author. I built the board on the same shell as the Documents section so both behave and look the same.
-
-On top of the new sections there were several rounds of polish: I fixed systemic positioning bugs, unified components, built a responsive layout and reduced-motion support. I wrote user guides for every section in Notion.`,
+I take part as a systems analyst and frontend developer: I set the tasks and build the interface of the Distribution, Support, Documents and Troubleshooting sections. The biggest task was about tables: saving their state so settings are not lost between sessions and tabs. I carried it from the idea to the release. I wrote user guides for the sections in Notion.`,
     },
-    did: [
-      {
-        ru: 'Аналитика: требования, user stories и спецификации API для разделов Distribution, Support, Documents и Troubleshooting.',
-        en: 'Analysis: requirements, user stories and API specs for Distribution, Support, Documents and Troubleshooting.',
-      },
-      {
-        ru: 'Сохранение состояния таблиц на AG Grid: версии схемы, конфликты правок, синхронизация между вкладками.',
-        en: 'Table state saving on AG Grid: schema versions, edit conflicts, sync between tabs.',
-      },
-      {
-        ru: 'Доска Troubleshooting: канбан, приоритет и срок, обсуждение с файлами и голосовыми, уведомления в Telegram.',
-        en: 'Troubleshooting board: kanban, priority and deadline, threads with files and voice, Telegram notices.',
-      },
-      {
-        ru: 'Обсуждения в Documents и Support: закрыть и снова открыть обращение, просмотр файлов прямо в переписке.',
-        en: 'Threads in Documents and Support: close and reopen a request, preview files right in the conversation.',
-      },
-      {
-        ru: 'Выгрузка платёжных запросов по выбранному лейблу и в рабочую таблицу для Douyin.',
-        en: 'Export of payment requests for a chosen label and into the working sheet for Douyin.',
-      },
-      {
-        ru: 'Единые компоненты, адаптивная вёрстка, плавные анимации без нагрузки на страницу, поддержка reduced motion.',
-        en: 'Shared components, responsive layout, smooth animations that stay light, reduced-motion support.',
-      },
-      {
-        ru: 'Инструкции для пользователей разделов в Notion.',
-        en: 'User guides for the sections in Notion.',
-      },
-    ],
     role: { ru: 'Системный аналитик, фронтенд-разработчик', en: 'Systems analyst, frontend developer' },
     year: '2026',
-    tech: ['React 19', 'TypeScript', 'AG Grid', 'HeroUI', 'Tailwind v4', 'NestJS'],
-    stack: [
-      {
-        name: { ru: 'Интерфейс', en: 'Interface' },
-        items: [
-          'React 19',
-          'TypeScript',
-          'Vite 6',
-          'Tailwind CSS 4',
-          'HeroUI',
-          'React Aria',
-          'React Router',
-          'TanStack Query',
-          'Refine',
-        ],
-      },
-      {
-        name: { ru: 'Таблицы, графики, перетаскивание', en: 'Tables, charts, drag and drop' },
-        items: ['AG Grid Enterprise', 'AG Charts', 'dnd-kit', 'Three.js'],
-      },
-      {
-        name: { ru: 'Языки интерфейса', en: 'Interface languages' },
-        items: ['i18next', 'RU', 'EN', 'ES', 'PT'],
-      },
-      {
-        name: { ru: 'Сервер и данные', en: 'Backend and data' },
-        items: ['NestJS 11', 'Prisma 6', 'PostgreSQL', 'ClickHouse', 'Redis', 'BullMQ', 'Zod', 'CASL'],
-      },
-      {
-        name: { ru: 'Интеграции', en: 'Integrations' },
-        items: ['Telegram Bot API', 'Google Sheets API', 'S3', 'MCP'],
-      },
-      {
-        name: { ru: 'Инфраструктура и качество', en: 'Infrastructure and quality' },
-        items: ['pnpm', 'Turborepo', 'Docker', 'Playwright', 'Vitest', 'ESLint', 'knip'],
-      },
-    ],
+    tech: ['React 19', 'TypeScript', 'AG Grid', 'HeroUI', 'Tailwind', 'NestJS', 'PostgreSQL', 'ClickHouse'],
     arch: [
-      { label: { ru: 'Интерфейс', en: 'Interface' }, note: { ru: 'React 19', en: 'React 19' } },
-      { label: { ru: 'Таблицы', en: 'Tables' }, note: { ru: 'AG Grid', en: 'AG Grid' } },
-      {
-        label: { ru: 'Сохранение состояния', en: 'State saving' },
-        note: { ru: 'версии и синхронизация', en: 'versions and sync' },
-      },
-      { label: 'API', note: { ru: 'NestJS', en: 'NestJS' } },
-      {
-        label: { ru: 'Данные', en: 'Data' },
-        note: { ru: 'PostgreSQL, ClickHouse', en: 'PostgreSQL, ClickHouse' },
-      },
+      { label: { ru: 'Интерфейс', en: 'Interface' } },
+      { label: { ru: 'Таблицы', en: 'Tables' } },
+      { label: 'API' },
+      { label: { ru: 'База данных', en: 'Database' } },
     ],
     nda: true,
     hue: 250,
@@ -130,93 +49,24 @@ On top of the new sections there were several rounds of polish: I fixed systemic
     title: { ru: 'Hitviro: платформа клиппинга', en: 'Hitviro: clipping platform' },
     category: 'web',
     visual: 'platform',
-    ru: 'Платформа, где лейбл заказывает промо-ролики, а исполнители снимают их и получают выплаты. Я отвечаю за аналитику и модуль выплат.',
-    en: 'A platform where the label orders promo videos and creators shoot them and get paid. I handle the analysis and the payout module.',
+    ru: 'Платформа, где лейбл заказывает промо-ролики у исполнителей. Я отвечаю за аналитику и выплаты.',
+    en: 'A platform where the label orders promo videos from creators. I handle the analysis and payouts.',
     long: {
-      ru: `Hitviro — платформа клиппинга для музыкального лейбла. Заказчик ставит трек и бюджет, исполнители сами берут кампанию, снимают ролик со звуком трека и присылают ссылку. Система сама считает просмотры, проверяет ролик и начисляет деньги. Команда принимает ролики и собирает выплаты, а заказчик видит заказы и отчёты.
+      ru: `Hitviro — платформа для музыкального лейбла: заказчик ставит задачу на промо-ролики, исполнители снимают их, а система следит за результатом и оплатой. Проект закрытый, поэтому без подробностей.
 
-Рядом с платформой работает ростер: внутренняя база креаторов, у которых лейбл покупал промо. В ней история закупов и цен, страница трека и подбор креаторов под новый релиз. Ростер заменил промо-таблицы.
+Моя роль — системный аналитик: исследовал текущие процессы, описал, как всё должно работать, и проектирую часть платформы, которая отвечает за выплаты.`,
+      en: `Hitviro is a platform for a music label: a client sets a task for promo videos, creators shoot them, and the system follows the result and the payment. The project is closed, so no details.
 
-Технически это Python без тяжёлых фреймворков, отдельные процессы для API, замеров, рассылок, бота и резервных копий, интерфейс на чистом JavaScript без сборщика, 24 языка интерфейса, выплаты через PayPal и EasyStaff и автоматические проверки денежных правил. Платформа развёрнута на AWS.
-
-Моя часть — аналитика и выплаты. Я исследовал текущие процессы и описал целевую схему, выбрал, как платформа обменивается данными с ERP, и проектирую платёжный модуль. Решение по архитектуре: слой API между Hitviro и ERP принадлежит ERP, а Hitviro работает как его клиент.`,
-      en: `Hitviro is a clipping platform for a music label. A client sets a track and a budget, creators pick up a campaign on their own, shoot a video with the track’s sound and send a link. The system counts views, checks the video and accrues the money. The team accepts videos and assembles payouts, and the client sees orders and reports.
-
-Next to the platform runs the roster: an internal database of creators the label has bought promo from. It holds purchase and price history, a page per track and a picker that finds creators for a new release. The roster replaced the promo spreadsheets.
-
-Technically it is Python without heavy frameworks, separate processes for the API, measurements, mailings, the bot and backups, a plain JavaScript interface with no bundler, 24 interface languages, payouts through PayPal and EasyStaff and automatic checks of the money rules. The platform runs on AWS.
-
-My part is analysis and payouts. I researched the current processes and described the target scheme, chose how the platform exchanges data with the ERP and I design the payout module. An architecture decision: the API layer between Hitviro and the ERP belongs to the ERP, and Hitviro works as its client.`,
+My role is systems analyst: I researched the current processes, described how everything should work and I design the part of the platform that handles payouts.`,
     },
-    did: [
-      {
-        ru: 'Исследование: как выплаты работают сейчас (AS-IS), как должны работать (TO-BE), созвон с промо-менеджером и вопросы команде.',
-        en: 'Research: how payouts work today (AS-IS), how they should work (TO-BE), a call with the promo manager and questions to the team.',
-      },
-      {
-        ru: 'Проектирование выплат через PayPal Payouts и EasyStaff: что платится, когда и кем подтверждается.',
-        en: 'Design of payouts through PayPal Payouts and EasyStaff: what is paid, when and who approves it.',
-      },
-      {
-        ru: 'Схема обмена данными с ERP: что передаётся, как часто и на чьей стороне лежит API.',
-        en: 'Data exchange scheme with the ERP: what is sent, how often and which side owns the API.',
-      },
-      {
-        ru: 'Изолированный платёжный модуль на сервере Hitviro: безопасность в приоритете, шифрование данных получателей, продумана повторная доставка пропущенных операций.',
-        en: 'An isolated payout module on the Hitviro server: security first, encryption of recipient data, redelivery of missed operations is designed in.',
-      },
-      {
-        ru: 'Работа по протоколу BRIEF → SPEC → PLAN → IMPLEMENTATION, отдельная ветка разработки и ревью с командой.',
-        en: 'Work through the BRIEF → SPEC → PLAN → IMPLEMENTATION protocol, a separate development branch and team review.',
-      },
-    ],
-    role: {
-      ru: 'Системный аналитик, разработка модуля выплат',
-      en: 'Systems analyst, payout module development',
-    },
+    role: { ru: 'Системный аналитик', en: 'Systems analyst' },
     year: '2026',
-    tech: ['Python', 'SQLite', 'PostgreSQL', 'JavaScript', 'PayPal', 'EasyStaff'],
-    stack: [
-      {
-        name: { ru: 'Сервер', en: 'Backend' },
-        items: ['Python (stdlib)', 'SQLite', 'PostgreSQL', 'systemd'],
-      },
-      {
-        name: { ru: 'Интерфейс', en: 'Interface' },
-        items: [
-          { ru: 'JavaScript без сборщика', en: 'Plain JavaScript, no bundler' },
-          'CSS',
-          { ru: '24 языка', en: '24 languages' },
-        ],
-      },
-      {
-        name: { ru: 'Деньги и интеграции', en: 'Money and integrations' },
-        items: ['PayPal Payouts', 'EasyStaff API', { ru: 'Telegram-бот', en: 'Telegram bot' }, 'ERP API'],
-      },
-      {
-        name: { ru: 'Инфраструктура', en: 'Infrastructure' },
-        items: ['AWS EC2', 'Caddy', 'Cloudflare', 'SSH-туннель'],
-      },
-      {
-        name: { ru: 'Качество', en: 'Quality' },
-        items: [
-          { ru: 'Автотесты', en: 'Automated tests' },
-          'ruff',
-          'gitleaks',
-          'pre-commit',
-          { ru: 'Проверки денежных правил', en: 'Money-rule checks' },
-        ],
-      },
-    ],
+    tech: ['Python', 'JavaScript', 'PostgreSQL', 'SQLite'],
     arch: [
-      { label: { ru: 'Заказчик', en: 'Client' }, note: { ru: 'трек и бюджет', en: 'track and budget' } },
-      { label: { ru: 'Кампания', en: 'Campaign' }, note: { ru: 'исполнители', en: 'creators' } },
-      {
-        label: { ru: 'Замеры', en: 'Measurements' },
-        note: { ru: 'просмотры и проверка', en: 'views and checks' },
-      },
-      { label: { ru: 'Выплаты', en: 'Payouts' }, note: { ru: 'PayPal, EasyStaff', en: 'PayPal, EasyStaff' } },
-      { label: 'ERP', note: { ru: 'учёт и платежи', en: 'accounting and payments' } },
+      { label: { ru: 'Заказчик', en: 'Client' } },
+      { label: { ru: 'Кампания', en: 'Campaign' } },
+      { label: { ru: 'Исполнители', en: 'Creators' } },
+      { label: { ru: 'Выплаты', en: 'Payouts' } },
     ],
     nda: true,
     hue: 330,
@@ -226,85 +76,24 @@ My part is analysis and payouts. I researched the current processes and describe
     slug: 'telegram-bots',
     title: { ru: 'Telegram-боты и mini app', en: 'Telegram bots and mini app' },
     category: 'bots',
-    ru: 'Больше десяти ботов и фоновых сервисов на Node.js: дистрибуция, поддержка, оплаты, сбор статистики. Работают в проде на Hetzner.',
-    en: 'More than ten bots and background services on Node.js: distribution, support, payments, statistics collection. Running in production on Hetzner.',
+    ru: 'Внутренние Telegram-боты компании, которые автоматизируют рабочие процессы: дистрибуция, поддержка, оплаты.',
+    en: 'The company’s in-house Telegram bots that automate working processes: distribution, support, payments.',
     long: {
-      ru: `Единое Node.js-приложение компании, в котором работает больше десяти Telegram-ботов и фоновых сервисов. Дистрибуция треков с мастером создания релиза и REST API, поддержка и разбор обращений, оплаты и промо-расходы, учёт видео креаторов, сканирование профилей TikTok, Instagram и YouTube, аналитика звуков TikTok.
-
-Все боты построены на общей базе: единая авторизация (Redis, PostgreSQL и запасной вариант в памяти), ограничение частоты запросов, кэш и очереди на Redis, тексты на русском и английском. Данные лежат в PostgreSQL, файлы в S3-хранилище. Таблицы синхронизируются с Coda и Google Sheets, а сбор данных идёт через Playwright и Apify.
-
-В проде всё работает на Hetzner Cloud: Docker-контейнер, Caddy на входе, логи через Dozzle, выкладка одной командой. Код покрыт тестами на Jest, перед коммитом срабатывают хуки Husky.
+      ru: `Набор внутренних Telegram-ботов и mini app компании. Они автоматизируют рабочие процессы: дистрибуцию треков, поддержку, оплаты, учёт и отчётность. Проект закрытый, поэтому без подробностей.
 
 Я разрабатываю и поддерживаю ботов, настраиваю интеграции и пишу для пользователей инструкции в Notion.`,
-      en: `A single Node.js application of the company that runs more than ten Telegram bots and background services. Track distribution with a release wizard and a REST API, support and request handling, payments and promo expenses, tracking of creators’ videos, scanning of TikTok, Instagram and YouTube profiles, TikTok sound analytics.
-
-All bots share one base: a single authorisation layer (Redis, PostgreSQL and an in-memory fallback), rate limiting, cache and queues on Redis, texts in Russian and English. Data lives in PostgreSQL and files in S3 storage. Tables sync with Coda and Google Sheets, and data collection runs through Playwright and Apify.
-
-In production everything runs on Hetzner Cloud: a Docker container, Caddy in front, logs through Dozzle, one-command deploys. The code is covered by Jest tests and Husky hooks run before every commit.
+      en: `A set of the company’s in-house Telegram bots and a mini app. They automate working processes: track distribution, support, payments, accounting and reporting. The project is closed, so no details.
 
 I build and maintain the bots, set up the integrations and write the user guides in Notion.`,
     },
-    did: [
-      {
-        ru: 'Разработка ботов на общей базе: авторизация, ограничение частоты запросов, тексты на двух языках.',
-        en: 'Building bots on the shared base: authorisation, rate limiting, two-language texts.',
-      },
-      {
-        ru: 'Бот дистрибуции: мастер создания релиза, статусы и REST API.',
-        en: 'Distribution bot: release creation wizard, statuses and a REST API.',
-      },
-      {
-        ru: 'Оплаты и промо-расходы: запись напрямую в PostgreSQL и S3, режим Douyin и QR, уведомления о платежах.',
-        en: 'Payments and promo expenses: writing straight to PostgreSQL and S3, Douyin and QR mode, payment notifications.',
-      },
-      {
-        ru: 'Синхронизация Coda → PostgreSQL, агрегация промо-расходов по ISRC и UPC.',
-        en: 'Coda → PostgreSQL sync, aggregation of promo expenses by ISRC and UPC.',
-      },
-      {
-        ru: 'Сбор данных: сканирование профилей и аналитика звуков через Playwright и Apify.',
-        en: 'Data collection: profile scanning and sound analytics through Playwright and Apify.',
-      },
-      {
-        ru: 'Интеграции с Google Sheets и Discord, инструкции для пользователей в Notion.',
-        en: 'Integrations with Google Sheets and Discord, user guides in Notion.',
-      },
-    ],
     role: { ru: 'Разработка и поддержка', en: 'Development and support' },
     year: '2026',
-    tech: ['Node.js', 'Telegraf', 'PostgreSQL', 'Redis', 'Playwright', 'Docker'],
-    stack: [
-      {
-        name: { ru: 'Сервер', en: 'Backend' },
-        items: ['Node.js', 'Express', 'Telegraf', 'node-telegram-bot-api', 'discord.js'],
-      },
-      {
-        name: { ru: 'Данные', en: 'Data' },
-        items: ['PostgreSQL', 'Redis', 'S3 (AWS SDK)', 'sharp'],
-      },
-      {
-        name: { ru: 'Сбор данных', en: 'Data collection' },
-        items: ['Playwright', 'Apify', { ru: 'прокси', en: 'proxies' }],
-      },
-      {
-        name: { ru: 'Интеграции', en: 'Integrations' },
-        items: ['Telegram Bot API', 'Google Sheets API', 'Coda API', 'Discord'],
-      },
-      {
-        name: { ru: 'Инфраструктура', en: 'Infrastructure' },
-        items: ['Docker', 'Caddy', 'Hetzner Cloud', 'Dozzle'],
-      },
-      {
-        name: { ru: 'Качество', en: 'Quality' },
-        items: ['Jest', 'Husky', { ru: 'Notion (документация)', en: 'Notion (docs)' }],
-      },
-    ],
+    tech: ['Node.js', 'Telegraf', 'PostgreSQL', 'Redis', 'Docker'],
     arch: [
-      { label: 'Telegram', note: { ru: 'боты и mini app', en: 'bots and mini app' } },
-      { label: { ru: 'Общая база ботов', en: 'Shared bot base' }, note: { ru: 'Node.js', en: 'Node.js' } },
-      { label: { ru: 'Redis', en: 'Redis' }, note: { ru: 'сессии и очереди', en: 'sessions and queues' } },
-      { label: 'PostgreSQL', note: { ru: 'данные', en: 'data' } },
-      { label: { ru: 'Coda и Google Sheets', en: 'Coda and Google Sheets' } },
+      { label: 'Telegram' },
+      { label: { ru: 'Боты и mini app', en: 'Bots and mini app' } },
+      { label: { ru: 'База данных', en: 'Database' } },
+      { label: { ru: 'Таблицы и отчёты', en: 'Sheets and reports' } },
     ],
     nda: true,
     hue: 205,
@@ -315,89 +104,24 @@ I build and maintain the bots, set up the integrations and write the user guides
     title: { ru: 'Распознавание музыки и статистика', en: 'Music recognition and statistics' },
     category: 'ai',
     visual: 'wave',
-    ru: 'Сервис, который находит трек в видео по ссылке и собирает статистику по роликам и релизам в TikTok, YouTube, Instagram и Spotify.',
-    en: 'A service that finds the track in a video by link and collects statistics for videos and releases on TikTok, YouTube, Instagram and Spotify.',
+    ru: 'Внутренний сервис: определяет музыку в видео по ссылке и собирает статистику по роликам и релизам.',
+    en: 'An in-house service: finds the music in a video by link and collects statistics for videos and releases.',
     long: {
-      ru: `Сервис, который по ссылке на видео определяет, какая музыка в нём играет. Принимает ссылки из YouTube, TikTok, Instagram, X, Facebook и Vimeo, вытаскивает звук через FFmpeg и отдаёт его на распознавание двум провайдерам: AudD и Shazam. Можно отправить сразу пачку ссылок.
+      ru: `Внутренний сервис компании, который по ссылке на видео определяет, какая музыка в нём играет, и собирает статистику по роликам и релизам. Проект закрытый, поэтому без подробностей.
 
-Второе направление — статистика. Сервис снимает показатели роликов в TikTok, YouTube Shorts, Instagram Reels и Douyin. Методы идут цепочкой от лёгких к тяжёлым (curl_cffi, затем Playwright, затем Apify), поэтому платные запросы тратятся только там, где без них не обойтись. По Spotify собирает статистику треков и релизов, а Chrome-расширение помогает управлять сбором.
+Участвую в разработке и доработке вместе с командой.`,
+      en: `An in-house service of the company that finds out what music is playing in a video from its link and collects statistics for videos and releases. The project is closed, so no details.
 
-Данные лежат в PostgreSQL, очереди и кэш на Redis, итоги выгружаются в Coda и Google Sheets. Сервис покрыт тестами на Jest и supertest, работает в Docker.
-
-Я участвую в разработке и доработке сервиса вместе с командой.`,
-      en: `A service that finds out what music is playing in a video from its link. It accepts links from YouTube, TikTok, Instagram, X, Facebook and Vimeo, extracts the audio with FFmpeg and sends it to two recognition providers, AudD and Shazam. You can send a whole batch of links at once.
-
-The second direction is statistics. The service takes the numbers of videos on TikTok, YouTube Shorts, Instagram Reels and Douyin. The methods run as a chain from light to heavy (curl_cffi, then Playwright, then Apify), so paid requests are spent only where there is no way around them. For Spotify it collects track and release statistics, and a Chrome extension helps manage the collection.
-
-Data lives in PostgreSQL, queues and cache on Redis, results go out to Coda and Google Sheets. The service is covered by Jest and supertest tests and runs in Docker.
-
-I take part in developing and improving the service together with the team.`,
+I take part in developing and improving it together with the team.`,
     },
-    did: [
-      {
-        ru: 'Точность статистики TikTok и Douyin: цифры принимаются только после подтверждения, что это нужный ролик.',
-        en: 'Accuracy of TikTok and Douyin statistics: numbers are accepted only after the video is confirmed as the right one.',
-      },
-      {
-        ru: 'Работа с лимитами Shazam: пауза при ограничении частоты запросов и запись распознанных треков.',
-        en: 'Handling Shazam limits: backing off on rate limits and recording recognised tracks.',
-      },
-      {
-        ru: 'Промо-ролики: классификация, чистка дублей раз в шесть часов, подстановка Douyin ID со страницы автора.',
-        en: 'Promo videos: classification, a duplicate sweep every six hours, filling the Douyin ID from the author page.',
-      },
-      {
-        ru: 'Мониторинг роликов AR-скаутов: опрос просмотров и сигналов по звуку, перепроверка выбранного видео по запросу.',
-        en: 'Monitoring of AR scouts’ videos: polling views and sound signals, rechecking a chosen video on demand.',
-      },
-      {
-        ru: 'CI: уведомления о деплое в Telegram.',
-        en: 'CI: deploy notifications in Telegram.',
-      },
-    ],
     role: { ru: 'Участие в разработке', en: 'Development contributor' },
     year: '2026',
-    tech: ['Node.js', 'Express', 'FFmpeg', 'Playwright', 'PostgreSQL', 'Redis'],
-    stack: [
-      {
-        name: { ru: 'Сервер', en: 'Backend' },
-        items: ['Node.js', 'Express', { ru: 'Python-скрипты', en: 'Python scripts' }, 'Winston'],
-      },
-      {
-        name: { ru: 'Распознавание', en: 'Recognition' },
-        items: ['AudD API', 'Shazam API', 'FFmpeg'],
-      },
-      {
-        name: { ru: 'Сбор данных', en: 'Data collection' },
-        items: ['Playwright (stealth)', 'curl_cffi', 'Apify', { ru: 'прокси', en: 'proxies' }],
-      },
-      {
-        name: { ru: 'Данные', en: 'Data' },
-        items: ['PostgreSQL', 'Redis', 'S3'],
-      },
-      {
-        name: { ru: 'Интеграции', en: 'Integrations' },
-        items: [
-          'Spotify for Artists',
-          'Coda API',
-          'Google Sheets',
-          { ru: 'Chrome-расширение', en: 'Chrome extension' },
-        ],
-      },
-      {
-        name: { ru: 'Инфраструктура и качество', en: 'Infrastructure and quality' },
-        items: ['Docker', 'Jest', 'supertest', 'ESLint', 'Prettier'],
-      },
-    ],
+    tech: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'FFmpeg', 'Docker'],
     arch: [
       { label: { ru: 'Ссылка на видео', en: 'Video link' } },
-      { label: 'FFmpeg', note: { ru: 'звук', en: 'audio' } },
-      {
-        label: { ru: 'AudD и Shazam', en: 'AudD and Shazam' },
-        note: { ru: 'распознавание', en: 'recognition' },
-      },
-      { label: 'PostgreSQL', note: { ru: 'результаты и снимки', en: 'results and snapshots' } },
-      { label: { ru: 'Coda и Google Sheets', en: 'Coda and Google Sheets' } },
+      { label: { ru: 'Распознавание', en: 'Recognition' } },
+      { label: { ru: 'База данных', en: 'Database' } },
+      { label: { ru: 'Отчёты', en: 'Reports' } },
     ],
     nda: true,
     hue: 175,
