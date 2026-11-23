@@ -15,14 +15,25 @@ const props = defineProps<{ slug: string }>()
 const { lang, t } = useLang()
 
 const project = computed(() => projectBySlug(props.slug))
+const paragraphs = computed(() =>
+  project.value
+    ? tx(project.value.long, lang.value)
+        .split(/\n\s*\n/)
+        .filter(Boolean)
+    : [],
+)
 const idx = computed(() => projects.findIndex((p) => p.slug === props.slug))
 const next = computed(() => projects[(idx.value + 1) % projects.length]!)
 
 // Своя подача у каждого проекта: рамка превью зависит от типа
 // (браузер для сайтов, окно приложения для ERP, телефон для ботов), галерея — от проекта.
-const frame = computed(() =>
-  project.value?.category === 'bots' ? 'phone' : project.value?.category === 'erp' ? 'app' : 'browser',
-)
+// рамка вокруг иллюстрации: телефон для ботов, окно приложения для ERP, платформы и сервиса распознавания
+const frame = computed(() => {
+  const p = project.value
+  if (!p) return 'browser'
+  if (p.cover) return 'browser'
+  return (p.visual ?? (p.category === 'erp' ? 'erp' : 'bots')) === 'bots' ? 'phone' : 'app'
+})
 const host = computed(() => {
   const d = project.value?.demo
   return d ? d.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
@@ -41,7 +52,7 @@ const host = computed(() => {
         ><span v-if="project.nda" class="pd-nda">{{ t('p_nda') }}</span>
       </p>
       <h1 class="sc-title pd-title">{{ tx(project.title, lang) }}</h1>
-      <p class="sc-lead">{{ project[lang] }}</p>
+      <p class="sc-lead">{{ tx(project, lang) }}</p>
       <ul class="chip-row pd-tags">
         <li v-for="tech in project.tech" :key="tech">{{ tech }}</li>
       </ul>
@@ -68,34 +79,62 @@ const host = computed(() => {
     <article :style="{ '--h': project.hue }">
       <!-- факты одной строкой -->
       <section class="wrap blk-first">
-        <dl v-reveal class="pd-facts glass">
+        <div class="pd-facts-wrap">
           <PixelPal name="sleep" :scale="3" class="pal-on-facts" />
-          <div>
-            <dt>{{ t('p_role') }}</dt>
-            <dd>{{ project.role[lang] }}</dd>
-          </div>
-          <div>
-            <dt>{{ t('p_year') }}</dt>
-            <dd>{{ project.year }}</dd>
-          </div>
-          <div>
-            <dt>{{ t('p_cat') }}</dt>
-            <dd>{{ t(`cat_${project.category}`) }}</dd>
-          </div>
-          <div>
-            <dt>{{ t('p_stack') }}</dt>
-            <dd>{{ project.tech.join(', ') }}</dd>
-          </div>
-        </dl>
+          <dl v-reveal class="pd-facts glass">
+            <div>
+              <dt>{{ t('p_role') }}</dt>
+              <dd>{{ tx(project.role, lang) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t('p_year') }}</dt>
+              <dd>{{ project.year }}</dd>
+            </div>
+            <div>
+              <dt>{{ t('p_cat') }}</dt>
+              <dd>{{ t(`cat_${project.category}`) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t('p_stack') }}</dt>
+              <dd>{{ project.tech.join(', ') }}</dd>
+            </div>
+          </dl>
+        </div>
       </section>
 
       <section class="wrap blk pd-about" aria-labelledby="about-t">
         <h2 id="about-t" v-reveal class="blk-kicker">{{ t('p_about') }}</h2>
         <div v-reveal class="pd-about-body">
-          <p class="pd-long">{{ project.long[lang] }}</p>
+          <p v-for="(para, i) in paragraphs" :key="i" class="pd-long">{{ para }}</p>
           <p v-if="project.nda" class="pd-note glass">
             <UiIcon name="layers" :size="20" /><span>{{ t('p_nda_note') }}</span>
           </p>
+        </div>
+      </section>
+
+      <section v-if="project.did?.length" class="wrap blk pd-about" aria-labelledby="did-t">
+        <h2 id="did-t" v-reveal class="blk-kicker">{{ t('p_did') }}</h2>
+        <ul v-reveal class="pd-did stagger">
+          <li v-for="(d, i) in project.did" :key="i" :style="{ '--i': i }">
+            <span class="pd-did-dot" aria-hidden="true"></span><span>{{ tx(d, lang) }}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section v-if="project.stack?.length" class="wrap blk pd-about" aria-labelledby="tech-t">
+        <h2 id="tech-t" v-reveal class="blk-kicker">{{ t('p_tech') }}</h2>
+        <div v-reveal class="pd-stack stagger">
+          <div
+            v-for="(g, i) in project.stack"
+            :key="tx(g.name, 'en')"
+            class="pd-stack-g glass"
+            :style="{ '--i': i }"
+          >
+            <h3>{{ tx(g.name, lang) }}</h3>
+            <ul class="chip-row">
+              <li v-for="item in g.items" :key="tx(item, 'en')">{{ tx(item, lang) }}</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -106,7 +145,7 @@ const host = computed(() => {
           <li v-for="(n, i) in project.arch" :key="tx(n.label, 'en')" :style="{ '--i': i }">
             <span class="flow-n">{{ String(i + 1).padStart(2, '0') }}</span>
             <b>{{ tx(n.label, lang) }}</b>
-            <small v-if="n.note">{{ n.note[lang] }}</small>
+            <small v-if="n.note">{{ tx(n.note, lang) }}</small>
           </li>
         </ol>
         <p class="blk-hint">{{ t('p_arch_note') }}</p>

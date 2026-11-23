@@ -34,7 +34,7 @@ const p = computed(() => props.project)
       <h3>
         <RouterLink :to="`/projects/${p.slug}`">{{ tx(p.title, lang) }}</RouterLink>
       </h3>
-      <p>{{ p[lang] }}</p>
+      <p>{{ tx(p, lang) }}</p>
       <div class="chips">
         <span v-for="tech in p.tech" :key="tech">{{ tech }}</span>
       </div>

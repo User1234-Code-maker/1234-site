@@ -12,7 +12,17 @@ async function scrollThrough(page: Page) {
   })
 }
 
-const routes = ['/', '/projects', '/projects/label-erp', '/music', '/about', '/contact', '/no-such-page']
+const routes = [
+  '/',
+  '/projects',
+  '/projects/label-erp',
+  '/projects/hitviro',
+  '/projects/music-recognition',
+  '/music',
+  '/about',
+  '/contact',
+  '/no-such-page',
+]
 const viewports = [
   { name: 'desktop', width: 1440, height: 900 },
   { name: 'tablet', width: 820, height: 1100 },
@@ -117,7 +127,7 @@ test.describe('функциональность', () => {
     await page.goto('/projects/game-studio-website')
     await expect(page.locator('.flow li')).toHaveCount(4)
     await page.locator('.pd-next').click()
-    await expect(page).toHaveURL(/\/projects\/label-erp$/)
+    await expect(page).toHaveURL(/\/projects\/portfolio-site$/)
   })
 
   test('музыка: альбом с треклистом, смена релиза, фильтр и ссылки на площадки', async ({ page }) => {
@@ -209,6 +219,32 @@ test.describe('функциональность', () => {
     await page.getByRole('button', { name: 'Menu' }).click()
     await page.locator('#mobile-menu').getByRole('link', { name: 'Projects' }).click()
     await expect(page).toHaveURL(/\/projects$/)
+  })
+
+  test('в мобильном меню перед каждым пунктом стоит стикер', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('/')
+    await page.getByRole('button', { name: 'Menu' }).click()
+    await expect(page.locator('#mobile-menu a .mm-ico')).toHaveCount(5)
+  })
+
+  test('друзья котика отвечают на клик, а страница проекта показывает подробности', async ({ page }) => {
+    await page.goto('/projects/hitviro')
+    await expect(page.locator('.pd-long')).not.toHaveCount(1)
+    await expect(page.locator('.pd-did li').first()).toBeVisible()
+    await expect(page.locator('.pd-stack-g').first()).toBeVisible()
+    const pal = page.locator('img.pal').first()
+    await pal.scrollIntoViewIfNeeded()
+    await pal.click({ force: true })
+    await expect(page.locator('.pal-say')).toBeVisible()
+    await expect(page.locator('.pal-say')).toHaveText(/\S+/)
+  })
+
+  test('русский текст: короткие слова не остаются в конце строки', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('lang', 'ru'))
+    await page.goto('/projects/label-erp')
+    const first = await page.locator('.pd-long').first().textContent()
+    expect(first).toContain('в\u00A0')
   })
 
   test('ссылка SoundCloud в шапке ведёт на настоящий адрес', async ({ page }) => {

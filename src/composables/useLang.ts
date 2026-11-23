@@ -1,5 +1,6 @@
 import { ref, watchEffect } from 'vue'
 import { site, type Lang } from '../data/site'
+import { typoRu } from '../utils/typo'
 
 const STORAGE_KEY = 'lang'
 
@@ -26,7 +27,10 @@ watchEffect(() => {
 })
 
 export function useLang() {
-  const t = (key: string): string => site.t[lang.value][key] ?? key
+  const t = (key: string): string => {
+    const s = site.t[lang.value][key] ?? key
+    return lang.value === 'ru' ? typoRu(s) : s
+  }
   const setLang = (l: Lang) => {
     lang.value = l
   }

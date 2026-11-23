@@ -1,13 +1,21 @@
 <script setup lang="ts">
-import type { Project } from '../data/types'
+import { computed } from 'vue'
+import type { Project, Visual } from '../data/types'
 
 // Образ проекта. Есть обложка — показываем её; нет (NDA) — рисуем абстрактную иллюстрацию
-// по типу проекта: окно с таблицами для ERP, чат и плитки mini app для ботов.
+// по типу проекта: окно с таблицами для ERP, чат и плитки mini app для ботов,
+// карточки кампаний для платформы и звуковая дорожка для распознавания музыки.
 // Никаких выдуманных данных: только формы, без текста.
-withDefaults(defineProps<{ project: Project; eager?: boolean; sizes?: string }>(), {
+const props = withDefaults(defineProps<{ project: Project; eager?: boolean; sizes?: string }>(), {
   eager: false,
   sizes: '(max-width: 700px) 100vw, 60vw',
 })
+// высоты столбиков звуковой дорожки: детерминированно, чтобы картинка не прыгала между загрузками
+const bars = Array.from({ length: 22 }, (_, i) => 24 + ((i * 37) % 62))
+// иллюстрацию можно задать в данных проекта, иначе её выбирает категория
+const kind = computed<Visual>(
+  () => props.project.visual ?? (props.project.category === 'erp' ? 'erp' : 'bots'),
+)
 </script>
 
 <template>
@@ -23,7 +31,7 @@ withDefaults(defineProps<{ project: Project; eager?: boolean; sizes?: string }>(
       :fetchpriority="eager ? 'high' : 'auto'"
       decoding="async"
     />
-    <div v-else-if="project.category === 'erp'" class="pv-art pv-erp" aria-hidden="true">
+    <div v-else-if="kind === 'erp'" class="pv-art pv-erp" aria-hidden="true">
       <div class="erp-win">
         <div class="erp-bar"><i></i><i></i><i></i></div>
         <div class="erp-side"><b></b><b></b><b class="on"></b><b></b><b></b></div>
@@ -35,6 +43,29 @@ withDefaults(defineProps<{ project: Project; eager?: boolean; sizes?: string }>(
           </div>
         </div>
       </div>
+    </div>
+    <div v-else-if="kind === 'platform'" class="pv-art pv-plat" aria-hidden="true">
+      <div class="plt-win">
+        <div class="erp-bar"><i></i><i></i><i></i></div>
+        <div class="plt-body">
+          <div v-for="n in 3" :key="n" class="plt-card" :class="`c${n}`">
+            <b class="plt-cover"></b>
+            <b class="plt-line"></b>
+            <b class="plt-line short"></b>
+            <span class="plt-bar"><i></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="plt-coin"><b></b><b></b></div>
+    </div>
+    <div v-else-if="kind === 'wave'" class="pv-art pv-wave" aria-hidden="true">
+      <div class="wv-card">
+        <div class="wv-bars"><i v-for="(h, n) in bars" :key="n" :style="{ height: `${h}%` }"></i></div>
+        <div class="wv-result">
+          <b class="wv-art"></b><span><b></b><b class="short"></b></span>
+        </div>
+      </div>
+      <div class="wv-chips"><b></b><b></b><b></b></div>
     </div>
     <div v-else class="pv-art pv-bots" aria-hidden="true">
       <div class="bot-phone">

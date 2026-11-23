@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useLang } from '../composables/useLang'
+import { usePalSpeech } from '../composables/usePalSpeech'
 import ToriiArt from './ToriiArt.vue'
 
 // Японский декор сцены. Всё — векторы и CSS, анимируем только transform/opacity.
@@ -11,6 +13,9 @@ const petals = Array.from({ length: 12 }, (_, i) => ({
   delay: -((i * 2.3) % 18),
   s: 0.7 + ((i * 13) % 6) / 10,
 }))
+// птичка на проводах и журавлики тоже отвечают на клик (мышью и пальцем; для клавиатуры это просто декор)
+const { t } = useLang()
+const { speak } = usePalSpeech(t)
 const lanternX = [8, 20, 33, 46, 59, 72, 86]
 // провисание гирлянды: y = 4 + 26·(1 − ((x − 50)/50)²)
 const sag = (x: number) => 4 + 26 * (1 - ((x - 50) / 50) ** 2)
@@ -32,7 +37,8 @@ const sag = (x: number) => 4 + 26 * (1 - ((x - 50) / 50) ** 2)
         <path d="M494 100 C 340 200, 170 210, -10 190" />
         <path d="M560 100 C 400 230, 220 250, -10 236" />
       </g>
-      <g class="sd-bird">
+      <g class="sd-bird" @click="speak('bird', $event.currentTarget as Element)">
+        <rect class="sd-hit" x="240" y="120" width="90" height="30" />
         <path d="M250 133c4-6 9-6 12 0 3-6 8-6 12 0-4-2-8-1-12 3-4-4-8-5-12-3Z" />
         <path d="M300 136c3-5 7-5 10 0 3-5 7-5 10 0-3-2-7-1-10 3-3-4-7-5-10-3Z" />
       </g>
@@ -56,7 +62,14 @@ const sag = (x: number) => 4 + 26 * (1 - ((x - 50) / 50) ** 2)
     </div>
     <ToriiArt v-if="items.includes('torii')" />
     <template v-if="items.includes('cranes')">
-      <svg v-for="n in 2" :key="n" class="sd-crane" :class="`c${n}`" viewBox="0 0 60 40">
+      <svg
+        v-for="n in 2"
+        :key="n"
+        class="sd-crane"
+        :class="`c${n}`"
+        viewBox="0 0 60 40"
+        @click="speak('crane', $event.currentTarget as Element)"
+      >
         <path d="M2 24 30 18 58 4 40 22 52 30 30 26 18 38 20 26Z" />
         <path class="fold" d="M30 18 40 22 30 26Z" />
       </svg>

@@ -82,10 +82,16 @@
   font-weight: 800;
   color: var(--violet);
 }
-.mu-kind span + span::before,
-.mu-rel-meta span + span::before {
+.mu-kind span + span::before {
   content: '·';
   margin-right: 8px;
+  color: var(--mute);
+}
+/* в карточках релизов вид и дата могут встать в две строки: без точки, чтобы она не оставалась в начале строки */
+.mu-rel-meta span {
+  white-space: nowrap;
+}
+.mu-rel-meta span + span {
   color: var(--mute);
 }
 .mu-info h2 {

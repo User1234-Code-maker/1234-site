@@ -5,6 +5,7 @@ import { useLang } from './composables/useLang'
 import { projectBySlug } from './data/projects'
 import PageVeil from './components/PageVeil.vue'
 import NowPlaying from './components/NowPlaying.vue'
+import PalBubble from './components/PalBubble.vue'
 import PixelCat from './components/PixelCat.vue'
 import { tx } from './utils/i18n'
 import { pageReady } from './utils/pageScroll'
@@ -47,4 +48,5 @@ const pageKey = () => route.path
   <PageVeil :trigger="veilKey" />
   <NowPlaying />
   <PixelCat />
+  <PalBubble />
 </template>

@@ -72,8 +72,8 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
         <img class="ab-cloud b" :src="cloudFront2" alt="" width="600" height="213" decoding="async" />
         <div class="ab-now glass">
           <small>{{ t('a_now') }}</small>
-          <b>{{ jobs[0]!.company[lang] }}</b>
-          <span>{{ jobs[0]!.role[lang] }}</span>
+          <b>{{ tx(jobs[0]!.company, lang) }}</b>
+          <span>{{ tx(jobs[0]!.role, lang) }}</span>
         </div>
       </div>
     </template>
@@ -121,7 +121,7 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
           >
             <span class="path-dot" aria-hidden="true"></span>
             <span class="path-year">{{ m.year }}</span>
-            <span class="path-title">{{ m.title[lang] }}</span>
+            <span class="path-title">{{ tx(m.title, lang) }}</span>
           </button>
         </div>
         <Transition name="swap" mode="out-in">
@@ -135,8 +135,8 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
             <PixelPal name="sleep" :scale="3" class="pal-on-panel" />
             <span class="path-panel-y" aria-hidden="true">{{ milestones[step]!.year }}</span>
             <div>
-              <h3>{{ milestones[step]!.title[lang] }}</h3>
-              <p>{{ milestones[step]!.text[lang] }}</p>
+              <h3>{{ tx(milestones[step]!.title, lang) }}</h3>
+              <p>{{ tx(milestones[step]!.text, lang) }}</p>
             </div>
           </div>
         </Transition>
@@ -158,7 +158,7 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
       <div class="skill-grid stagger">
         <article v-for="(g, i) in skills" :key="g.name.en" class="skill-card" :style="{ '--i': i }">
           <h3>
-            {{ g.name[lang] }}<small>{{ g.items.length }}</small>
+            {{ tx(g.name, lang) }}<small>{{ g.items.length }}</small>
           </h3>
           <ul class="chip-row">
             <li v-for="item in g.items" :key="tx(item, 'en')">{{ tx(item, lang) }}</li>
@@ -171,8 +171,8 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
       <ul class="services-row stagger">
         <li v-for="(s, i) in services" :key="s.title.en" class="service-card" :style="{ '--i': i }">
           <span class="service-ic"><UiIcon :name="serviceIcons[i] ?? 'spark'" :size="22" /></span>
-          <h4>{{ s.title[lang] }}</h4>
-          <p>{{ s.text[lang] }}</p>
+          <h4>{{ tx(s.title, lang) }}</h4>
+          <p>{{ tx(s.text, lang) }}</p>
         </li>
       </ul>
     </section>
@@ -182,12 +182,12 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
       <h2 id="exp-t" v-reveal class="blk-h">{{ t('a_exp_t') }}</h2>
       <ol class="jobs">
         <li v-for="(j, i) in jobs" :key="j.period.en" v-reveal class="job" :style="{ '--i': i }">
-          <time class="job-when">{{ j.period[lang] }}</time>
+          <time class="job-when">{{ tx(j.period, lang) }}</time>
           <span class="job-dot" aria-hidden="true"></span>
           <div class="job-body">
-            <h3>{{ j.role[lang] }}</h3>
-            <p class="job-co">{{ j.company[lang] }}</p>
-            <p>{{ j.text[lang] }}</p>
+            <h3>{{ tx(j.role, lang) }}</h3>
+            <p class="job-co">{{ tx(j.company, lang) }}</p>
+            <p>{{ tx(j.text, lang) }}</p>
           </div>
         </li>
       </ol>

@@ -573,3 +573,16 @@
     right: 6%;
   }
 }
+
+/* птичка и журавлики откликаются на клик, остальной декор по-прежнему не мешает */
+.sd-bird {
+  pointer-events: all;
+  cursor: pointer;
+}
+.sd-hit {
+  fill: transparent;
+}
+.sd-crane {
+  pointer-events: auto;
+  cursor: pointer;
+}

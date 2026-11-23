@@ -7,6 +7,15 @@ export interface Bi {
 
 export type Category = 'web' | 'erp' | 'bots' | 'ai' | 'lab'
 
+/** вид иллюстрации для проектов без обложки */
+export type Visual = 'erp' | 'bots' | 'platform' | 'wave'
+
+/** группа технологий для блока «Стек» на странице проекта */
+export interface StackGroup {
+  name: Bi
+  items: Array<string | Bi>
+}
+
 interface ArchNode {
   label: string | Bi
   note?: Bi
@@ -18,8 +27,14 @@ export interface Project {
   category: Category
   ru: string
   en: string
-  /** развёрнутое описание для страницы проекта */
+  /** развёрнутое описание для страницы проекта; абзацы разделяются пустой строкой */
   long: Bi
+  /** что именно сделано мной: короткие пункты для блока «Что я делал» */
+  did?: Bi[]
+  /** полный стек по группам; в карточках и в строке фактов остаётся короткий tech */
+  stack?: StackGroup[]
+  /** иллюстрация для проекта без обложки; по умолчанию выбирается по категории */
+  visual?: Visual
   role: Bi
   year: string
   tech: string[]

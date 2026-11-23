@@ -106,7 +106,7 @@ const seedOf = (id: string) => [...id].reduce((a, c) => a + c.charCodeAt(0), 0)
           </p>
           <h2>{{ release.title }}</h2>
           <p class="mu-genres">{{ release.genres.map((g) => genreLabel(g, lang)).join(' / ') }}</p>
-          <p v-if="release.blurb" class="mu-blurb">{{ release.blurb[lang] }}</p>
+          <p v-if="release.blurb" class="mu-blurb">{{ tx(release.blurb, lang) }}</p>
           <div class="mu-ctrl">
             <button
               type="button"

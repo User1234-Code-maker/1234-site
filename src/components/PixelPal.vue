@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useLang } from '../composables/useLang'
+import { usePalSpeech } from '../composables/usePalSpeech'
 import sleep from '../assets/pixel/sleep.svg'
 import music from '../assets/pixel/music.svg'
 import peek from '../assets/pixel/peek.svg'
@@ -19,18 +22,34 @@ const art = {
 } as const
 const props = withDefaults(defineProps<{ name: keyof typeof art; scale?: number }>(), { scale: 4 })
 const a = art[props.name]
+
+// клик (или Enter / пробел) — существо отзывается и подпрыгивает
+const { t } = useLang()
+const { speak } = usePalSpeech(t)
+const poked = ref(false)
+function poke(e: Event) {
+  speak(props.name, e.currentTarget as Element)
+  poked.value = false
+  requestAnimationFrame(() => (poked.value = true))
+  window.setTimeout(() => (poked.value = false), 450)
+}
 </script>
 
 <template>
   <img
     class="pal"
-    :class="`pal-${name}`"
+    :class="[`pal-${name}`, { poked }]"
     :src="a[0]"
     alt=""
-    aria-hidden="true"
+    role="button"
+    tabindex="0"
+    :aria-label="t('pal_poke')"
     :width="a[1] * scale"
     :height="a[2] * scale"
     loading="lazy"
     decoding="async"
+    @click="poke"
+    @keydown.enter.prevent="poke"
+    @keydown.space.prevent="poke"
   />
 </template>

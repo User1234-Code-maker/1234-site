@@ -87,7 +87,7 @@ const count = (c: Category | 'all') =>
             <h3>
               <RouterLink class="gal-link" :to="`/projects/${p.slug}`">{{ tx(p.title, lang) }}</RouterLink>
             </h3>
-            <p class="gal-desc">{{ p[lang] }}</p>
+            <p class="gal-desc">{{ tx(p, lang) }}</p>
             <ul class="chip-row">
               <li v-for="tech in p.tech" :key="tech">{{ tech }}</li>
             </ul>

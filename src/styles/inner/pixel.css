@@ -17,7 +17,7 @@
 .pal-on-panel {
   position: absolute;
   right: 26px;
-  top: -36px;
+  bottom: -22px;
 }
 .pal-corner {
   position: absolute;
@@ -79,5 +79,114 @@
 @media (prefers-reduced-motion: reduce) {
   .pal-corner {
     animation: none;
+  }
+}
+
+/* стикеры в мобильном меню: пиксельная иконка на мягкой плашке, видна на любом фоне */
+.mobile-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.mm-ico {
+  flex: none;
+  box-sizing: border-box;
+  width: 34px;
+  height: 34px;
+  padding: 5px;
+  border-radius: 11px;
+  background: #eef2ff;
+  object-fit: contain;
+  image-rendering: pixelated;
+  transition: transform 0.2s;
+}
+[data-theme='dark'] .mm-ico {
+  background: #dfe6ff;
+}
+.mobile-menu a:hover .mm-ico,
+.mobile-menu a:focus-visible .mm-ico {
+  transform: translateY(-2px) rotate(-6deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-ico {
+    transition: none;
+  }
+}
+
+/* друзья котика откликаются на клик */
+.pal {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pal.poked {
+  animation: pal-poke 0.45s ease-out;
+}
+@keyframes pal-poke {
+  30% {
+    transform: translateY(-6px) scale(1.12);
+  }
+  60% {
+    transform: translateY(1px) scale(0.96);
+  }
+}
+.pal:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+/* общее облачко речи; transform и opacity, без размытия */
+.pal-say {
+  position: fixed;
+  z-index: 60;
+  width: max-content;
+  max-width: min(220px, 70vw);
+  padding: 7px 13px;
+  border-radius: 14px 14px 14px 4px;
+  background: #fff;
+  color: var(--ink);
+  font: 800 13px Mn;
+  line-height: 1.3;
+  pointer-events: none;
+  translate: -50% calc(-100% - 6px);
+  box-shadow: 0 10px 24px -10px rgb(30 42 107 / 0.5);
+  animation: pal-say 2.4s ease-out forwards;
+}
+[data-theme='dark'] .pal-say {
+  background: #1f2766;
+  color: #e8ebff;
+  box-shadow:
+    0 0 0 1px rgb(150 160 255 / 0.35),
+    0 10px 24px -10px rgb(0 0 0 / 0.7);
+}
+@keyframes pal-say {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  10%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pal.poked {
+    animation: none;
+  }
+  .pal-say {
+    animation: pal-say-fade 2.4s linear forwards;
+  }
+  @keyframes pal-say-fade {
+    0%,
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 }
