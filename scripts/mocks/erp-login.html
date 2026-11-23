@@ -1,0 +1,178 @@
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" />
+<style>
+  body {
+    display: grid;
+    place-items: center;
+    background: repeating-linear-gradient(
+      90deg,
+      #0d0d10 0 9px,
+      #6a7180 9px 13px,
+      #f4f6fb 13px 17px,
+      #1b1c22 17px 24px,
+      #b9c6e6 24px 29px,
+      #e8c39a 29px 33px,
+      #0f1014 33px 41px,
+      #ffffff 41px 44px,
+      #7d8aa8 44px 50px,
+      #141519 50px 58px,
+      #d8b892 58px 61px,
+      #c4d2f0 61px 66px,
+      #101114 66px 77px
+    );
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(90deg, #000 0, transparent 22%, transparent 78%, #000 100%);
+    opacity: 0.55;
+  }
+  .card {
+    position: relative;
+    width: 1080px;
+    height: 720px;
+    border-radius: 26px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 40px 90px #000c;
+  }
+  .l {
+    background: #131418;
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+  }
+  .wm {
+    font-weight: 800;
+    font-style: italic;
+    font-size: 46px;
+    letter-spacing: -2px;
+    transform: skewX(-8deg);
+    margin-bottom: 34px;
+  }
+  .wm span {
+    display: inline-block;
+    border: 3px solid #fff;
+    padding: 0 12px;
+    border-radius: 6px 18px;
+  }
+  h1 {
+    font-size: 44px;
+    font-weight: 700;
+    color: #d8d9de;
+  }
+  p {
+    color: #8b8e98;
+    font-size: 19px;
+    line-height: 1.5;
+    margin: 12px 0 20px;
+  }
+  label {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  label b {
+    color: #ff3b5c;
+  }
+  .in {
+    background: #2a2e3b;
+    border-radius: 16px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 22px;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .go {
+    margin-top: 12px;
+    background: linear-gradient(#2f62ff, #1e46f0);
+    border-radius: 16px;
+    height: 66px;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 20px;
+    box-shadow: inset 0 1px 0 #6f93ff;
+  }
+  .lang {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 20px;
+    color: #d0d2d8;
+  }
+  .lang b {
+    color: #3a6bff;
+    font-weight: 600;
+  }
+  .r {
+    background: #050608;
+    position: relative;
+  }
+  .r svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .r small {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: #c8cbd2;
+  }
+</style>
+<div class="card">
+  <div class="l">
+    <div class="wm"><span>0to8</span></div>
+    <h1>Вход</h1>
+    <p>Войдите с email или логином и паролем, чтобы открыть ERP систему</p>
+    <label>Email или логин <b>*</b></label>
+    <div class="in">manager@label.demo</div>
+    <label>Пароль <b>*</b></label>
+    <div class="in" style="letter-spacing: 4px">••••••••••••</div>
+    <div class="go">Войти</div>
+    <div class="lang"><b>RU</b> / EN / PT / ES</div>
+  </div>
+  <div class="r">
+    <svg viewBox="0 0 540 720" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#0a0b0e" />
+          <stop offset=".55" stop-color="#9aa0aa" />
+          <stop offset=".7" stop-color="#2a2d33" />
+          <stop offset="1" stop-color="#050608" />
+        </linearGradient>
+        <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#050608" />
+          <stop offset=".5" stop-color="#c9ced6" />
+          <stop offset=".62" stop-color="#3a3e46" />
+          <stop offset="1" stop-color="#08090b" />
+        </linearGradient>
+        <filter id="b"><feGaussianBlur stdDeviation="6" /></filter>
+      </defs>
+      <path
+        d="M0 230 C140 120 300 60 540 0 L540 140 C360 170 200 260 0 330Z"
+        fill="url(#g1)"
+        filter="url(#b)"
+      />
+      <path
+        d="M0 470 C180 330 360 300 540 210 L540 330 C380 420 220 470 0 580Z"
+        fill="url(#g2)"
+        filter="url(#b)"
+      />
+      <path
+        d="M60 720 C220 600 380 560 540 470 L540 600 C420 650 300 690 200 720Z"
+        fill="url(#g1)"
+        filter="url(#b)"
+      />
+    </svg>
+    <small>Zero to Infinity</small>
+  </div>
+</div>

@@ -1,0 +1,286 @@
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" /><link
+  rel="stylesheet"
+  href="phone.css"
+/>
+<style>
+  .lg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 16px;
+  }
+  .live {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #5fe08a;
+    background: #12301d;
+    border-radius: 8px;
+    padding: 3px 7px;
+  }
+  .hero {
+    position: relative;
+    margin-top: 8px;
+    border: 1px solid #232c3a;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #121a26, #0f1a22);
+    padding: 16px 18px;
+    height: 124px;
+    overflow: hidden;
+  }
+  .hero strong {
+    font-size: 44px;
+    font-weight: 800;
+  }
+  .hero strong span {
+    font-size: 28px;
+    color: #9aa6bd;
+  }
+  .hero small {
+    display: block;
+    font-size: 14px;
+    color: #d3d8e3;
+  }
+  .pb {
+    width: 150px;
+    height: 7px;
+    border-radius: 9px;
+    background: #1f2736;
+    margin-top: 10px;
+  }
+  .pb i {
+    display: block;
+    width: 30%;
+    height: 100%;
+    border-radius: 9px;
+    background: #5fe0d0;
+  }
+  .rings {
+    position: absolute;
+    right: -30px;
+    top: -20px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, transparent 0 18px, #24434b 18px 19px);
+  }
+  .rings::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, #5fe0d0, transparent);
+    transform-origin: left;
+    rotate: 130deg;
+  }
+  .meta {
+    font-size: 11.5px;
+    color: #8f97ab;
+    margin: 8px 4px;
+  }
+  .two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .s {
+    border: 1px solid #232c3e;
+    border-radius: 16px;
+    padding: 12px;
+    background: #111725;
+  }
+  .s.r {
+    border-color: #4a1f2c;
+    background: #1a1118;
+  }
+  .s strong {
+    font-size: 28px;
+    font-weight: 800;
+  }
+  .s small {
+    display: block;
+    font-size: 11.5px;
+    color: #aeb5c6;
+  }
+  .s a {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #232c3e;
+    font-weight: 700;
+    font-size: 13px;
+    color: #7c9bff;
+  }
+  .s.r a {
+    color: #ff4f73;
+    border-color: #3a1f28;
+  }
+  .ch {
+    margin-top: 10px;
+    border: 1px solid #232838;
+    border-radius: 16px;
+    background: #121621;
+    padding: 12px 14px;
+  }
+  .ch h4 {
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    color: #a5acbd;
+    display: flex;
+    justify-content: space-between;
+  }
+  .ch h4 span {
+    color: #5fe08a;
+    letter-spacing: 0;
+  }
+  .ch svg {
+    margin: 8px 0 2px;
+  }
+  .ch p {
+    font-size: 11.5px;
+    font-weight: 700;
+    border-top: 1px solid #222838;
+    padding-top: 8px;
+    display: flex;
+    gap: 16px;
+  }
+  .add {
+    margin-top: 12px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #6f97ff, #2b55e8);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .sig {
+    margin-top: 14px;
+    font-size: 10.5px;
+    letter-spacing: 2px;
+    color: #a5acbd;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sig b {
+    color: #7c9bff;
+    letter-spacing: 0;
+    font-size: 12px;
+  }
+  .nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 64px;
+    border-top: 1px solid #1c2130;
+    background: #0b0e14;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    font-size: 11px;
+    color: #9aa2b5;
+    padding-top: 10px;
+  }
+  .nav span::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #9aa2b5;
+    border-radius: 6px;
+    margin: 0 auto 4px;
+  }
+  .nav .on {
+    color: #6f97ff;
+  }
+  .nav .on::before {
+    border-color: #6f97ff;
+  }
+  .sg {
+    margin-top: 10px;
+    border: 1px solid #232838;
+    border-radius: 16px;
+    background: #121621;
+    padding: 12px 14px;
+  }
+  .sg small {
+    color: #8f97ab;
+    font-size: 11.5px;
+    display: block;
+  }
+  .sg b {
+    font-size: 15px;
+  }
+  .tag {
+    font-size: 12px;
+    font-weight: 800;
+    color: #e9b36a;
+    background: #2b2216;
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+  .av {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2b3550, #151a26);
+    flex: none;
+  }
+</style>
+<div class="bar">
+  <span class="lg"><span class="ib">⌂</span>RADAR <span class="live">● LIVE</span></span
+  ><span class="row" style="gap: 8px"
+    ><span class="ib">+</span><span class="ib"><span class="burg"></span></span
+  ></span>
+</div>
+<div class="hero">
+  <span class="rings"></span><strong>24 <span>/ 80</span></strong
+  ><small>Аккаунтов отслеживается</small>
+  <div class="pb"><i></i></div>
+</div>
+<div class="meta">Последняя проверка · 40 мин назад</div>
+<div class="two">
+  <div class="s"><strong>97</strong><small>Ждут просмотра</small><a>Сигналы →</a></div>
+  <div class="s r"><strong>2</strong><small>Требуют внимания</small><a>Radar →</a></div>
+</div>
+<div class="ch">
+  <h4>АКТИВНОСТЬ ЗА 24 ЧАСА <span>↗ +18%</span></h4>
+  <svg viewBox="0 0 320 90" width="100%" height="90">
+    <defs>
+      <linearGradient id="f" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#6f97ff" stop-opacity=".35" />
+        <stop offset="1" stop-color="#6f97ff" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M0 82 L30 80 L55 30 L75 70 L100 78 L130 60 L150 20 L172 74 L200 66 L230 72 L255 40 L280 70 L320 64 L320 90 L0 90Z"
+      fill="url(#f)"
+    />
+    <path
+      d="M0 82 L30 80 L55 30 L75 70 L100 78 L130 60 L150 20 L172 74 L200 66 L230 72 L255 40 L280 70 L320 64"
+      fill="none"
+      stroke="#6f97ff"
+      stroke-width="2.5"
+      stroke-linejoin="round"
+    />
+  </svg>
+  <p><span>24 аккаунта проверено</span><span>11 новых роликов</span></p>
+</div>
+<div class="add">+ Добавить</div>
+<div class="sig">СИГНАЛЫ МОНИТОРИНГА <b>Все</b></div>
+<div class="sg">
+  <div class="row" style="justify-content: space-between">
+    <span class="tag">≋ УСКОРЕНИЕ</span><small>6 ч назад</small>
+  </div>
+  <div class="row" style="gap: 10px; margin-top: 10px">
+    <span class="av"></span
+    ><span><b>@nightcore.lab</b><small>Новый ролик растёт быстрее обычного</small></span>
+  </div>
+</div>
+<div class="nav">
+  <span class="on">Обзор</span><span>Список</span><span>История</span><span>Сигналы</span>
+</div>

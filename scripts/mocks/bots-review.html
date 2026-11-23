@@ -1,0 +1,184 @@
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" />
+<style>
+  body {
+    background: #000;
+  }
+  .tb {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    font-weight: 700;
+    font-size: 20px;
+    justify-content: space-between;
+  }
+  .tb span {
+    color: #9aa2b5;
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .v {
+    position: relative;
+    height: 470px;
+    background:
+      radial-gradient(18% 28% at 30% 62%, #ffffffcc, transparent 70%),
+      radial-gradient(12% 20% at 76% 58%, #ffffffaa, transparent 70%),
+      radial-gradient(60% 50% at 50% 70%, #2a2f3a, transparent), linear-gradient(#0b0c10, #000);
+    overflow: hidden;
+  }
+  .v::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, transparent 0 22px, #0006 22px 30px);
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+  .v p {
+    position: absolute;
+    left: 14px;
+    right: 60px;
+    top: 110px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-shadow: 0 2px 8px #000;
+  }
+  .v i {
+    position: absolute;
+    right: 16px;
+    top: 120px;
+    font-style: normal;
+    font-size: 24px;
+  }
+  .sheet {
+    margin-top: -34px;
+    position: relative;
+    border-radius: 26px 26px 0 0;
+    background: linear-gradient(#24262c, #141518 40%);
+    padding: 20px 22px 0;
+  }
+  .sheet::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    translate: -50% 0;
+    width: 48px;
+    height: 5px;
+    border-radius: 9px;
+    background: #5a5d66;
+  }
+  .pr {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .pr div {
+    flex: 1;
+    height: 5px;
+    border-radius: 9px;
+    background: #3a3d45;
+  }
+  .pr div i {
+    display: block;
+    width: 38%;
+    height: 100%;
+    background: #fff;
+    border-radius: 9px;
+    position: relative;
+  }
+  .pr div i::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: -6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .pr small {
+    color: #cfd3dc;
+    font-size: 13px;
+  }
+  .st {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 4px 0;
+    font-size: 15px;
+  }
+  .st span::first-letter {
+    color: #6ab0ff;
+  }
+  .cm {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #d9dce4;
+    letter-spacing: 0.5px;
+  }
+  .dt {
+    text-align: center;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #d9dce4;
+  }
+  .mk {
+    margin-top: 14px;
+    border: 1px solid #4a4d56;
+    border-radius: 999px;
+    text-align: center;
+    padding: 12px;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .act {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 16px;
+  }
+  .act span {
+    width: 84px;
+    height: 84px;
+    border-radius: 22px;
+    display: grid;
+    place-items: center;
+    font-size: 36px;
+    color: #fff;
+  }
+  .act .no {
+    background: #d1314f;
+  }
+  .act .yes {
+    background: #45a047;
+  }
+  .act .sk {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #2a2d34;
+    font-size: 22px;
+  }
+</style>
+<div class="tb">0to8 AR Scouts Bot <span>⋮ ✕</span></div>
+<div class="v">
+  <p>Songs that sound like a summer night in 2009</p>
+  <i>♪</i>
+</div>
+<div class="sheet">
+  <div class="pr">
+    <div><i></i></div>
+    <small>-0:14</small>
+  </div>
+  <div class="st">
+    <span>◉ 1,2M</span><span>♥ 248k</span><span>◌ 312</span><span>↗ 3,1k</span><span>▦ 9</span>
+  </div>
+  <div class="cm">◌ THE VIBE IS UNREAL</div>
+  <div class="dt">▣ 12.11.2026</div>
+  <div class="mk">Пометить как ИИ-шансон</div>
+  <div class="act"><span class="no">✕</span><span class="sk">⊘</span><span class="yes">♥</span></div>
+</div>

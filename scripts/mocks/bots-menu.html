@@ -1,0 +1,205 @@
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" /><link
+  rel="stylesheet"
+  href="phone.css"
+/>
+<style>
+  .c {
+    position: relative;
+    height: 230px;
+    border-radius: 26px;
+    border: 1px solid #232838;
+    background: radial-gradient(80% 90% at 50% 20%, #1a2030, #10131b);
+    margin-top: 14px;
+    overflow: hidden;
+  }
+  .c b {
+    position: absolute;
+    left: 22px;
+    bottom: 46px;
+    font-size: 25px;
+    font-weight: 800;
+  }
+  .c small {
+    position: absolute;
+    left: 22px;
+    bottom: 22px;
+    color: #a5acbd;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .c em {
+    position: absolute;
+    right: 20px;
+    bottom: 26px;
+    font-style: normal;
+    color: #c9cedb;
+    font-size: 20px;
+  }
+  .tab {
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    translate: -50% 0;
+    width: 130px;
+    height: 190px;
+    border-radius: 12px;
+    background: linear-gradient(160deg, #1b5f5a, #0b1d22 60%);
+    border: 1px solid #2d3a44;
+    rotate: -6deg;
+    box-shadow: 0 20px 40px #000a;
+  }
+  .tab::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    width: 46px;
+    height: 80px;
+    border-radius: 24px 24px 8px 8px;
+    background: #06121a;
+    box-shadow: 0 0 30px #46e0d088;
+  }
+  .tab i {
+    position: absolute;
+    bottom: 14px;
+    width: 50px;
+    height: 46px;
+    border-radius: 6px;
+  }
+  .radar {
+    position: absolute;
+    left: 50%;
+    top: 22px;
+    translate: -50% 0;
+    width: 250px;
+    height: 150px;
+    border-radius: 14px;
+    background: #151a24;
+    border: 1px solid #2a3040;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 8px;
+  }
+  .rd {
+    border-radius: 50%;
+    border: 1px solid #2c4a52;
+    background: repeating-radial-gradient(circle, #0f171d 0 14px, #18303a 14px 15px);
+    position: relative;
+    aspect-ratio: 1;
+    align-self: center;
+  }
+  .rd::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 48%;
+    height: 2px;
+    background: linear-gradient(90deg, #4fe0cf, transparent);
+    transform-origin: left;
+    rotate: -40deg;
+  }
+  .lst {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .lst span {
+    flex: 1;
+    border-radius: 5px;
+    background: #1d2330;
+    position: relative;
+  }
+  .lst span::after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 30px;
+    height: 8px;
+    border-bottom: 1.5px solid #4fe0cf;
+    border-left: 1.5px solid transparent;
+    transform: skewY(-20deg);
+  }
+  .vid {
+    position: absolute;
+    left: 58px;
+    top: 12px;
+    width: 120px;
+    height: 150px;
+    border-radius: 12px;
+    background:
+      radial-gradient(60% 60% at 50% 30%, #4d8dff88, transparent), linear-gradient(#123064, #0a1630);
+    border: 1px solid #3a5ea8;
+    rotate: -5deg;
+  }
+  .vid::after {
+    content: '▶';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #ffffff33;
+    display: grid;
+    place-items: center;
+    color: #cfe;
+    font-size: 14px;
+  }
+  .wav {
+    position: absolute;
+    right: 46px;
+    top: 16px;
+    width: 130px;
+    height: 80px;
+    border-radius: 12px;
+    background: #10213e;
+    border: 1px solid #3a5ea8;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 0 12px;
+  }
+  .wav i {
+    flex: 1;
+    background: #8fb6ff;
+    border-radius: 2px;
+  }
+  .gr {
+    position: absolute;
+    right: 52px;
+    top: 104px;
+    width: 120px;
+    height: 70px;
+    border-radius: 12px;
+    background: #0f1a30;
+    border: 1px solid #2e4b84;
+  }
+</style>
+<div class="bar">
+  <span></span><span class="ib"><span class="burg"></span></span>
+</div>
+<div class="c">
+  <div class="tab">
+    <i style="left: 10px; background: #5a1f2a"></i><i style="right: 10px; background: #1f3a8a"></i>
+  </div>
+  <b>Ревью</b><small>142 в очереди</small><em>→</em>
+</div>
+<div class="c">
+  <div class="radar">
+    <span class="rd"></span><span class="lst"><span></span><span></span><span></span><span></span></span>
+  </div>
+  <b>Радар</b><small>24 на наблюдении</small><em>→</em>
+</div>
+<div class="c" style="background: radial-gradient(70% 80% at 55% 20%, #183a6e, #10131b)">
+  <span class="vid"></span
+  ><span class="wav"
+    ><i style="height: 30%"></i><i style="height: 70%"></i><i style="height: 45%"></i
+    ><i style="height: 90%"></i><i style="height: 55%"></i><i style="height: 80%"></i
+    ><i style="height: 35%"></i><i style="height: 65%"></i><i style="height: 50%"></i
+    ><i style="height: 75%"></i></span
+  ><span class="gr"></span><b>ИИ-шансон</b><small>9 роликов · 9 звуков</small><em>→</em>
+</div>

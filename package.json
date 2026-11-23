@@ -15,7 +15,8 @@
     "check": "npm run lint && npm run format:check && npm run typecheck && npm run knip && npm test",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "postbuild": "cp dist/index.html dist/404.html"
+    "postbuild": "cp dist/index.html dist/404.html",
+    "mocks": "node scripts/mocks/render.mjs"
   },
   "dependencies": {
     "vue": "3.5.45",

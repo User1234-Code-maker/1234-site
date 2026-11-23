@@ -122,6 +122,9 @@
         if (location.pathname === '%BASE_URL%' || location.pathname + '/' === '%BASE_URL%') {
           var t = document.getElementById(isDark ? 'home-preloads-dark' : 'home-preloads')
           if (t) document.head.appendChild(t.content.cloneNode(true))
+          // город в Hero — самая крупная картинка первого экрана на телефоне
+          var tc = document.getElementById(isDark ? 'pre-night' : 'pre-day')
+          if (tc) document.head.appendChild(tc.content.cloneNode(true))
         } else {
           // на «Обо мне» самая крупная картинка — тот же персонаж, что на главной
           if (/\/about\/?$/.test(location.pathname)) {

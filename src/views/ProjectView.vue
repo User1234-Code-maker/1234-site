@@ -31,9 +31,13 @@ const next = computed(() => projects[(idx.value + 1) % projects.length]!)
 const frame = computed(() => {
   const p = project.value
   if (!p) return 'browser'
-  if (p.cover) return 'browser'
+  // у NDA-проектов перерисованные экраны: окно приложения без адресной строки
+  if (p.cover) return p.nda ? 'app' : 'browser'
   return (p.visual ?? (p.category === 'erp' ? 'erp' : 'bots')) === 'bots' ? 'phone' : 'app'
 })
+// экраны телефона (боты) — другие пропорции; ленты со скроллом вбок должны получать фокус с клавиатуры
+const phoneShots = computed(() => project.value?.slug === 'telegram-bots')
+const scrolly = computed(() => ['portfolio-site', 'telegram-bots'].includes(project.value?.slug ?? ''))
 const host = computed(() => {
   const d = project.value?.demo
   return d ? d.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''
@@ -156,12 +160,17 @@ const host = computed(() => {
         <div
           class="pd-shots stagger"
           :class="`shots-${project.slug}`"
-          :tabindex="project.slug === 'portfolio-site' ? 0 : undefined"
-          :role="project.slug === 'portfolio-site' ? 'region' : undefined"
-          :aria-label="project.slug === 'portfolio-site' ? t('p_shots') : undefined"
+          :tabindex="scrolly ? 0 : undefined"
+          :role="scrolly ? 'region' : undefined"
+          :aria-label="scrolly ? t('p_shots') : undefined"
         >
           <figure v-for="(s, i) in project.shots" :key="s" class="pd-shot" :style="{ '--i': i }">
-            <LazyImg :src="s" :width="1200" :height="750" :alt="`${tx(project.title, lang)} · ${i + 1}`" />
+            <LazyImg
+              :src="s"
+              :width="phoneShots ? 390 : 1200"
+              :height="phoneShots ? 844 : 750"
+              :alt="`${tx(project.title, lang)} · ${i + 1}`"
+            />
           </figure>
         </div>
       </section>

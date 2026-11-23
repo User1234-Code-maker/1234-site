@@ -59,7 +59,7 @@ export const texts: Record<'ru' | 'en', Texts> = {
     p_sample: 'Пример',
     p_nda: 'NDA',
     p_nda_note:
-      'Проект выполнен для компании под NDA: код, ссылки и скриншоты не публикуются. Здесь описаны общая идея и моя роль.',
+      'Проект выполнен для компании под NDA: код и ссылки не публикуются. Экраны перерисованы по мотивам настоящих, все данные на них выдуманные.',
     p_nda_links: 'Код и демо закрыты (NDA)',
     a_cv: 'Скачать резюме (PDF)',
     p_sample_note: 'Это демонстрационный кейс: описание и ссылки появятся, когда проект будет готов.',
@@ -107,7 +107,7 @@ export const texts: Record<'ru' | 'en', Texts> = {
     np_error: 'Не удалось загрузить трек',
     m_show: 'Показать в плеере',
     a_hi: 'Привет :3',
-    a_role: 'Фуллстек-разработчик, системный аналитик и музыкант',
+    a_role: 'Я фуллстек-разработчик, системный аналитик и музыкант',
     a_story_t: 'Коротко обо мне',
     a_dev_t: 'Разработка',
     a_dev_p:
@@ -120,7 +120,6 @@ export const texts: Record<'ru' | 'en', Texts> = {
     a_exp_t: 'Опыт',
     a_tl_t: 'Путь',
     a_tl_hint: 'Нажми на этап, чтобы раскрыть',
-    a_now: 'Сейчас',
     a_band_t: 'Музыка — большая часть моей жизни',
     a_band_p: 'Альбом «1234» можно включить прямо здесь.',
     a_more: 'Подробнее об этом',
@@ -242,7 +241,7 @@ export const texts: Record<'ru' | 'en', Texts> = {
     p_sample: 'Sample',
     p_nda: 'NDA',
     p_nda_note:
-      'This project was done for a company under NDA: the code, links and screenshots are not published. Here is the general idea and my role.',
+      'This project was done for a company under NDA: the code and links are not published. The screens are redrawn after the real ones, and all data on them is made up.',
     p_nda_links: 'Code and demo are private (NDA)',
     a_cv: 'Download CV (PDF)',
     p_sample_note: 'This is a sample case: the description and links will appear when the project is ready.',
@@ -290,7 +289,7 @@ export const texts: Record<'ru' | 'en', Texts> = {
     np_error: 'Could not load the track',
     m_show: 'Show in player',
     a_hi: 'Hi :3',
-    a_role: 'Fullstack developer, systems analyst and musician',
+    a_role: "I'm a fullstack developer, systems analyst and musician",
     a_story_t: 'Short story',
     a_dev_t: 'Development',
     a_dev_p:
@@ -303,7 +302,6 @@ export const texts: Record<'ru' | 'en', Texts> = {
     a_exp_t: 'Experience',
     a_tl_t: 'Journey',
     a_tl_hint: 'Tap a step to expand it',
-    a_now: 'Now',
     a_band_t: 'Music is a big part of my life',
     a_band_p: 'You can play the 1234 album right here.',
     a_more: 'More about this',

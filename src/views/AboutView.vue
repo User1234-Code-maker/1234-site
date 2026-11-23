@@ -56,11 +56,6 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
         <!-- облака перед низом персонажа: он «выходит» из неба, а не висит обрезанной фоткой -->
         <img class="ab-cloud a" :src="cloudFront" alt="" width="600" height="303" decoding="async" />
         <img class="ab-cloud b" :src="cloudFront2" alt="" width="600" height="213" decoding="async" />
-        <div class="ab-now glass">
-          <small>{{ t('a_now') }}</small>
-          <b>{{ tx(jobs[0]!.company, lang) }}</b>
-          <span>{{ tx(jobs[0]!.role, lang) }}</span>
-        </div>
       </div>
     </template>
 

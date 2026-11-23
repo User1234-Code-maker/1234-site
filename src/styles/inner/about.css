@@ -27,31 +27,6 @@
   mask-image: linear-gradient(to bottom, #000 58%, rgb(0 0 0 / 0.6) 76%, transparent 96%);
   height: min(620px, calc(66 * var(--sh, 1svh)));
 }
-.ab-now {
-  position: absolute;
-  left: -2%;
-  display: grid;
-  gap: 3px;
-  padding: 16px 20px;
-  border-radius: var(--r-m);
-  max-width: 250px;
-  background: var(--glass-hi);
-  animation: floaty 7s ease-in-out infinite;
-  z-index: 2;
-}
-.ab-now small {
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--violet);
-}
-.ab-now b {
-  font-size: 15px;
-}
-.ab-now span {
-  font-size: 13px;
-  color: var(--soft);
-  line-height: 1.35;
-}
 @keyframes floaty {
   0%,
   100% {
@@ -456,10 +431,6 @@
   grid-area: wave;
 }
 @media (max-width: 1100px) {
-  .ab-now {
-    left: 0;
-    bottom: 10%;
-  }
   .wrap.ab-story {
     grid-template-columns: 1fr;
   }
@@ -474,11 +445,6 @@
   }
 }
 @media (max-width: 700px) {
-  .ab-now {
-    padding: 12px 14px;
-    max-width: 190px;
-    bottom: 2%;
-  }
   .ab-sides,
   .services-row {
     grid-template-columns: 1fr;
@@ -577,9 +543,6 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ab-now {
-    animation: none !important;
-  }
   .side-card {
     transition: none;
   }
@@ -675,9 +638,6 @@
 [data-theme='dark'] .ab-cloud {
   filter: brightness(0.42) saturate(1.5) hue-rotate(8deg);
 }
-.ab-now {
-  bottom: 18%;
-}
 @media (max-width: 1100px) {
   .ab-art {
     inset: 0 -26px 0;
@@ -689,5 +649,23 @@
 @media (max-width: 700px) {
   .ab-char {
     height: 380px;
+  }
+}
+
+/* десктоп: персонаж и облака ниже, растворение начинается позже — не срезается раньше времени */
+@media (min-width: 1101px) {
+  .ab-art {
+    /* до нижнего края сцены (она обрезает всё ниже): персонаж опускается и тает ровно у края */
+    inset: 30px -44px -72px 0;
+  }
+  .ab-char {
+    -webkit-mask-image: linear-gradient(to bottom, #000 66%, rgb(0 0 0 / 0.6) 82%, transparent 99%);
+    mask-image: linear-gradient(to bottom, #000 66%, rgb(0 0 0 / 0.6) 82%, transparent 99%);
+  }
+  .ab-cloud.a {
+    bottom: 3%;
+  }
+  .ab-cloud.b {
+    bottom: 6%;
   }
 }

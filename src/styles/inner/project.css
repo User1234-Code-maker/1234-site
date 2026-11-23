@@ -270,6 +270,16 @@
   flex: 0 0 min(78%, 860px);
   scroll-snap-align: start;
 }
+/* боты: три экрана телефона в ряд */
+.shots-telegram-bots {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.shots-telegram-bots .pd-shot:first-child {
+  grid-column: auto;
+}
+.shots-telegram-bots .pd-shot {
+  border-radius: 28px;
+}
 /* игровая студия: тёмная «витрина» под цвет самого сайта */
 .shots-game-studio-website {
   padding: 22px;
@@ -387,6 +397,16 @@
   }
   .shots-game-studio-website {
     padding: 12px;
+  }
+  .shots-telegram-bots {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+  }
+  .shots-telegram-bots .pd-shot {
+    flex: 0 0 72%;
+    scroll-snap-align: start;
   }
   .shots-portfolio-site .pd-shot {
     flex-basis: 88%;

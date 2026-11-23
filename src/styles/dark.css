@@ -94,6 +94,12 @@
   background-image: url(../assets/img/city-night.webp);
   opacity: 0.5;
 }
+@media (max-width: 700px) {
+  [data-theme='dark'] .l-city,
+  [data-theme='dark'] .l-far {
+    background-image: url(../assets/img/city-night-xs.webp);
+  }
+}
 [data-theme='dark'] .l-cloudback img,
 [data-theme='dark'] .l-cloudmid img,
 [data-theme='dark'] .l-cloudfront img,

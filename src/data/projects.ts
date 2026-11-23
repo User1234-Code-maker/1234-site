@@ -12,6 +12,14 @@ import gsNews from '../assets/img/shot-game-studio-news.webp'
 import shot1 from '../assets/img/shot-portfolio-1.webp'
 import shot2 from '../assets/img/shot-portfolio-2.webp'
 import shot3 from '../assets/img/shot-portfolio-3.webp'
+import ndaErp from '../assets/img/nda-erp-dashboard.webp'
+import ndaErpLogin from '../assets/img/nda-erp-login.webp'
+import ndaHitviro from '../assets/img/nda-hitviro-campaigns.webp'
+import ndaBots from '../assets/img/nda-bots-cover.webp'
+import ndaBotsMenu from '../assets/img/nda-bots-menu.webp'
+import ndaBotsRadar from '../assets/img/nda-bots-radar.webp'
+import ndaBotsReview from '../assets/img/nda-bots-review.webp'
+import ndaMusic from '../assets/img/nda-music-comic.webp'
 import type { Category, Project } from './types'
 
 export const categories: Category[] = ['web', 'erp', 'bots', 'ai']
@@ -19,6 +27,9 @@ export const categories: Category[] = ['web', 'erp', 'bots', 'ai']
 const list: Project[] = [
   {
     slug: 'label-erp',
+    // экраны перерисованы по мотивам, данные на них выдуманные
+    cover: ndaErp,
+    shots: [ndaErpLogin, ndaErp],
     title: { ru: 'ERP для музыкального лейбла', en: 'ERP for a music label' },
     category: 'erp',
     ru: 'Внутренняя ERP музыкального лейбла: дистрибуция, поддержка, документы и доска задач.',
@@ -46,6 +57,8 @@ I take part as a systems analyst and frontend developer: I set the tasks and bui
   },
   {
     slug: 'hitviro',
+    // экраны перерисованы по мотивам, данные на них выдуманные
+    cover: ndaHitviro,
     title: { ru: 'Hitviro: платформа клиппинга', en: 'Hitviro: clipping platform' },
     category: 'web',
     visual: 'platform',
@@ -74,6 +87,9 @@ My role is systems analyst: I researched the current processes, described how ev
   },
   {
     slug: 'telegram-bots',
+    // экраны перерисованы по мотивам, данные на них выдуманные
+    cover: ndaBots,
+    shots: [ndaBotsMenu, ndaBotsRadar, ndaBotsReview],
     title: { ru: 'Telegram-боты и mini app', en: 'Telegram bots and mini app' },
     category: 'bots',
     ru: 'Внутренние Telegram-боты компании, которые автоматизируют рабочие процессы: дистрибуция, поддержка, оплаты.',
@@ -101,6 +117,8 @@ I build and maintain the bots, set up the integrations and write the user guides
   },
   {
     slug: 'music-recognition',
+    // экраны перерисованы по мотивам, данные на них выдуманные
+    cover: ndaMusic,
     title: { ru: 'Распознавание музыки и статистика', en: 'Music recognition and statistics' },
     category: 'ai',
     visual: 'wave',

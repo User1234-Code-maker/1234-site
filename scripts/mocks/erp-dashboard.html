@@ -1,0 +1,423 @@
+<!doctype html><meta charset="utf-8" /><link rel="stylesheet" href="base.css" />
+<style>
+  body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    padding: 16px;
+    background: #0b0d13;
+  }
+  .side {
+    background: #11141c;
+    border: 1px solid #1d2130;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .logo {
+    height: 84px;
+    display: grid;
+    place-items: center;
+    border-bottom: 1px solid #1d2130;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: -1px;
+    font-style: italic;
+  }
+  .logo b {
+    color: #3d6bff;
+  }
+  .nav {
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+  }
+  .it {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #dfe3ee;
+  }
+  .it i {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #9aa3b8;
+    border-radius: 6px;
+    flex: none;
+  }
+  .it .ch {
+    margin-left: auto;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #8a93a8;
+    border-bottom: 2px solid #8a93a8;
+    rotate: 45deg;
+    translate: 0 -3px;
+  }
+  .it .ch.up {
+    rotate: -135deg;
+    translate: 0 2px;
+  }
+  .sub {
+    padding-left: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-left: 1px solid #252a3a;
+    margin-left: 24px;
+  }
+  .sub .it {
+    font-weight: 500;
+    color: #aeb5c6;
+    padding: 9px 12px;
+  }
+  .sub .it i {
+    width: 16px;
+    height: 16px;
+    border-width: 1.5px;
+  }
+  .it.on {
+    background: #2357ff;
+    color: #fff;
+  }
+  .it.on i {
+    border-color: #fff;
+  }
+  .sub .it.sel {
+    background: #1a1f2d;
+    color: #fff;
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid #1d2130;
+  }
+  .ava {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6b8cff, #c27bff);
+    position: relative;
+  }
+  .ava::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    bottom: -1px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #2fc46b;
+    border: 2px solid #11141c;
+  }
+  .user b {
+    display: block;
+    font-size: 16px;
+  }
+  .user small {
+    color: #8f97ab;
+    font-size: 13px;
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    overflow: hidden;
+  }
+  .top {
+    height: 66px;
+    border: 1px solid #1d2130;
+    border-radius: 18px;
+    background: #11141c;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .top span {
+    margin-left: auto;
+    color: #a7aec0;
+    font-size: 15px;
+    display: flex;
+    gap: 28px;
+  }
+  .pad {
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .crumb {
+    color: #8f97ab;
+    font-size: 16px;
+  }
+  .crumb b {
+    color: #fff;
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .lead {
+    color: #9aa2b5;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .btn {
+    margin-left: auto;
+    background: #2357ff;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 15px;
+  }
+  .sync {
+    align-self: flex-start;
+    border: 1px solid #262b3b;
+    border-radius: 10px;
+    padding: 7px 14px;
+    font-size: 14px;
+    color: #a7aec0;
+  }
+  .sync b {
+    color: #fff;
+    font-weight: 600;
+  }
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 4px;
+  }
+  .k {
+    background: #12151e;
+    border: 1px solid #1e2332;
+    border-radius: 18px;
+    padding: 20px 22px;
+  }
+  .k .h {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #c3c9d7;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .k .h i {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .k strong {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    margin: 18px 0 6px;
+    letter-spacing: -1px;
+  }
+  .k small {
+    color: #8f97ab;
+    font-size: 13.5px;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .card {
+    background: #12151e;
+    border: 1px solid #1e2332;
+    border-radius: 18px;
+    padding: 22px;
+  }
+  .card h3 {
+    font-size: 17px;
+  }
+  .card p {
+    color: #8f97ab;
+    font-size: 14px;
+    margin: 6px 0 16px;
+  }
+  .tr {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #151924;
+    border: 1px solid #1e2332;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+  }
+  .tr .n {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #1d2231;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    color: #8f97ab;
+  }
+  .tr b {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .tr small {
+    color: #8f97ab;
+    font-size: 13px;
+  }
+  .tr .pl {
+    margin-left: auto;
+    color: #3fbf6d;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .tr .tier {
+    border: 1px solid #9a5a2a;
+    color: #ff9c57;
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    background: #2a1a10;
+  }
+  .pf {
+    margin-top: 18px;
+  }
+  .pf .l {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .pf .l small {
+    color: #8f97ab;
+    font-weight: 500;
+    font-size: 13.5px;
+  }
+  .bar {
+    height: 12px;
+    border-radius: 999px;
+    background: #1c2130;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+  }
+</style>
+<aside class="side">
+  <div class="logo"><span>0to8<b>.</b>erp</span></div>
+  <nav class="nav">
+    <div class="it"><i></i>Финансы</div>
+    <div class="it"><i style="border-radius: 50%"></i>AI-Ассистент</div>
+    <div class="it"><i></i>Артисты<span class="ch"></span></div>
+    <div class="it"><i></i>Каталог<span class="ch"></span></div>
+    <div class="it"><i style="border-radius: 50%"></i>Сплиты<span class="ch"></span></div>
+    <div class="it"><i></i>Дистрибуция<span class="ch"></span></div>
+    <div class="it on"><i></i>Маркетинг<span class="ch up" style="border-color: #fff"></span></div>
+    <div class="sub">
+      <div class="it"><i></i>Каталог SP Digital</div>
+      <div class="it sel"><i></i>Viberate Данные</div>
+      <div class="it"><i></i>Промо расходы</div>
+      <div class="it"><i></i>Основные оплаты</div>
+      <div class="it"><i></i>Отчёты</div>
+    </div>
+  </nav>
+  <div class="user">
+    <span class="ava"></span><span><b>Bogdan</b><small>bogdan@label.demo</small></span>
+  </div>
+</aside>
+<main class="main">
+  <div class="top">
+    Viberate Данные<span><i>☾</i>RU</span>
+  </div>
+  <div class="pad">
+    <div class="crumb">Маркетинг &nbsp;›&nbsp; <b>Viberate Данные</b></div>
+    <h1>Viberate Данные</h1>
+    <div class="lead">
+      Ежедневная статистика по площадкам, копится в хранилище данных лейбла.<span class="btn"
+        >↻ Обновить</span
+      >
+    </div>
+    <div class="sync">↻ Синхронизация &nbsp;<b>18 / 11 / 2026</b> 09:30</div>
+    <div class="kpis">
+      <div class="k">
+        <div class="h"><i style="background: #1d2a5a"></i>Треков в наблюдении</div>
+        <strong>9,418</strong><small>записей в каталоге</small>
+      </div>
+      <div class="k">
+        <div class="h"><i style="background: #173d2a"></i>Всего стримов</div>
+        <strong>11.6B</strong><small>по всем 4 площадкам</small>
+      </div>
+      <div class="k">
+        <div class="h"><i style="background: #173d2a"></i>За 24 часа</div>
+        <strong>87.3M</strong><small style="color: #3fbf6d">↑ +64.2M к среднему за 7 дн.</small>
+      </div>
+      <div class="k">
+        <div class="h"><i style="background: #3d2a14"></i>Прорывы / Звёзды</div>
+        <strong
+          ><span style="color: #ffa23a">614</span> <span style="color: #556">/</span>
+          <span style="color: #3d6bff">1,938</span></strong
+        ><small>тир 3+ / стабильные лидеры</small>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Топ прорывов</h3>
+        <p>Самое сильное ускорение в каталоге прямо сейчас.</p>
+        <div class="tr">
+          <span class="n">1</span
+          ><span class="cov" style="background: linear-gradient(135deg, #222, #bbb 60%, #333)"></span
+          ><span><b>Night Drive - Ultra Slowed</b><small>KAIRO</small></span
+          ><span class="pl">Spotify</span><span class="tier">Тир 5</span>
+        </div>
+        <div class="tr">
+          <span class="n">2</span
+          ><span class="cov" style="background: linear-gradient(160deg, #111, #999 55%, #222)"></span
+          ><span><b>Night Drive - Super Slowed</b><small>KAIRO</small></span
+          ><span class="pl">Spotify</span><span class="tier">Тир 5</span>
+        </div>
+        <div class="tr">
+          <span class="n">3</span
+          ><span class="cov" style="background: linear-gradient(135deg, #3a3a4a, #cfcfe0 45%, #1a1a24)"></span
+          ><span><b>FUNK VELOZ - Slowed</b><small>NØRTE</small></span
+          ><span class="pl">Spotify</span><span class="tier">Тир 4</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Площадка-лидер</h3>
+        <p>Откуда начинается рост: доля треков, которые ведёт каждая площадка.</p>
+        <div class="pf">
+          <div class="l"><span style="color: #3fbf6d">● Spotify</span><small>3 118 треков</small></div>
+          <div class="bar"><i style="width: 57%; background: #3fbf6d"></i></div>
+        </div>
+        <div class="pf">
+          <div class="l"><span style="color: #ff4a3a">● YouTube</span><small>5 402 трека</small></div>
+          <div class="bar"><i style="width: 100%; background: #ff4a3a"></i></div>
+        </div>
+        <div class="pf">
+          <div class="l"><span style="color: #ff7a33">● SoundCloud</span><small>736 треков</small></div>
+          <div class="bar"><i style="width: 14%; background: #ff7a33"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
