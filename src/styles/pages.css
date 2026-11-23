@@ -393,11 +393,6 @@ nav > a[aria-current]::after {
   background: rgba(255, 255, 255, 0.6);
   cursor: pointer;
 }
-.fchip small {
-  margin-left: 8px;
-  font-weight: 800;
-  color: #5a4bc4;
-}
 .fchip:hover {
   background: #fff;
   border-color: var(--ink);
@@ -406,9 +401,6 @@ nav > a[aria-current]::after {
   background: var(--ink);
   color: #fff;
   border-color: var(--ink);
-}
-.fchip.on small {
-  color: #b9c4ff;
 }
 @keyframes cardIn {
   from {

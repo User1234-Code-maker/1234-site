@@ -201,3 +201,10 @@
     }
   }
 }
+
+/* круглые соцсети внизу меню: иконка строго по центру круга */
+.mobile-menu .soc a {
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+}

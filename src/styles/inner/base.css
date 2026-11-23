@@ -231,10 +231,6 @@
   cursor: pointer;
   box-shadow: none;
 }
-.page .fchip small {
-  font-size: 12px;
-  opacity: 0.7;
-}
 .page .fchip:hover {
   color: var(--ink);
 }

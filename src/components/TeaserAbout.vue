@@ -19,9 +19,6 @@ const cards = [
     <div class="ta-grid">
       <div class="about">
         <p>{{ t('a_text') }}</p>
-        <span class="avail"
-          ><i></i><span>{{ t('a_open') }}</span></span
-        >
         <RouterLink class="slink" to="/about"
           ><span>{{ t('a_more') }}</span> <span aria-hidden="true">→</span></RouterLink
         >

@@ -44,7 +44,6 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
         <a class="pill cv-btn" :href="cvHref" download
           >{{ t('a_cv') }} <UiIcon name="download" :size="18"
         /></a>
-        <span class="avail"><i></i>{{ t('a_open') }}</span>
       </div>
     </template>
     <template #art>

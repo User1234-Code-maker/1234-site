@@ -231,19 +231,6 @@
 [data-theme='dark'] .bot-app b:nth-child(3) {
   background: hsl(var(--h) 40% 22%);
 }
-.pr-count {
-  margin-top: 26px;
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--soft);
-}
-.pr-count b {
-  font-size: 44px;
-  letter-spacing: -0.05em;
-  color: var(--ink);
-  margin-right: 6px;
-  vertical-align: -6px;
-}
 .pr-fan {
   position: absolute;
   inset: 0;
@@ -251,7 +238,8 @@
   place-items: center;
 }
 .pr-fan-card {
-  --r: calc((var(--i) - 1.5) * 7deg);
+  --d: calc(var(--i) - 2.5);
+  --r: calc(var(--d) * 5deg);
   position: absolute;
   width: min(460px, 72%);
   aspect-ratio: 16 / 9.5;
@@ -260,14 +248,14 @@
   border: 4px solid var(--glass-hi);
   box-shadow: var(--shadow-l);
   rotate: var(--r);
-  translate: calc((var(--i) - 1.5) * 34px) calc(var(--i) * -6px);
+  translate: calc(var(--d) * 26px) calc(var(--d) * -5px);
   transition:
     rotate 0.6s var(--ease-out),
     translate 0.6s var(--ease-out);
 }
 .pr-fan:hover .pr-fan-card {
-  rotate: calc(var(--r) * 1.7);
-  translate: calc((var(--i) - 1.5) * 90px) calc(var(--i) * -10px);
+  rotate: calc(var(--r) * 1.3);
+  translate: calc(var(--d) * 44px) calc(var(--d) * -7px);
 }
 .gallery {
   display: grid;
@@ -443,12 +431,13 @@
   }
 }
 @media (max-width: 700px) {
-  .pr-count b {
-    font-size: 36px;
-  }
   .pr-fan-card {
-    width: 70%;
-    translate: calc((var(--i) - 1.5) * 18px) calc(var(--i) * -5px);
+    width: 62%;
+    translate: calc(var(--d) * 12px) calc(var(--d) * -3px);
+  }
+  .pr-fan:hover .pr-fan-card {
+    rotate: calc(var(--r) * 1.15);
+    translate: calc(var(--d) * 18px) calc(var(--d) * -4px);
   }
   .gallery {
     gap: 16px;

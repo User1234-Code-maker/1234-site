@@ -12,19 +12,10 @@ import { tx } from '../utils/i18n'
 
 const { lang, t } = useLang()
 const active = ref<Category | 'all'>('all')
+const fan = [...projects].reverse()
 const shown = computed(() =>
   active.value === 'all' ? projects : projects.filter((p) => p.category === active.value),
 )
-// «4 проекта», «5 проектов», «1 проект»
-const countWord = computed(() => {
-  const n = projects.length % 100
-  const d = n % 10
-  if (lang.value === 'ru' && d === 1 && n !== 11) return t('p_count_one')
-  if (lang.value === 'ru' && d >= 2 && d <= 4 && (n < 12 || n > 14)) return t('p_count_few')
-  return t(lang.value === 'ru' ? 'p_count_many' : 'p_count_few')
-})
-const count = (c: Category | 'all') =>
-  c === 'all' ? projects.length : projects.filter((p) => p.category === c).length
 </script>
 
 <template>
@@ -33,15 +24,12 @@ const count = (c: Category | 'all') =>
       <SceneEyebrow :text="t('eyebrow')" />
       <h1 class="sc-title">{{ t('p_title') }}</h1>
       <p class="sc-lead">{{ t('p_sub_page') }}</p>
-      <p class="pr-count">
-        <b>{{ projects.length }}</b> {{ countWord }}
-      </p>
     </template>
     <template #art>
-      <!-- веер из обложек: при наведении карточки расходятся -->
+      <!-- веер из обложек: при наведении карточки расходятся; первый проект лежит сверху -->
       <div class="pr-fan" aria-hidden="true">
-        <div v-for="(p, i) in projects" :key="p.slug" class="pr-fan-card" :style="{ '--i': i }">
-          <ProjectVisual :project="p" :eager="i === 0" />
+        <div v-for="(p, i) in fan" :key="p.slug" class="pr-fan-card" :style="{ '--i': i }">
+          <ProjectVisual :project="p" :eager="i === fan.length - 1" />
         </div>
       </div>
     </template>
@@ -59,7 +47,7 @@ const count = (c: Category | 'all') =>
             :aria-pressed="active === c"
             @click="active = c"
           >
-            {{ t(`cat_${c}`) }}<small>{{ count(c) }}</small>
+            {{ t(`cat_${c}`) }}
           </button>
         </div>
         <PixelPal name="peek" :scale="4" class="pal-filters" />

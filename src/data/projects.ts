@@ -16,7 +16,7 @@ import type { Category, Project } from './types'
 
 export const categories: Category[] = ['web', 'erp', 'bots', 'ai']
 
-export const projects: Project[] = [
+const list: Project[] = [
   {
     slug: 'label-erp',
     title: { ru: 'ERP для музыкального лейбла', en: 'ERP for a music label' },
@@ -31,7 +31,7 @@ export const projects: Project[] = [
 
 I take part as a systems analyst and frontend developer: I set the tasks and build the interface of the Distribution, Support, Documents and Troubleshooting sections. The biggest task was about tables: saving their state so settings are not lost between sessions and tabs. I carried it from the idea to the release. I wrote user guides for the sections in Notion.`,
     },
-    role: { ru: 'Системный аналитик, фронтенд-разработчик', en: 'Systems analyst, frontend developer' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['React 19', 'TypeScript', 'AG Grid', 'HeroUI', 'Tailwind', 'NestJS', 'PostgreSQL', 'ClickHouse'],
     arch: [
@@ -59,7 +59,7 @@ I take part as a systems analyst and frontend developer: I set the tasks and bui
 
 My role is systems analyst: I researched the current processes, described how everything should work and I design the part of the platform that handles payouts.`,
     },
-    role: { ru: 'Системный аналитик', en: 'Systems analyst' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['Python', 'JavaScript', 'PostgreSQL', 'SQLite'],
     arch: [
@@ -86,7 +86,7 @@ My role is systems analyst: I researched the current processes, described how ev
 
 I build and maintain the bots, set up the integrations and write the user guides in Notion.`,
     },
-    role: { ru: 'Разработка и поддержка', en: 'Development and support' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['Node.js', 'Telegraf', 'PostgreSQL', 'Redis', 'Docker'],
     arch: [
@@ -114,7 +114,7 @@ I build and maintain the bots, set up the integrations and write the user guides
 
 I take part in developing and improving it together with the team.`,
     },
-    role: { ru: 'Участие в разработке', en: 'Development contributor' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['Node.js', 'Express', 'PostgreSQL', 'Redis', 'FFmpeg', 'Docker'],
     arch: [
@@ -166,7 +166,7 @@ The server and the database run on free hosting: Node.js on Render, PostgreSQL o
         en: 'Publishing: Render and Neon, a repository on GitHub.',
       },
     ],
-    role: { ru: 'Фуллстек-разработчик', en: 'Fullstack developer' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'three.js'],
     stack: [
@@ -240,7 +240,7 @@ Checks: unit tests on Vitest, end-to-end tests on Playwright together with axe a
         en: 'Automated tests, accessibility checks, Lighthouse and the GitHub Actions pipeline.',
       },
     ],
-    role: { ru: 'Дизайн, вёрстка и разработка', en: 'Design, markup and development' },
+    role: { ru: 'Фуллстек-разработчик и системный аналитик', en: 'Fullstack developer and systems analyst' },
     year: '2026',
     tech: ['Vue 3', 'TypeScript', 'Vite', 'Vitest', 'Playwright'],
     stack: [
@@ -279,5 +279,8 @@ Checks: unit tests on Vitest, end-to-end tests on Playwright together with axe a
     hue: 262,
   },
 ]
+
+// открытые проекты первыми, NDA после
+export const projects: Project[] = [...list.filter((p) => !p.nda), ...list.filter((p) => p.nda)]
 
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug)

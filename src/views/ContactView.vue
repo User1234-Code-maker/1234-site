@@ -74,7 +74,6 @@ const channels = computed(() =>
       <p v-if="state === 'fail'" class="ct-fail" role="alert">{{ t('c_copy_fail') }}</p>
       <div class="sc-actions">
         <a class="pill" :href="hrefFor('mail')">{{ t('c_mail') }} <UiIcon name="arrow" :size="18" /></a>
-        <span class="avail"><i></i>{{ t('a_open') }}</span>
       </div>
     </template>
 
