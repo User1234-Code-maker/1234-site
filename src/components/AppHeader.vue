@@ -31,8 +31,7 @@ const links = [
 
 // на главной, как в утверждённом макете, подчёркнут «Обо мне»
 const isHome = computed(() => route.name === 'home')
-const isOn = (to: string) =>
-  isHome.value ? to === '/about' : route.path === to || route.path.startsWith(to + '/')
+const isOn = (to: string) => !isHome.value && (route.path === to || route.path.startsWith(to + '/'))
 
 watch(
   () => route.fullPath,

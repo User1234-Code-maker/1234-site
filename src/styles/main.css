@@ -339,7 +339,10 @@ html.cat-adopted .cat{visibility:hidden}
 .home .hero{z-index:1}
 .home .rest{z-index:0;margin-top:calc(-34*var(--sh,1svh));padding-top:calc(34*var(--sh,1svh) + 10px)}
 /* нижний край персонажа растворяется: при прокрутке слой уезжает вверх и больше не виден его срез */
-@media (min-width:1101px){.l-char img.main{--m:linear-gradient(to bottom,#000 0,#000 calc(100% - 2px - 22%*var(--hf,0)),transparent 100%);-webkit-mask-image:var(--m);mask-image:var(--m)}}
+/* правый край картинки персонажа (плечо упирается в её границу) тает, чтобы не было видно прямоугольного среза */
+@media (min-width:1101px){.l-char img.main{--m:linear-gradient(to bottom,#000 0,#000 calc(100% - 2px - 22%*var(--hf,0)),transparent 100%);
+ -webkit-mask-image:var(--m),linear-gradient(to left,transparent 0,#000 9%);-webkit-mask-composite:source-in;
+ mask-image:var(--m),linear-gradient(to left,transparent 0,#000 9%);mask-composite:intersect}}
 
 /* телефоны и планшеты: слои Hero без тяжёлых эффектов — в Chrome и Telegram они давали рывки при прокрутке */
 @media (hover:none),(max-width:700px){
@@ -357,7 +360,7 @@ html.cat-adopted .cat{visibility:hidden}
 @media (min-width:601px) and (max-width:1100px){
  .l-char{padding:0;justify-content:flex-end;align-items:flex-end;right:-11vw}
  .l-char img.main{height:min(72vh,60vw);height:min(calc(72*var(--sh,1svh)),60vw);
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%);mask-image:linear-gradient(to right,transparent 0,#000 14%)}
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 91%,transparent 100%);mask-image:linear-gradient(to right,transparent 0,#000 14%,#000 91%,transparent 100%)}
  .l-wash{background:linear-gradient(100deg,rgba(240,243,255,.86) 0%,rgba(239,242,255,.78) 30%,rgba(236,240,255,.4) 52%,rgba(234,238,255,0) 70%)}
  .l-cloudfront{opacity:.25}
  main{margin-top:0;justify-content:center;max-width:min(520px,62vw);padding-bottom:40px}

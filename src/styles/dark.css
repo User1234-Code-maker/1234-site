@@ -330,3 +330,10 @@ img.ic-dk {
     content: none;
   }
 }
+
+/* карточки релизов в тизере главной: в тёмной теме тёмное стекло, иначе белые буквы на светлом */
+[data-theme='dark'] .tm-rel {
+  background: rgb(22 28 78 / 0.72);
+  border-color: rgb(160 170 255 / 0.18);
+  box-shadow: 0 14px 30px -22px rgb(0 0 0 / 0.8);
+}
