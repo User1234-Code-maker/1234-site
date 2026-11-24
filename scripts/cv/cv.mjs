@@ -1,228 +1,382 @@
 // Резюме в PDF (русское и английское): npm run cv
-// Текст — в этом файле, вёрстка — HTML ниже. PDF текстовый: его читают и люди, и системы отбора резюме (ATS).
+// Классический формат, который хорошо читают и люди, и системы отбора (ATS): текстовый PDF,
+// разделы с линиями, «Обязанности / Достижения». Шрифты Source Serif 4 и Source Sans 3 (лицензия OFL) лежат в ./fonts.
 import { chromium } from '@playwright/test'
 import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const F = path.join(root, 'src/assets/fonts')
+const here = path.dirname(fileURLToPath(import.meta.url))
+const root = path.resolve(here, '../..')
+const F = path.join(here, 'fonts')
 const site = 'https://user1234-code-maker.github.io/1234-site/'
 
-const contacts = [
-  ['bogdan.korzun2003@gmail.com', 'mailto:bogdan.korzun2003@gmail.com'],
-  ['+7 924 118-13-24', 'tel:+79241181324'],
-  ['+66 94 486 7814', 'tel:+66944867814'],
-  ['t.me/OpalineDream', 'https://t.me/OpalineDream'],
-  ['linkedin.com/in/bogdankorzun', 'https://www.linkedin.com/in/bogdankorzun/'],
-  ['github.com/User1234-Code-maker', 'https://github.com/User1234-Code-maker'],
-]
+const links = {
+  email: ['bogdan.korzun2003@gmail.com', 'mailto:bogdan.korzun2003@gmail.com'],
+  tg: ['@OpalineDream', 'https://t.me/OpalineDream'],
+  li: ['linkedin.com/in/bogdankorzun', 'https://www.linkedin.com/in/bogdankorzun/'],
+  gh: ['github.com/User1234-Code-maker', 'https://github.com/User1234-Code-maker'],
+  site: ['user1234-code-maker.github.io/1234-site', site],
+}
 
 const cv = {
-  ru: {
-    file: 'Bogdan-Korzun-CV-RU.pdf',
-    name: 'Богдан Корзун',
-    role: 'Фуллстек-разработчик и системный аналитик',
-    place: 'Хабаровск / Таиланд · готов к релокации и удалённой работе',
-    siteLabel: 'Портфолио',
-    h: {
-      profile: 'Профиль',
-      stack: 'Стек',
-      exp: 'Опыт работы',
-      projects: 'Открытые проекты',
-      edu: 'Образование и языки',
-      more: 'Ещё',
-    },
-    profile:
-      'Делаю внутренние продукты музыкального лейбла от требований до продакшена: ERP, Telegram-боты и сервисы данных. Сам разговариваю с заказчиками, пишу постановку, проектирую решение и пишу код фронтенда и бэкенда. До разработки 3,5 года продавал IT- и AI-решения B2B-клиентам, поэтому понимаю, зачем бизнесу каждая фича, и умею объяснять техническое простыми словами.',
-    stack: [
-      ['Фронтенд', 'TypeScript, React 19, Vue 3, Vite, Tailwind 4, HeroUI, AG Grid Enterprise, HTML/CSS'],
-      ['Бэкенд', 'Node.js, NestJS, Express, Telegraf (Telegram Bot API), REST, Stripe'],
-      ['Данные', 'PostgreSQL, Prisma, Redis, ClickHouse, Google Sheets API'],
-      ['Качество и выкладка', 'Vitest, Playwright, axe, GitHub Actions, Docker, Git, code review'],
-      ['Анализ', 'BRD, user stories, API-спецификации, BPMN, Notion-документация'],
-    ],
-    jobs: [
-      {
-        title: 'Фуллстек-разработчик и системный аналитик',
-        org: 'Zero to Infinity (музыкальный лейбл)',
-        when: 'апрель 2025 — сейчас',
-        did: [
-          'ERP лейбла (React 19, AG Grid Enterprise, NestJS, Prisma, PostgreSQL): разделы дистрибуции, поддержки, документов и финансов.',
-          'Довёл до продакшена сохранение настроек таблиц в разделах «Дистрибуция» и «Саппорт»: версии схемы, защита от одновременной записи, синхронизация между вкладками.',
-          'Telegram-боты для дистрибуции, поддержки и оплат (Node.js, Telegraf, PostgreSQL, Redis, Docker): заявки, статусы, проверка согласований из Google Sheets перед выплатой.',
-          'Внутренние сервисы: распознавание музыки в видео по ссылке со статистикой, исследование выплат промо-платформы Hitviro и её связки с ERP.',
-          'Собираю требования, пишу BRD, user stories и API-спецификации, делаю code review, веду инструкции для команды в Notion.',
-        ],
-      },
-      {
-        title: 'Продажи IT- и AI-решений',
-        org: 'Quantum Agency, Nomadic Soft, собственные проекты',
-        when: 'октябрь 2022 — март 2026',
-        did: [
-          'Business Development Manager в Quantum Agency (июнь 2025 — март 2026) и IT Sales Manager в Nomadic Soft (январь 2024 — июнь 2025): пресейл, оценка проектов вместе с PM и разработкой, участие в составлении ТЗ.',
-          'Закрывал сделки до 15 млн ₽ напрямую с собственниками бизнеса, проекты web, mobile и AI до 10 млн ₽.',
-          'Собственные IT-проекты и консалтинг (2022–2025): собрал распределённую команду, автоматизировал продажи и отчётность скриптами и AI-инструментами.',
-        ],
-      },
-    ],
-    projects: [
-      {
-        name: 'Сайт-портфолио «1234»',
-        link: site,
-        text: 'Vue 3, TypeScript, Vite. Два языка, светлая и тёмная тема, свой плеер для музыки. 126 автотестов (Vitest, Playwright, axe), Lighthouse 95+ на компьютере, превью ссылок для каждой страницы.',
-      },
-      {
-        name: 'Сайт игровой студии',
-        link: 'https://game-studio-site.onrender.com',
-        text: 'Начинал как вёрстку руками по макету из Figma. Теперь это React + TypeScript, Express API, PostgreSQL, тестовые оплаты Stripe, 3 языка. 166 автотестов в CI, 0 уязвимостей в зависимостях.',
-      },
-    ],
-    edu: [
-      'СПбУТУиЭ, лингвистика (переводчик), неоконченное высшее, 2022',
-      'Английский B2 (Лингвамания, 2020) · японский, JLPT N5 (СПбГУ, 2024) · русский родной',
-    ],
-    more: 'Пишу и выпускаю свою музыку, был лидером рок-группы и звукорежиссёром. Водительские права категории B.',
-  },
   en: {
     file: 'Bogdan-Korzun-CV-EN.pdf',
+    lang: 'en',
     name: 'Bogdan Korzun',
-    role: 'Fullstack Developer and Systems Analyst',
+    title: 'Fullstack Developer / Systems Analyst',
+    tagline: 'TypeScript · React · Vue · Node.js · NestJS · PostgreSQL · Telegram Bots · ERP',
+    phones: '+7 (924) 118-13-24',
     place: 'Khabarovsk / Thailand · open to relocation and remote work',
-    siteLabel: 'Portfolio',
+    l: { tg: 'Telegram', site: 'Portfolio', gh: 'GitHub', li: 'LinkedIn' },
     h: {
       profile: 'Profile',
-      stack: 'Stack',
-      exp: 'Experience',
-      projects: 'Open projects',
-      edu: 'Education and languages',
-      more: 'Also',
+      key: 'Key achievements',
+      skills: 'Technical skills',
+      projects: 'Projects',
+      exp: 'Work experience',
+      earlier: 'Earlier experience: IT sales and consulting',
+      edu: 'Education, languages and more',
+      resp: 'Responsibilities:',
+      ach: 'Achievements:',
+      stack: 'Stack:',
     },
     profile:
-      'I build in-house products for a music label from requirements to production: an ERP, Telegram bots and data services. I talk to stakeholders, write the spec, design the solution and code both the front end and the back end. Before development I spent 3.5 years selling IT and AI solutions to B2B clients, so I understand why the business needs each feature and can explain technical things in plain words.',
-    stack: [
-      ['Front end', 'TypeScript, React 19, Vue 3, Vite, Tailwind 4, HeroUI, AG Grid Enterprise, HTML/CSS'],
-      ['Back end', 'Node.js, NestJS, Express, Telegraf (Telegram Bot API), REST, Stripe'],
-      ['Data', 'PostgreSQL, Prisma, Redis, ClickHouse, Google Sheets API'],
-      ['Quality and delivery', 'Vitest, Playwright, axe, GitHub Actions, Docker, Git, code review'],
-      ['Analysis', 'BRD, user stories, API specs, BPMN, Notion documentation'],
+      'Fullstack developer and systems analyst at a music label. I build in-house products end to end: gather requirements from the business, design the solution, and write both the front end and the back end — an ERP, Telegram bots and data services that the team uses every day. Before moving into development I spent 3.5+ years in B2B IT/AI sales, so I understand why the business needs each feature and can explain technical decisions to owners and developers alike.',
+    key: [
+      'Shipped persistent table state for the ERP Distribution and Support sections to production: schema versions, optimistic concurrency, sync between browser tabs',
+      'Built and run Telegram bots for distribution, support and payments (Node.js, Telegraf, PostgreSQL, Redis, Docker) used by the team daily',
+      'Delivered several rounds of ERP UI/UX work in React 19 and AG Grid Enterprise: fixed systemic layout bugs, unified components, made screens responsive',
+      'Built two open fullstack projects with CI: a game studio site (React, Express, PostgreSQL, Stripe, 166 tests) and my portfolio (Vue 3, 126 tests, Lighthouse 95+)',
+      'Wrote BRDs, user stories, API specs and Notion user guides for ERP sections and bots',
     ],
-    jobs: [
-      {
-        title: 'Fullstack Developer and Systems Analyst',
-        org: 'Zero to Infinity (music label)',
-        when: 'April 2025 — present',
-        did: [
-          'The label’s ERP (React 19, AG Grid Enterprise, NestJS, Prisma, PostgreSQL): distribution, support, documents and finance sections.',
-          'Shipped persistent table settings for the Distribution and Support sections to production: schema versions, protection against concurrent writes, sync between browser tabs.',
-          'Telegram bots for distribution, support and payments (Node.js, Telegraf, PostgreSQL, Redis, Docker): requests, statuses, checking approvals from Google Sheets before a payout.',
-          'In-house services: music recognition in videos by link with statistics; research of payouts on the Hitviro promo platform and its link with the ERP.',
-          'I gather requirements, write BRDs, user stories and API specs, review code and keep team guides in Notion.',
-        ],
-      },
-      {
-        title: 'IT and AI solutions sales',
-        org: 'Quantum Agency, Nomadic Soft, own projects',
-        when: 'October 2022 — March 2026',
-        did: [
-          'Business Development Manager at Quantum Agency (June 2025 — March 2026) and IT Sales Manager at Nomadic Soft (January 2024 — June 2025): presales, project estimates with PMs and developers, help with specs.',
-          'Closed deals up to 15 M RUB directly with business owners; web, mobile and AI projects up to 10 M RUB.',
-          'Own IT projects and consulting (2022–2025): built a distributed team, automated sales and reporting with scripts and AI tools.',
-        ],
-      },
+    skills: [
+      ['Languages', 'TypeScript · JavaScript · SQL · HTML · CSS'],
+      [
+        'Front end',
+        'React 19 · Vue 3 · Vite · Tailwind v4 · HeroUI · AG Grid Enterprise · responsive layout · accessibility (axe)',
+      ],
+      [
+        'Back end',
+        'Node.js · NestJS · Express · REST APIs · Telegraf / Telegram Bot API · Stripe · Google Sheets API',
+      ],
+      ['Data', 'PostgreSQL · Prisma · Redis · ClickHouse'],
+      ['Testing and delivery', 'Vitest · Playwright · GitHub Actions · Docker · Git · code review'],
+      [
+        'Systems analysis',
+        'BRD · user stories · API specs · BPMN · business process design · Notion documentation',
+      ],
+      ['Tools', 'Cursor · Figma · Notion · Bitrix24 · 1C · MS Excel · Logic Pro X'],
     ],
     projects: [
       {
-        name: 'Portfolio site “1234”',
-        link: site,
-        text: 'Vue 3, TypeScript, Vite. Two languages, light and dark themes, a custom music player. 126 automated tests (Vitest, Playwright, axe), Lighthouse 95+ on desktop, link previews for every page.',
+        name: 'Game Studio Website',
+        links: [
+          ['Live demo', 'https://game-studio-site.onrender.com'],
+          ['Code', 'https://github.com/User1234-Code-maker/game-studio-site'],
+        ],
+        stack: 'React · TypeScript · Express · PostgreSQL · Stripe · Playwright · GitHub Actions',
+        did: [
+          'Started as a hand-coded layout from a Figma mockup, grew into a multi-page app with a catalogue, cart and Stripe test checkout',
+          'Express API with input validation, rate limiting, strict CSP and a verified Stripe webhook; 3 interface languages',
+          '166 automated tests in CI (API, components, browser flows), 0 vulnerable dependencies',
+        ],
       },
       {
-        name: 'Game Studio Website',
-        link: 'https://game-studio-site.onrender.com',
-        text: 'Started as a hand-coded layout from a Figma mockup. Now React + TypeScript, an Express API, PostgreSQL, Stripe test payments, 3 languages. 166 automated tests in CI, 0 vulnerable dependencies.',
+        name: 'Portfolio site “1234”',
+        links: [
+          ['Site', site],
+          ['Code', 'https://github.com/User1234-Code-maker/1234-site'],
+        ],
+        stack: 'Vue 3 · TypeScript · Vite · Vitest · Playwright · GitHub Actions',
+        did: [
+          'Bilingual site with light and dark themes, a custom music player and hand-drawn art',
+          '126 automated tests including accessibility checks; Lighthouse 95+ on desktop; AVIF images and link previews for every page',
+        ],
+      },
+    ],
+    zero: {
+      title: 'Fullstack Developer / Systems Analyst',
+      org: 'Zero to Infinity (music label)',
+      when: 'Apr 2025 — Present',
+      resp: [
+        'Developing ERP modules: React 19, AG Grid Enterprise, HeroUI, Tailwind v4 on the front end; NestJS, Prisma, PostgreSQL on the back end',
+        'Building and maintaining Telegram bots for distribution, support and payments (Node.js, Telegraf, PostgreSQL, Redis, Docker)',
+        'In-house services: music recognition in videos by link with statistics; integrations with Google Sheets',
+        'Gathering requirements from stakeholders and turning them into BRDs, user stories and API specifications',
+        'Designing business processes and system workflows; planning features, testing and preparing releases',
+        'Code review and day-to-day work with the development team; troubleshooting production issues',
+      ],
+      ach: [
+        'Delivered the full lifecycle of the ERP table-state persistence feature: architecture (revision / schema_version, optimistic concurrency, cross-tab sync), task breakdown, production release',
+        'Added approval checks to the payments bot so payouts are created only for approved requests',
+        'Researched payouts on the Hitviro promo platform and its integration with the ERP',
+        'Produced Notion user guides for ERP sections and the related Telegram bots',
+      ],
+    },
+    earlier: [
+      {
+        title: 'Business Development Manager (IT / AI Solutions)',
+        org: 'Quantum Agency · quantum-dev.ru',
+        when: 'Jun 2025 — Mar 2026',
+        text: 'B2B lead generation, negotiations with owners and decision-makers, pre-sale scoping with PM and developers. Closed deals up to 15M RUB.',
+      },
+      {
+        title: 'IT Sales Manager (B2B/B2C, project-based solutions)',
+        org: 'Nomadic Soft · nomadicsoft.io',
+        when: 'Jan 2024 — Jun 2025',
+        text: 'Requirements gathering, estimates, proposals and technical briefs together with the dev team. Closed web / mobile / AI projects up to 10M RUB.',
+      },
+      {
+        title: 'Founder & Independent IT Consultant',
+        org: 'Self-employed · Moscow',
+        when: 'Oct 2022 — Jun 2025',
+        text: 'Ran own IT and digital projects, hired a distributed team, automated sales and reporting with scripts and AI tools.',
+      },
+      {
+        title: 'Retail Sales Associate',
+        org: 'Inventive Retail Group · inventive.ru',
+        when: 'Oct 2023 — Jan 2025',
+        text: 'Floor sales, 1C, KPIs and onboarding of new staff; consistently exceeded sales targets.',
       },
     ],
     edu: [
-      'SPbUTUE, Linguistics (translator), incomplete higher education, 2022',
-      'English B2 (Lingvamania, 2020) · Japanese, JLPT N5 (SPbSU, 2024) · Russian native',
+      ['SPbUTUE — Linguistics, Translator / Interpreter (incomplete higher education)', '2022'],
+      ['JLPT N5 — Japanese Language Proficiency Test (SPbSU)', '2024'],
+      ['English B2 — Lingvamania Language School', '2020'],
     ],
-    more: 'I write and release my own music; former rock band leader and sound engineer. Driver’s license (category B).',
+    langs: 'Languages: Russian (native) · English B2 · Japanese (JLPT N5)',
+    about:
+      'Also: driver’s license (category B); I write and release my own music, used to lead a rock band and work as a sound engineer.',
+  },
+  ru: {
+    file: 'Bogdan-Korzun-CV-RU.pdf',
+    lang: 'ru',
+    name: 'Богдан Корзун',
+    title: 'Фуллстек-разработчик / Системный аналитик',
+    tagline: 'TypeScript · React · Vue · Node.js · NestJS · PostgreSQL · Telegram-боты · ERP',
+    phones: '+7 (924) 118-13-24',
+    place: 'Хабаровск / Таиланд · готов к релокации и удалённой работе',
+    l: { tg: 'Telegram', site: 'Портфолио', gh: 'GitHub', li: 'LinkedIn' },
+    h: {
+      profile: 'Профиль',
+      key: 'Ключевые достижения',
+      skills: 'Технические навыки',
+      projects: 'Проекты',
+      exp: 'Опыт работы',
+      earlier: 'Ранее: продажи IT-решений и консалтинг',
+      edu: 'Образование, языки и прочее',
+      resp: 'Обязанности:',
+      ach: 'Достижения:',
+      stack: 'Стек:',
+    },
+    profile:
+      'Фуллстек-разработчик и системный аналитик в музыкальном лейбле. Делаю внутренние продукты целиком: собираю требования у бизнеса, проектирую решение и пишу и фронтенд, и бэкенд — ERP, Telegram-боты и сервисы данных, которыми команда пользуется каждый день. До разработки 3,5+ года работал в B2B-продажах IT/AI-решений, поэтому понимаю, зачем бизнесу каждая фича, и говорю на одном языке и с собственниками, и с разработчиками.',
+    key: [
+      'Довёл до продакшена сохранение состояния таблиц в разделах ERP «Дистрибуция» и «Саппорт»: версии схемы, оптимистичная блокировка, синхронизация между вкладками',
+      'Сделал и поддерживаю Telegram-боты для дистрибуции, поддержки и оплат (Node.js, Telegraf, PostgreSQL, Redis, Docker), которыми команда пользуется каждый день',
+      'Провёл несколько раундов UI/UX-доработок ERP на React 19 и AG Grid Enterprise: убрал системные баги вёрстки, унифицировал компоненты, сделал экраны адаптивными',
+      'Сделал два открытых фуллстек-проекта с CI: сайт игровой студии (React, Express, PostgreSQL, Stripe, 166 тестов) и портфолио (Vue 3, 126 тестов, Lighthouse 95+)',
+      'Подготовил BRD, user stories, API-спецификации и инструкции в Notion для разделов ERP и ботов',
+    ],
+    skills: [
+      ['Языки', 'TypeScript · JavaScript · SQL · HTML · CSS'],
+      [
+        'Фронтенд',
+        'React 19 · Vue 3 · Vite · Tailwind v4 · HeroUI · AG Grid Enterprise · адаптивная вёрстка · доступность (axe)',
+      ],
+      [
+        'Бэкенд',
+        'Node.js · NestJS · Express · REST API · Telegraf / Telegram Bot API · Stripe · Google Sheets API',
+      ],
+      ['Данные', 'PostgreSQL · Prisma · Redis · ClickHouse'],
+      ['Тесты и выкладка', 'Vitest · Playwright · GitHub Actions · Docker · Git · code review'],
+      [
+        'Системный анализ',
+        'BRD · user stories · API-спецификации · BPMN · проектирование процессов · документация в Notion',
+      ],
+      ['Инструменты', 'Cursor · Figma · Notion · Bitrix24 · 1С · MS Excel · Logic Pro X'],
+    ],
+    projects: [
+      {
+        name: 'Сайт игровой студии',
+        links: [
+          ['Демо', 'https://game-studio-site.onrender.com'],
+          ['Код', 'https://github.com/User1234-Code-maker/game-studio-site'],
+        ],
+        stack: 'React · TypeScript · Express · PostgreSQL · Stripe · Playwright · GitHub Actions',
+        did: [
+          'Начинал как вёрстку руками по макету из Figma, вырос в многостраничное приложение с каталогом, корзиной и тестовой оплатой Stripe',
+          'Express API с проверкой входных данных, ограничением частоты запросов, строгим CSP и проверкой подписи вебхука Stripe; 3 языка интерфейса',
+          '166 автотестов в CI (API, компоненты, сценарии в браузере), 0 уязвимостей в зависимостях',
+        ],
+      },
+      {
+        name: 'Сайт-портфолио «1234»',
+        links: [
+          ['Сайт', site],
+          ['Код', 'https://github.com/User1234-Code-maker/1234-site'],
+        ],
+        stack: 'Vue 3 · TypeScript · Vite · Vitest · Playwright · GitHub Actions',
+        did: [
+          'Двуязычный сайт со светлой и тёмной темой, своим музыкальным плеером и рисованным артом',
+          '126 автотестов, включая проверку доступности; Lighthouse 95+ на компьютере; AVIF-картинки и превью ссылок для каждой страницы',
+        ],
+      },
+    ],
+    zero: {
+      title: 'Фуллстек-разработчик / Системный аналитик',
+      org: 'Zero to Infinity (музыкальный лейбл)',
+      when: 'апрель 2025 — сейчас',
+      resp: [
+        'Разработка модулей ERP: React 19, AG Grid Enterprise, HeroUI, Tailwind v4 на фронтенде; NestJS, Prisma, PostgreSQL на бэкенде',
+        'Разработка и поддержка Telegram-ботов для дистрибуции, поддержки и оплат (Node.js, Telegraf, PostgreSQL, Redis, Docker)',
+        'Внутренние сервисы: распознавание музыки в видео по ссылке со статистикой; интеграции с Google Sheets',
+        'Сбор требований у заказчиков и оформление их в BRD, user stories и API-спецификации',
+        'Проектирование бизнес-процессов и workflow, планирование, тестирование и подготовка релизов',
+        'Code review и разбор проблем в продакшене',
+      ],
+      ach: [
+        'Прошёл полный цикл фичи сохранения состояния таблиц ERP: архитектура (revision / schema_version, оптимистичная блокировка, синхронизация между вкладками), постановка задач, продакшен-релиз',
+        'Добавил в бот оплат проверку согласований: выплата создаётся только по одобренной заявке',
+        'Исследовал выплаты промо-платформы Hitviro и её интеграцию с ERP',
+        'Подготовил базы инструкций в Notion для разделов ERP и связанных ботов',
+      ],
+    },
+    earlier: [
+      {
+        title: 'Business Development Manager (IT / AI Solutions)',
+        org: 'Quantum Agency · quantum-dev.ru',
+        when: 'июнь 2025 — март 2026',
+        text: 'Привлечение B2B-клиентов, переговоры с собственниками и ЛПР, пресейл-оценка вместе с PM и разработкой. Закрывал сделки до 15 млн ₽.',
+      },
+      {
+        title: 'IT Sales Manager (B2B/B2C, проектные продажи)',
+        org: 'Nomadic Soft · nomadicsoft.io',
+        when: 'январь 2024 — июнь 2025',
+        text: 'Сбор требований, оценка, КП и технические брифы вместе с командой разработки. Закрывал проекты web / mobile / AI до 10 млн ₽.',
+      },
+      {
+        title: 'Основатель и независимый IT-консультант',
+        org: 'ИП / фриланс · Москва',
+        when: 'октябрь 2022 — июнь 2025',
+        text: 'Вёл собственные IT- и digital-проекты, собрал распределённую команду, автоматизировал продажи и отчётность скриптами и AI-инструментами.',
+      },
+      {
+        title: 'Продавец-консультант',
+        org: 'Inventive Retail Group · inventive.ru',
+        when: 'октябрь 2023 — январь 2025',
+        text: 'Продажи в зале, 1С, KPI и наставничество новых сотрудников; стабильно перевыполнял планы продаж.',
+      },
+    ],
+    edu: [
+      ['СПбУТУиЭ — лингвистика, переводчик (неоконченное высшее)', '2022'],
+      ['JLPT N5 — международный сертификат по японскому языку (СПбГУ)', '2024'],
+      ['Английский B2 — школа «Лингвамания»', '2020'],
+    ],
+    langs: 'Языки: русский (родной) · английский B2 · японский (JLPT N5)',
+    about:
+      'Ещё: водительские права категории B; пишу и выпускаю свою музыку, был лидером рок-группы и звукорежиссёром.',
   },
 }
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+const a = ([t, h]) => `<a href="${h}">${esc(t)}</a>`
+const ul = (items, cls = '') => `<ul class="${cls}">${items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>`
+
+const font = (fam, file, w, style = 'normal', cyr = false) =>
+  `@font-face{font-family:${fam};src:url(${F}/${file}.woff2);font-weight:${w};font-style:${style}${cyr ? ';unicode-range:U+0400-04FF' : ''}}`
+const fonts = [
+  ...['400', '600', '700'].flatMap((w) => [
+    font('S', `source-serif-4-latin-${w}-normal`, w),
+    font('S', `source-serif-4-cyrillic-${w}-normal`, w, 'normal', true),
+  ]),
+  font('S', 'source-serif-4-latin-400-italic', 400, 'italic'),
+  font('S', 'source-serif-4-cyrillic-400-italic', 400, 'italic', true),
+  ...['600', '700'].flatMap((w) => [
+    font('H', `source-sans-3-latin-${w}-normal`, w),
+    font('H', `source-sans-3-cyrillic-${w}-normal`, w, 'normal', true),
+  ]),
+].join('\n')
+
 const html = (
   c,
-) => `<!doctype html><html lang="${c === cv.ru ? 'ru' : 'en'}"><meta charset="utf-8"><title>${c.name} — CV</title><style>
-@font-face{font-family:M;src:url(${F}/manrope-cyrillic-400-normal.woff2);font-weight:400;unicode-range:U+0400-04FF}
-@font-face{font-family:M;src:url(${F}/manrope-latin-400-normal.woff2);font-weight:400}
-@font-face{font-family:M;src:url(${F}/manrope-cyrillic-500-normal.woff2);font-weight:500 600;unicode-range:U+0400-04FF}
-@font-face{font-family:M;src:url(${F}/manrope-latin-500-normal.woff2);font-weight:500 600}
-@font-face{font-family:M;src:url(${F}/manrope-cyrillic-800-normal.woff2);font-weight:700 800;unicode-range:U+0400-04FF}
-@font-face{font-family:M;src:url(${F}/manrope-latin-800-normal.woff2);font-weight:700 800}
-@page{size:A4;margin:14mm 16mm}
+) => `<!doctype html><html lang="${c.lang}"><meta charset="utf-8"><title>${c.name} — CV</title><style>
+${fonts}
+@page{size:A4;margin:13mm 15mm 13mm}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:M,sans-serif;color:#1d2340;font-size:10.6pt;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:S,serif;color:#1b1f2a;font-size:10pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 a{color:inherit;text-decoration:none}
-.page{padding:0}
-header{display:grid;grid-template-columns:1fr auto;gap:0 6mm;align-items:center;padding-bottom:6mm;border-bottom:2px solid #1e2a6b}
-h1{font-weight:800;font-size:27pt;letter-spacing:-.5pt;line-height:1.05;color:#1e2a6b}
-.role,.place{grid-column:1/-1}
-.role{font-weight:700;font-size:13pt;color:#6b5bd6;margin-top:2mm}
-.place{color:#5a6187;margin-top:1.5mm;font-size:9.6pt}
-.site{display:inline-block;background:#1e2a6b;color:#fff;font-weight:700;font-size:9.6pt;padding:2.2mm 4mm;border-radius:999px;white-space:nowrap}
-.contacts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:1.2mm 5mm;margin-top:4mm;font-size:9.4pt;color:#2c3460}
-.contacts a{white-space:nowrap}
-section{margin-top:6mm}
-h2{break-after:avoid}
-h2{font-weight:800;font-size:10pt;letter-spacing:.4pt;color:#6b5bd6;margin-bottom:2.5mm}
-.lead{max-width:none}
-.stack{display:grid;grid-template-columns:38mm 1fr;gap:1.4mm 4mm}
-.stack b{font-weight:700}
-.job{margin-bottom:4.5mm;break-inside:avoid}
-.jh{display:flex;justify-content:space-between;gap:4mm;align-items:baseline}
-.jh b{font-weight:800;font-size:11.2pt;color:#1e2a6b}
-.jh span{color:#5a6187;font-size:9.6pt;white-space:nowrap}
-.org{color:#434a80;font-weight:600;margin:.6mm 0 1.6mm}
+h1{font-family:H,sans-serif;font-weight:700;font-size:25pt;color:#1f4e8c;letter-spacing:-.2pt;line-height:1.05}
+.title{font-weight:700;font-size:12.2pt;margin-top:1.6mm}
+.tag{font-style:italic;color:#4a5263;margin-top:.6mm}
+.contacts{margin-top:2.6mm;font-size:9.4pt;color:#2b3242;line-height:1.55}
+.contacts span+span::before{content:" · ";color:#8a93a6}
+.contacts b{font-weight:600;color:#1f4e8c}
+.top{padding-bottom:3.2mm;border-bottom:1.4pt solid #1f4e8c}
+h2{font-family:H,sans-serif;font-weight:700;font-size:10.6pt;letter-spacing:1.1pt;text-transform:uppercase;color:#1f4e8c;
+ margin:4.4mm 0 1.9mm;padding-bottom:1mm;border-bottom:.6pt solid #c9d3e6;break-after:avoid}
+p{text-align:left}
 ul{list-style:none}
-li{position:relative;padding-left:4.5mm;margin-bottom:1.2mm}
-li::before{content:"";position:absolute;left:0;top:2.2mm;width:1.6mm;height:1.6mm;border-radius:50%;background:#6b5bd6}
-.prj{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
-.p{border:1px solid #d9ddf3;border-radius:3mm;padding:3.5mm 4mm;break-inside:avoid}
-.p b{font-weight:800;color:#1e2a6b;display:block}
-.p a{font-size:8.8pt;color:#6b5bd6;font-weight:600;display:block;margin:.4mm 0 1.4mm}
-.p p{font-size:9.6pt}
-.small{font-size:9.8pt}
-</style><body><div class="page">
-<header>
+li{position:relative;padding-left:4.2mm;margin:.7mm 0}
+li::before{content:"•";position:absolute;left:.8mm;color:#1f4e8c;font-weight:700}
+ul.ok li::before{content:"✓";left:0;color:#1d8a4e;font-family:H,sans-serif}
+.skills{display:grid;grid-template-columns:34mm 1fr;gap:1.1mm 3mm}
+.skills b{font-family:H,sans-serif;font-weight:700;font-size:9.8pt;color:#1b1f2a}
+.job,.prj{margin-bottom:3.2mm;break-inside:avoid}
+.job.main{break-inside:auto}
+li{break-inside:avoid}
+.jh{display:flex;justify-content:space-between;align-items:baseline;gap:4mm}
+.jh b{font-family:H,sans-serif;font-weight:700;font-size:11pt}
+.jh span{font-size:9.4pt;color:#4a5263;white-space:nowrap}
+.org{font-style:italic;color:#4a5263;margin:.3mm 0 1.2mm}
+.lbl{font-family:H,sans-serif;font-weight:700;font-size:9.6pt;margin-top:1.4mm}
+.pl{font-size:9.4pt;color:#1f4e8c;font-weight:600}
+.pl a+a::before{content:" · ";color:#8a93a6}
+.st{font-size:9.6pt;color:#4a5263;margin:.4mm 0 .6mm}
+.st i{font-style:normal;font-weight:600;color:#1b1f2a}
+.early .job{margin-bottom:2.4mm}
+.early p{font-size:9.8pt}
+.edu div{display:flex;justify-content:space-between;gap:4mm;margin:.6mm 0}
+.edu span{color:#4a5263;white-space:nowrap}
+</style><body>
+<div class="top">
   <h1>${c.name}</h1>
-  <a class="site" href="${site}">${c.siteLabel}: user1234-code-maker.github.io/1234-site</a>
-  <div class="role">${c.role}</div><div class="place">${c.place}</div>
-  <div class="contacts">${contacts.map(([t, h]) => `<a href="${h}">${t}</a>`).join('')}</div>
-</header>
-<section><h2>${c.h.profile.toUpperCase()}</h2><p class="lead">${esc(c.profile)}</p></section>
-<section><h2>${c.h.stack.toUpperCase()}</h2><div class="stack">${c.stack.map(([k, v]) => `<b>${k}</b><span>${v}</span>`).join('')}</div></section>
-<section><h2>${c.h.exp.toUpperCase()}</h2>${c.jobs
+  <div class="title">${c.title}</div>
+  <div class="tag">${c.tagline}</div>
+  <div class="contacts">
+    <span>${a(links.email)}</span><span>${c.phones}</span><span>${c.l.tg}: ${a(links.tg)}</span><br>
+    <span><b>${c.l.site}:</b> ${a(links.site)}</span><span>${a(links.gh)}</span><br>
+    <span>${a(links.li)}</span><span>${c.place}</span>
+  </div>
+</div>
+<h2>${c.h.profile}</h2><p>${esc(c.profile)}</p>
+<h2>${c.h.key}</h2>${ul(c.key, 'ok')}
+<h2>${c.h.skills}</h2><div class="skills">${c.skills.map(([k, v]) => `<b>${k}</b><span>${v}</span>`).join('')}</div>
+<h2>${c.h.exp}</h2>
+<div class="job main"><div class="jh"><b>${c.zero.title}</b><span>${c.zero.when}</span></div><div class="org">${c.zero.org}</div>
+  <div class="lbl">${c.h.resp}</div>${ul(c.zero.resp)}<div class="lbl">${c.h.ach}</div>${ul(c.zero.ach, 'ok')}</div>
+<h2>${c.h.projects}</h2>${c.projects
+  .map(
+    (
+      p,
+    ) => `<div class="prj"><div class="jh"><b>${p.name}</b><span class="pl">${p.links.map(([t, h]) => `<a href="${h}">${t}</a>`).join('')}</span></div>
+  <div class="st"><i>${c.h.stack}</i> ${p.stack}</div>${ul(p.did)}</div>`,
+  )
+  .join('')}
+<h2>${c.h.earlier}</h2><div class="early">${c.earlier
   .map(
     (j) =>
-      `<div class="job"><div class="jh"><b>${j.title}</b><span>${j.when}</span></div><div class="org">${j.org}</div><ul>${j.did.map((d) => `<li>${esc(d)}</li>`).join('')}</ul></div>`,
+      `<div class="job"><div class="jh"><b>${j.title}</b><span>${j.when}</span></div><div class="org">${j.org}</div><p>${esc(j.text)}</p></div>`,
   )
-  .join('')}</section>
-<section><h2>${c.h.projects.toUpperCase()}</h2><div class="prj">${c.projects
-  .map(
-    (p) =>
-      `<div class="p"><b>${p.name}</b><a href="${p.link}">${p.link.replace('https://', '')}</a><p>${esc(p.text)}</p></div>`,
-  )
-  .join('')}</div></section>
-<section><h2>${c.h.edu.toUpperCase()}</h2><ul class="small">${c.edu.map((e) => `<li>${e}</li>`).join('')}</ul></section>
-<section><h2>${c.h.more.toUpperCase()}</h2><p class="small">${c.more}</p></section>
-</div></body></html>`
+  .join('')}</div>
+<h2>${c.h.edu}</h2><div class="edu">${c.edu.map(([t, y]) => `<div><b style="font-weight:400">${t}</b><span>${y}</span></div>`).join('')}<p style="margin-top:1.4mm">${c.langs}</p><p style="margin-top:.8mm">${esc(c.about)}</p></div>
+</body></html>`
 
 const b = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox'] })
 const p = await b.newPage()
 for (const c of [cv.ru, cv.en]) {
-  const tmp = `/tmp/${c.file}.html`
+  const tmp = path.join(process.env.TMPDIR || '/tmp', `${c.file}.html`)
   writeFileSync(tmp, html(c))
   await p.goto('file://' + tmp, { waitUntil: 'load' })
   await p.pdf({
