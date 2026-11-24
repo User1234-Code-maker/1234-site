@@ -33,13 +33,11 @@ const cv = {
       profile: 'Profile',
       key: 'Key achievements',
       skills: 'Technical skills',
-      projects: 'Projects',
       exp: 'Work experience',
       earlier: 'Earlier experience: IT sales and consulting',
       edu: 'Education, languages and more',
       resp: 'Responsibilities:',
       ach: 'Achievements:',
-      stack: 'Stack:',
     },
     profile:
       'Fullstack developer and systems analyst at a music label. I build in-house products end to end: gather requirements from the business, design the solution, and write both the front end and the back end — an ERP, Telegram bots and data services that the team uses every day. Before moving into development I spent 3.5+ years in B2B IT/AI sales, so I understand why the business needs each feature and can explain technical decisions to owners and developers alike.',
@@ -47,7 +45,7 @@ const cv = {
       'Shipped persistent table state for the ERP Distribution and Support sections to production: schema versions, optimistic concurrency, sync between browser tabs',
       'Built and run Telegram bots for distribution, support and payments (Node.js, Telegraf, PostgreSQL, Redis, Docker) used by the team daily',
       'Delivered several rounds of ERP UI/UX work in React 19 and AG Grid Enterprise: fixed systemic layout bugs, unified components, made screens responsive',
-      'Built two open fullstack projects with CI: a game studio site (React, Express, PostgreSQL, Stripe, 166 tests) and my portfolio (Vue 3, 126 tests, Lighthouse 95+)',
+      'Built an in-house service that recognises music in videos by link and collects statistics for videos and releases',
       'Wrote BRDs, user stories, API specs and Notion user guides for ERP sections and bots',
     ],
     skills: [
@@ -67,33 +65,6 @@ const cv = {
         'BRD · user stories · API specs · BPMN · business process design · Notion documentation',
       ],
       ['Tools', 'Cursor · Figma · Notion · Bitrix24 · 1C · MS Excel · Logic Pro X'],
-    ],
-    projects: [
-      {
-        name: 'Game Studio Website',
-        links: [
-          ['Live demo', 'https://game-studio-site.onrender.com'],
-          ['Code', 'https://github.com/User1234-Code-maker/game-studio-site'],
-        ],
-        stack: 'React · TypeScript · Express · PostgreSQL · Stripe · Playwright · GitHub Actions',
-        did: [
-          'Started as a hand-coded layout from a Figma mockup, grew into a multi-page app with a catalogue, cart and Stripe test checkout',
-          'Express API with input validation, rate limiting, strict CSP and a verified Stripe webhook; 3 interface languages',
-          '166 automated tests in CI (API, components, browser flows), 0 vulnerable dependencies',
-        ],
-      },
-      {
-        name: 'Portfolio site “1234”',
-        links: [
-          ['Site', site],
-          ['Code', 'https://github.com/User1234-Code-maker/1234-site'],
-        ],
-        stack: 'Vue 3 · TypeScript · Vite · Vitest · Playwright · GitHub Actions',
-        did: [
-          'Bilingual site with light and dark themes, a custom music player and hand-drawn art',
-          '126 automated tests including accessibility checks; Lighthouse 95+ on desktop; AVIF images and link previews for every page',
-        ],
-      },
     ],
     zero: {
       title: 'Fullstack Developer / Systems Analyst',
@@ -162,13 +133,11 @@ const cv = {
       profile: 'Профиль',
       key: 'Ключевые достижения',
       skills: 'Технические навыки',
-      projects: 'Проекты',
       exp: 'Опыт работы',
       earlier: 'Ранее: продажи IT-решений и консалтинг',
       edu: 'Образование, языки и прочее',
       resp: 'Обязанности:',
       ach: 'Достижения:',
-      stack: 'Стек:',
     },
     profile:
       'Фуллстек-разработчик и системный аналитик в музыкальном лейбле. Делаю внутренние продукты целиком: собираю требования у бизнеса, проектирую решение и пишу и фронтенд, и бэкенд — ERP, Telegram-боты и сервисы данных, которыми команда пользуется каждый день. До разработки 3,5+ года работал в B2B-продажах IT/AI-решений, поэтому понимаю, зачем бизнесу каждая фича, и говорю на одном языке и с собственниками, и с разработчиками.',
@@ -176,7 +145,7 @@ const cv = {
       'Довёл до продакшена сохранение состояния таблиц в разделах ERP «Дистрибуция» и «Саппорт»: версии схемы, оптимистичная блокировка, синхронизация между вкладками',
       'Сделал и поддерживаю Telegram-боты для дистрибуции, поддержки и оплат (Node.js, Telegraf, PostgreSQL, Redis, Docker), которыми команда пользуется каждый день',
       'Провёл несколько раундов UI/UX-доработок ERP на React 19 и AG Grid Enterprise: убрал системные баги вёрстки, унифицировал компоненты, сделал экраны адаптивными',
-      'Сделал два открытых фуллстек-проекта с CI: сайт игровой студии (React, Express, PostgreSQL, Stripe, 166 тестов) и портфолио (Vue 3, 126 тестов, Lighthouse 95+)',
+      'Сделал внутренний сервис, который распознаёт музыку в видео по ссылке и собирает статистику по роликам и релизам',
       'Подготовил BRD, user stories, API-спецификации и инструкции в Notion для разделов ERP и ботов',
     ],
     skills: [
@@ -196,33 +165,6 @@ const cv = {
         'BRD · user stories · API-спецификации · BPMN · проектирование процессов · документация в Notion',
       ],
       ['Инструменты', 'Cursor · Figma · Notion · Bitrix24 · 1С · MS Excel · Logic Pro X'],
-    ],
-    projects: [
-      {
-        name: 'Сайт игровой студии',
-        links: [
-          ['Демо', 'https://game-studio-site.onrender.com'],
-          ['Код', 'https://github.com/User1234-Code-maker/game-studio-site'],
-        ],
-        stack: 'React · TypeScript · Express · PostgreSQL · Stripe · Playwright · GitHub Actions',
-        did: [
-          'Начинал как вёрстку руками по макету из Figma, вырос в многостраничное приложение с каталогом, корзиной и тестовой оплатой Stripe',
-          'Express API с проверкой входных данных, ограничением частоты запросов, строгим CSP и проверкой подписи вебхука Stripe; 3 языка интерфейса',
-          '166 автотестов в CI (API, компоненты, сценарии в браузере), 0 уязвимостей в зависимостях',
-        ],
-      },
-      {
-        name: 'Сайт-портфолио «1234»',
-        links: [
-          ['Сайт', site],
-          ['Код', 'https://github.com/User1234-Code-maker/1234-site'],
-        ],
-        stack: 'Vue 3 · TypeScript · Vite · Vitest · Playwright · GitHub Actions',
-        did: [
-          'Двуязычный сайт со светлой и тёмной темой, своим музыкальным плеером и рисованным артом',
-          '126 автотестов, включая проверку доступности; Lighthouse 95+ на компьютере; AVIF-картинки и превью ссылок для каждой страницы',
-        ],
-      },
     ],
     zero: {
       title: 'Фуллстек-разработчик / Системный аналитик',
@@ -356,14 +298,6 @@ li{break-inside:avoid}
 <h2>${c.h.exp}</h2>
 <div class="job main"><div class="jh"><b>${c.zero.title}</b><span>${c.zero.when}</span></div><div class="org">${c.zero.org}</div>
   <div class="lbl">${c.h.resp}</div>${ul(c.zero.resp)}<div class="lbl">${c.h.ach}</div>${ul(c.zero.ach, 'ok')}</div>
-<h2>${c.h.projects}</h2>${c.projects
-  .map(
-    (
-      p,
-    ) => `<div class="prj"><div class="jh"><b>${p.name}</b><span class="pl">${p.links.map(([t, h]) => `<a href="${h}">${t}</a>`).join('')}</span></div>
-  <div class="st"><i>${c.h.stack}</i> ${p.stack}</div>${ul(p.did)}</div>`,
-  )
-  .join('')}
 <h2>${c.h.earlier}</h2><div class="early">${c.earlier
   .map(
     (j) =>
