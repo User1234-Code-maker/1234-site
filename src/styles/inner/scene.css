@@ -364,13 +364,14 @@
 /* гирлянда фонарей */
 .sd-lanterns,
 .sd-lanterns-row {
-  left: 6%;
-  right: 6%;
+  left: 0;
+  right: 0;
   top: 96px;
   height: 22%;
 }
+/* гирлянда идёт от края до края страницы */
 .sd-lanterns {
-  width: 88%;
+  width: 100%;
 }
 .sd-string {
   stroke: #3b3f86;

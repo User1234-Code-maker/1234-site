@@ -37,7 +37,9 @@ const frame = computed(() => {
 })
 // экраны телефона (боты) — другие пропорции; ленты со скроллом вбок должны получать фокус с клавиатуры
 const phoneShots = computed(() => project.value?.slug === 'telegram-bots')
-const scrolly = computed(() => ['portfolio-site', 'telegram-bots'].includes(project.value?.slug ?? ''))
+const scrolly = computed(() =>
+  ['portfolio-site', 'telegram-bots', 'label-erp', 'hitviro'].includes(project.value?.slug ?? ''),
+)
 const host = computed(() => {
   const d = project.value?.demo
   return d ? d.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''

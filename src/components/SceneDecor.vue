@@ -16,9 +16,13 @@ const petals = Array.from({ length: 12 }, (_, i) => ({
 // птичка на проводах и журавлики тоже отвечают на клик (мышью и пальцем; для клавиатуры это просто декор)
 const { t } = useLang()
 const { speak } = usePalSpeech(t)
-const lanternX = [8, 20, 33, 46, 59, 72, 86]
+const lanternX = [7, 19, 31, 43, 55, 67, 79, 91]
 // провисание гирлянды: y = 4 + 26·(1 − ((x − 50)/50)²)
-const sag = (x: number) => 4 + 26 * (1 - ((x - 50) / 50) ** 2)
+// высота провода в точке x (та же кривая, что в path: от -2 до 102 по x)
+const sag = (x: number) => {
+  const t = (x + 2) / 104
+  return -2 + 116 * t * (1 - t)
+}
 </script>
 
 <template>
@@ -49,7 +53,7 @@ const sag = (x: number) => 4 + 26 * (1 - ((x - 50) / 50) ** 2)
       viewBox="0 0 100 50"
       preserveAspectRatio="none"
     >
-      <path class="sd-string" d="M0 4 Q 50 56 100 4" fill="none" />
+      <path class="sd-string" d="M-2 -2 Q 50 56 102 -2" fill="none" />
     </svg>
     <div v-if="items.includes('lanterns')" class="sd-lanterns-row">
       <span

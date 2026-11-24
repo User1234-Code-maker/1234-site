@@ -1868,3 +1868,40 @@ nav > a[aria-current]::after {
 .pv-pic {
   display: contents;
 }
+
+/* компактный низ страницы: последний блок и футер без двойного отступа */
+.rest .lazy:last-of-type .sec,
+.rest .sec:last-of-type {
+  padding-bottom: 28px;
+}
+.rest .foot {
+  margin-top: 0;
+}
+.foot {
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+.page-main {
+  padding-bottom: clamp(36px, 4vw, 56px);
+}
+
+/* экраны NDA-проектов (ERP, Hitviro) — лентой, как у портфолио, а не на всю ширину */
+.pd-shots.shots-label-erp,
+.pd-shots.shots-hitviro {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+}
+.pd-shots.shots-label-erp .pd-shot,
+.pd-shots.shots-hitviro .pd-shot {
+  flex: 0 0 min(78%, 860px);
+  scroll-snap-align: start;
+}
+/* у телефонов прозрачные углы: под ними не должно быть светлой подложки */
+.pd-shots.shots-telegram-bots .lazyimg,
+.pd-shots.shots-telegram-bots .lazyimg:not(.loaded) {
+  background: none;
+  animation: none;
+}
