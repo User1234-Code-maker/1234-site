@@ -352,9 +352,13 @@ html.cat-adopted .cat{visibility:hidden}
 /* соцсети и так есть в меню-шашлыке: в шапке им места не хватает, они наезжали на логотип и выталкивали кнопку меню */
 @media (max-width:960px){header .right .soc{display:none}}
 @media (max-width:720px){header .right>.pill{display:none}}
-/* аватар не «висит» над пустыми облаками: крупнее и ниже, текст начинается сразу под ним */
+/* планшет и узкое окно ноутбука (601–1100): аватар стоит на нижнем краю, как на большом экране,
+   а не висит в облаках. Текст слева поверх светлой подложки. */
 @media (min-width:601px) and (max-width:1100px){
- .l-char{padding-top:calc(9*var(--sh,1svh))}
- .l-char img.main{height:calc(52*var(--sh,1svh))}
- main{margin-top:calc(54*var(--sh,1svh))}
+ .l-char{padding:0;justify-content:flex-end;align-items:flex-end;right:-11vw}
+ .l-char img.main{height:min(72vh,60vw);height:min(calc(72*var(--sh,1svh)),60vw);
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 14%);mask-image:linear-gradient(to right,transparent 0,#000 14%)}
+ .l-wash{background:linear-gradient(100deg,rgba(240,243,255,.86) 0%,rgba(239,242,255,.78) 30%,rgba(236,240,255,.4) 52%,rgba(234,238,255,0) 70%)}
+ .l-cloudfront{opacity:.25}
+ main{margin-top:0;justify-content:center;max-width:min(520px,62vw);padding-bottom:40px}
 }
