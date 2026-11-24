@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { avifOf } from '../utils/img'
 import cloudA from '../assets/img/cloud-a.webp'
 import cloudASm from '../assets/img/cloud-a-sm.webp'
 import cloudB from '../assets/img/cloud-b.webp'
@@ -20,14 +21,26 @@ const chara = useCharacter()
     <div class="layer l-sky"></div>
     <div class="layer l-cloudback" data-par="3">
       <picture
-        ><source media="(max-width: 700px)" :srcset="cloudCSm" />
+        ><source
+          v-if="avifOf(cloudCSm)"
+          media="(max-width: 700px)"
+          type="image/avif"
+          :srcset="avifOf(cloudCSm)" />
+        <source media="(max-width: 700px)" :srcset="cloudCSm" />
+        <source v-if="avifOf(cloudC)" type="image/avif" :srcset="avifOf(cloudC)" />
         <img :src="cloudC" alt="" width="840" height="370"
       /></picture>
     </div>
     <div class="layer l-city" data-par="7"></div>
     <div class="layer l-cloudmid" data-par="12">
       <picture
-        ><source media="(max-width: 700px)" :srcset="cloudASm" />
+        ><source
+          v-if="avifOf(cloudASm)"
+          media="(max-width: 700px)"
+          type="image/avif"
+          :srcset="avifOf(cloudASm)" />
+        <source media="(max-width: 700px)" :srcset="cloudASm" />
+        <source v-if="avifOf(cloudA)" type="image/avif" :srcset="avifOf(cloudA)" />
         <img :src="cloudA" alt="" width="1070" height="540"
       /></picture>
     </div>
@@ -38,7 +51,14 @@ const chara = useCharacter()
     <div class="layer l-wash"></div>
     <div class="layer l-char" data-par="20">
       <picture>
+        <source
+          v-if="avifOf(chara.sm)"
+          media="(max-width: 700px)"
+          type="image/avif"
+          :srcset="avifOf(chara.sm)"
+        />
         <source media="(max-width: 700px)" :srcset="chara.sm" />
+        <source v-if="avifOf(chara.src)" type="image/avif" :srcset="avifOf(chara.src)" />
         <img
           class="main"
           :src="chara.src"
@@ -51,7 +71,13 @@ const chara = useCharacter()
     </div>
     <div class="layer l-cloudfront" data-par="26">
       <picture
-        ><source media="(max-width: 700px)" :srcset="cloudBSm" />
+        ><source
+          v-if="avifOf(cloudBSm)"
+          media="(max-width: 700px)"
+          type="image/avif"
+          :srcset="avifOf(cloudBSm)" />
+        <source media="(max-width: 700px)" :srcset="cloudBSm" />
+        <source v-if="avifOf(cloudB)" type="image/avif" :srcset="avifOf(cloudB)" />
         <img :src="cloudB" alt="" width="1100" height="390"
       /></picture>
     </div>

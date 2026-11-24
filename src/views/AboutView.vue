@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { avifOf } from '../utils/img'
 import { computed, ref } from 'vue'
 import PageShell from '../components/PageShell.vue'
 import SceneEyebrow from '../components/SceneEyebrow.vue'
@@ -51,7 +52,16 @@ const playAlbum = () => toggle(album, player.release?.id === album.id ? player.i
         <span class="ab-halo" aria-hidden="true"></span>
         <picture>
           <source media="(max-width: 700px)" :srcset="chara.sm" />
-          <img class="ab-char" :src="chara.src" alt="" width="2664" height="1872" fetchpriority="high" />
+          <picture class="pv-pic"
+            ><source
+              v-if="avifOf(chara.sm)"
+              media="(max-width: 700px)"
+              type="image/avif"
+              :srcset="avifOf(chara.sm)" />
+            <source media="(max-width: 700px)" :srcset="chara.sm" />
+            <source v-if="avifOf(chara.src)" type="image/avif" :srcset="avifOf(chara.src)" />
+            <img class="ab-char" :src="chara.src" alt="" width="2664" height="1872" fetchpriority="high"
+          /></picture>
         </picture>
         <!-- облака перед низом персонажа: он «выходит» из неба, а не висит обрезанной фоткой -->
         <img class="ab-cloud a" :src="cloudFront" alt="" width="600" height="303" decoding="async" />

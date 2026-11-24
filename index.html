@@ -7,15 +7,15 @@
     <link
       rel="preload"
       as="image"
-      type="image/webp"
-      href="/src/assets/img/character-sm.webp"
+      type="image/avif"
+      href="/src/assets/img/character-sm.avif"
       media="(max-width: 700px)"
     />
     <link
       rel="preload"
       as="image"
-      type="image/webp"
-      href="/src/assets/img/character.webp"
+      type="image/avif"
+      href="/src/assets/img/character.avif"
       media="(min-width: 701px)"
     />
     </template>
@@ -23,15 +23,15 @@
     <link
       rel="preload"
       as="image"
-      type="image/webp"
-      href="/src/assets/img/character-dark-sm.webp"
+      type="image/avif"
+      href="/src/assets/img/character-dark-sm.avif"
       media="(max-width: 700px)"
     />
     <link
       rel="preload"
       as="image"
-      type="image/webp"
-      href="/src/assets/img/character-dark.webp"
+      type="image/avif"
+      href="/src/assets/img/character-dark.avif"
       media="(min-width: 701px)"
     />
     </template>
@@ -65,29 +65,29 @@
          этого запрета прокрутка начинала «пружинить» и отскакивать наверх. Заставка просто глотает касания. */
       #boot{touch-action:none;overscroll-behavior:contain}
       #boot{position:fixed;inset:0;z-index:1000;overflow:hidden;background:linear-gradient(180deg,#D7E4FC,#E6E1F8);color-scheme:light;
-        clip-path:inset(0 0 0 0);transition:clip-path .85s cubic-bezier(.7,0,.2,1);cursor:pointer}
+        clip-path:inset(0 0 0 0);transition:clip-path .6s cubic-bezier(.7,0,.2,1);cursor:pointer}
       #boot.out{clip-path:inset(0 0 100% 0);pointer-events:none}
       #boot.out .b-center{opacity:0;transform:translateY(-24px) scale(.96);transition:opacity .35s,transform .5s}
       #boot svg,#boot i{position:absolute;display:block}
       .b-grid{inset:0;width:100%;height:100%}
       .b-grid line{stroke:rgba(78,106,200,.22);stroke-width:1;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;
-        animation:bdraw .9s ease-out var(--d) forwards}
+        animation:bdraw .5s ease-out var(--d) forwards}
       .b-city{left:0;bottom:0;width:100%;height:46%}
       .b-city path{stroke:rgba(78,106,200,.45);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;
-        fill:rgba(120,140,225,0);animation:bdraw 1.2s ease-out .35s forwards,bfill .6s ease 1.1s forwards}
+        fill:rgba(120,140,225,0);animation:bdraw .65s ease-out .15s forwards,bfill .35s ease .6s forwards}
       .b-cloud{width:46vw;height:16vw;max-width:620px;max-height:200px;border-radius:50%;filter:blur(26px);opacity:0;
-        background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));animation:bfade 1s ease .5s forwards}
-      .b-cloud.c1{left:-6vw;top:12%}.b-cloud.c2{right:-8vw;top:34%;animation-delay:.75s}
-      .b-star{width:22px;height:22px;fill:#fff;filter:drop-shadow(0 0 8px rgba(124,92,255,.9));opacity:0;scale:.2;animation:bstar .6s ease 1.05s forwards}
-      .b-star.s1{left:22%;top:26%}.b-star.s2{right:24%;top:62%;width:16px;height:16px;animation-delay:1.25s}
+        background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,0));animation:bfade .5s ease .25s forwards}
+      .b-cloud.c1{left:-6vw;top:12%}.b-cloud.c2{right:-8vw;top:34%;animation-delay:.4s}
+      .b-star{width:22px;height:22px;fill:#fff;filter:drop-shadow(0 0 8px rgba(124,92,255,.9));opacity:0;scale:.2;animation:bstar .35s ease .6s forwards}
+      .b-star.s1{left:22%;top:26%}.b-star.s2{right:24%;top:62%;width:16px;height:16px;animation-delay:.7s}
       .b-center{position:absolute;left:50%;top:46%;translate:-50% -50%;display:flex;flex-direction:column;align-items:center;gap:18px}
       .b-cap{position:relative!important;width:clamp(96px,16vw,140px);height:auto;overflow:visible}
-      .b-cap .cl path{stroke-dasharray:1;stroke-dashoffset:1;animation:bdraw .95s cubic-bezier(.5,0,.2,1) .2s forwards}
-      .b-cap .cf{opacity:0;animation:bfade .45s ease .95s forwards}
+      .b-cap .cl path{stroke-dasharray:1;stroke-dashoffset:1;animation:bdraw .5s cubic-bezier(.5,0,.2,1) .1s forwards}
+      .b-cap .cf{opacity:0;animation:bfade .3s ease .5s forwards}
       .b-word{font:800 clamp(34px,6vw,52px)/1 Manrope,system-ui,sans-serif;letter-spacing:-.03em;color:#1E2A6B;clip-path:inset(0 100% 0 0);
-        animation:bwipe .5s cubic-bezier(.6,0,.2,1) 1s forwards}
+        animation:bwipe .35s cubic-bezier(.6,0,.2,1) .55s forwards}
       .b-bar{position:relative!important;width:120px;height:3px;border-radius:3px;background:rgba(30,42,107,.14);overflow:hidden}
-      .b-bar i{inset:0;background:#6B5BD6;transform-origin:left;transform:scaleX(0);animation:bbar 1.4s cubic-bezier(.4,0,.2,1) .1s forwards}
+      .b-bar i{inset:0;background:#6B5BD6;transform-origin:left;transform:scaleX(0);animation:bbar .8s cubic-bezier(.4,0,.2,1) .05s forwards}
       [data-theme=dark] #boot{background:linear-gradient(180deg,#070B26,#151A4C)}
       [data-theme=dark] .b-grid line{stroke:rgba(120,140,255,.2)}
       [data-theme=dark] .b-city path{stroke:rgba(140,150,255,.55)}
@@ -164,7 +164,7 @@
   </head>
   <body>
     <div id="boot" aria-hidden="true">
-      <svg class="b-grid" viewBox="0 0 1000 600" preserveAspectRatio="none" fill="none"><line x1="0" y1="0" x2="0" y2="600" pathLength="1" style="--d:0ms"/><line x1="100" y1="0" x2="100" y2="600" pathLength="1" style="--d:45ms"/><line x1="200" y1="0" x2="200" y2="600" pathLength="1" style="--d:90ms"/><line x1="300" y1="0" x2="300" y2="600" pathLength="1" style="--d:135ms"/><line x1="400" y1="0" x2="400" y2="600" pathLength="1" style="--d:180ms"/><line x1="500" y1="0" x2="500" y2="600" pathLength="1" style="--d:225ms"/><line x1="600" y1="0" x2="600" y2="600" pathLength="1" style="--d:270ms"/><line x1="700" y1="0" x2="700" y2="600" pathLength="1" style="--d:315ms"/><line x1="800" y1="0" x2="800" y2="600" pathLength="1" style="--d:360ms"/><line x1="900" y1="0" x2="900" y2="600" pathLength="1" style="--d:405ms"/><line x1="1000" y1="0" x2="1000" y2="600" pathLength="1" style="--d:450ms"/><line x1="0" y1="0" x2="1000" y2="0" pathLength="1" style="--d:120ms"/><line x1="0" y1="100" x2="1000" y2="100" pathLength="1" style="--d:180ms"/><line x1="0" y1="200" x2="1000" y2="200" pathLength="1" style="--d:240ms"/><line x1="0" y1="300" x2="1000" y2="300" pathLength="1" style="--d:300ms"/><line x1="0" y1="400" x2="1000" y2="400" pathLength="1" style="--d:360ms"/><line x1="0" y1="500" x2="1000" y2="500" pathLength="1" style="--d:420ms"/><line x1="0" y1="600" x2="1000" y2="600" pathLength="1" style="--d:480ms"/></svg>
+      <svg class="b-grid" viewBox="0 0 1000 600" preserveAspectRatio="none" fill="none"><line x1="0" y1="0" x2="0" y2="600" pathLength="1" style="--d:0ms"/><line x1="100" y1="0" x2="100" y2="600" pathLength="1" style="--d:25ms"/><line x1="200" y1="0" x2="200" y2="600" pathLength="1" style="--d:50ms"/><line x1="300" y1="0" x2="300" y2="600" pathLength="1" style="--d:74ms"/><line x1="400" y1="0" x2="400" y2="600" pathLength="1" style="--d:99ms"/><line x1="500" y1="0" x2="500" y2="600" pathLength="1" style="--d:124ms"/><line x1="600" y1="0" x2="600" y2="600" pathLength="1" style="--d:148ms"/><line x1="700" y1="0" x2="700" y2="600" pathLength="1" style="--d:173ms"/><line x1="800" y1="0" x2="800" y2="600" pathLength="1" style="--d:198ms"/><line x1="900" y1="0" x2="900" y2="600" pathLength="1" style="--d:223ms"/><line x1="1000" y1="0" x2="1000" y2="600" pathLength="1" style="--d:248ms"/><line x1="0" y1="0" x2="1000" y2="0" pathLength="1" style="--d:66ms"/><line x1="0" y1="100" x2="1000" y2="100" pathLength="1" style="--d:99ms"/><line x1="0" y1="200" x2="1000" y2="200" pathLength="1" style="--d:132ms"/><line x1="0" y1="300" x2="1000" y2="300" pathLength="1" style="--d:165ms"/><line x1="0" y1="400" x2="1000" y2="400" pathLength="1" style="--d:198ms"/><line x1="0" y1="500" x2="1000" y2="500" pathLength="1" style="--d:231ms"/><line x1="0" y1="600" x2="1000" y2="600" pathLength="1" style="--d:264ms"/></svg>
       <i class="b-cloud c1"></i><i class="b-cloud c2"></i>
       <svg class="b-city" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMax slice" fill="none"><path pathLength="1" d="M0 600V470h40V420h50V380h36V430h44V350h54V300h30V360h40V440h60V400h44V330h48V280h36V340h40V450h70V410h50V360h44V310h40V370h46V460h60V420h44V390h50V340h38V300h30V350h44V430h56V470h60V440h46V400h40V360h50V420h50V480h60V600"/></svg>
       <svg class="b-star s1" viewBox="0 0 24 24"><path d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6Z"/></svg>

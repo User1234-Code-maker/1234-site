@@ -2,9 +2,13 @@
 import { computed } from 'vue'
 import type { Release } from '../data/types'
 import { artistName } from '../data/music'
+import { avifOf } from '../utils/img'
 
 // Обложка-заглушка: рисуется кодом по оттенку релиза, чтобы не подсовывать чужие картинки.
 const props = defineProps<{ release: Release; disc?: boolean; small?: boolean }>()
+const coverSrc = computed(
+  () => (props.small ? (props.release.coverSm ?? props.release.cover) : props.release.cover) ?? '',
+)
 const seed = computed(() => [...props.release.id].reduce((a, c) => a + c.charCodeAt(0), 0))
 const skyline = computed(() =>
   Array.from({ length: 9 }, (_, i) => ({ x: i * 22 - 2, h: 22 + ((seed.value * (i + 3)) % 58) })),
@@ -16,14 +20,17 @@ const sunX = computed(() => 40 + (seed.value % 90))
   <span class="rcover" :style="{ '--h': release.hue }">
     <span v-if="disc" class="rc-disc" aria-hidden="true"></span>
     <span v-if="release.cover" class="rc-art rc-real">
-      <img
-        :src="small ? (release.coverSm ?? release.cover) : release.cover"
-        :alt="`${release.title}: ${artistName}`"
-        :width="small ? 420 : 900"
-        :height="small ? 420 : 900"
-        loading="lazy"
-        decoding="async"
-      />
+      <picture class="pv-pic">
+        <source v-if="avifOf(coverSrc)" type="image/avif" :srcset="avifOf(coverSrc)" />
+        <img
+          :src="coverSrc"
+          :alt="`${release.title}: ${artistName}`"
+          :width="small ? 420 : 900"
+          :height="small ? 420 : 900"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
     </span>
     <span v-else class="rc-art">
       <svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">

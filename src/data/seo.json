@@ -1,0 +1,103 @@
+{
+  "site": "https://user1234-code-maker.github.io/1234-site",
+  "pages": {
+    "": {
+      "title": "Bogdan Korzun — Fullstack Developer & Musician",
+      "description": "Portfolio of Bogdan Korzun: fullstack developer, systems analyst and musician. Projects, music and contacts.",
+      "image": "og.jpg"
+    },
+    "about": {
+      "title": "About — Bogdan Korzun",
+      "description": "Fullstack developer and systems analyst at a music label: experience, skills and how I work.",
+      "image": "og/about.jpg",
+      "og": {
+        "kicker": "About me",
+        "headline": "Fullstack developer and systems analyst",
+        "art": "character.webp"
+      }
+    },
+    "projects": {
+      "title": "Projects — Bogdan Korzun",
+      "description": "ERP for a music label, Telegram bots, a promo platform and two open projects with live demos.",
+      "image": "og/projects.jpg",
+      "og": {
+        "kicker": "Projects",
+        "headline": "ERP, bots, platforms and websites",
+        "art": "nda-erp-dashboard.webp"
+      }
+    },
+    "music": {
+      "title": "Music — Bogdan Korzun",
+      "description": "My album 1234 and singles: listen right on the site or on streaming services.",
+      "image": "og/music.jpg",
+      "og": {
+        "kicker": "Music",
+        "headline": "Album 1234 and new singles",
+        "art": "cover-album-1234.webp",
+        "square": true
+      }
+    },
+    "contact": {
+      "title": "Contact — Bogdan Korzun",
+      "description": "Write to me on Telegram, LinkedIn or by email. Open to interesting projects and full-time roles.",
+      "image": "og/contact.jpg",
+      "og": {
+        "kicker": "Contact",
+        "headline": "Let's build something together",
+        "art": "character-dark.webp"
+      }
+    },
+    "projects/label-erp": {
+      "title": "ERP for a music label — Bogdan Korzun",
+      "description": "The in-house ERP of a music label: distribution, support, documents and a task board.",
+      "image": "og/label-erp.jpg",
+      "og": {
+        "kicker": "Project · NDA",
+        "headline": "ERP for a music label",
+        "art": "nda-erp-dashboard.webp"
+      }
+    },
+    "projects/hitviro": {
+      "title": "Hitviro: clipping platform — Bogdan Korzun",
+      "description": "A platform where the label orders promo videos from creators. I handle the analysis and payouts.",
+      "image": "og/hitviro.jpg",
+      "og": {
+        "kicker": "Project · NDA",
+        "headline": "Hitviro: clipping platform",
+        "art": "nda-hitviro-campaigns.webp"
+      }
+    },
+    "projects/telegram-bots": {
+      "title": "Telegram bots and mini app — Bogdan Korzun",
+      "description": "The company’s in-house Telegram bots that automate working processes: distribution, support, payments.",
+      "image": "og/telegram-bots.jpg",
+      "og": {
+        "kicker": "Project · NDA",
+        "headline": "Telegram bots and mini app",
+        "art": "nda-bots-cover.webp"
+      }
+    },
+    "projects/music-recognition": {
+      "title": "Music recognition and statistics — Bogdan Korzun",
+      "description": "An in-house service: finds the music in a video by link and collects statistics for videos and releases.",
+      "image": "og/music-recognition.jpg",
+      "og": {
+        "kicker": "Project · NDA",
+        "headline": "Music recognition and statistics",
+        "art": "nda-music-comic.webp"
+      }
+    },
+    "projects/game-studio-website": {
+      "title": "Game Studio Website — Bogdan Korzun",
+      "description": "A multi-page game studio site: catalogue, cart, Stripe payments, a 3D gamepad on the first screen.",
+      "image": "og/game-studio-website.jpg",
+      "og": { "kicker": "Open project", "headline": "Game Studio Website", "art": "cover-game-studio.webp" }
+    },
+    "projects/portfolio-site": {
+      "title": "Personal portfolio site — Bogdan Korzun",
+      "description": "This site: a multi-page bilingual portfolio with a dark theme, tests and fast loading.",
+      "image": "og/portfolio-site.jpg",
+      "og": { "kicker": "Open project", "headline": "Personal portfolio site", "art": "cover-portfolio.webp" }
+    }
+  }
+}

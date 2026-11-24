@@ -425,3 +425,17 @@ test.describe('котик на главной', () => {
     expect(after.x).toBeLessThan(live.x - 150)
   })
 })
+
+test.describe('превью ссылок и цифры', () => {
+  test('у страницы проекта свой HTML с заголовком и картинкой превью', async ({ request }) => {
+    const html = await (await request.get('/projects/hitviro')).text()
+    expect(html).toContain('<title>Hitviro: clipping platform — Bogdan Korzun</title>')
+    expect(html).toMatch(/og:image" content="[^"]+\/og\/hitviro\.jpg"/)
+    expect(html).toContain('Content-Security-Policy')
+  })
+
+  test('у открытого проекта есть блок «В цифрах»', async ({ page }) => {
+    await page.goto('/projects/game-studio-website')
+    await expect(page.locator('.pd-res li')).toHaveCount(4)
+  })
+})

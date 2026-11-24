@@ -1,9 +1,9 @@
 // Заставка живёт в index.html (рисуется до загрузки скриптов). Здесь только решаем, когда её убрать:
 // не раньше, чем доиграет «рисование», и не позже жёсткого потолка.
-const MIN_MS = 1500
+const MIN_MS = 850
 // повторные заходы: заставка короткая, ровно чтобы мелькнул знак, без искусственного ожидания
-const QUICK_MS = 450
-const MAX_MS = 2600
+const QUICK_MS = 350
+const MAX_MS = 1800
 
 export const BOOT_KEY = 'boot-v1'
 
@@ -37,7 +37,7 @@ export function finishBoot() {
     }
     el.classList.add('out')
     root.classList.remove('booting')
-    window.setTimeout(() => el.remove(), 900)
+    window.setTimeout(() => el.remove(), 650)
   }
 
   const min = root.classList.contains('boot-quick') ? QUICK_MS : MIN_MS

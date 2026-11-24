@@ -149,6 +149,30 @@ I take part in developing and improving it together with the team.`,
   },
   {
     slug: 'game-studio-website',
+    results: [
+      {
+        value: '166',
+        label: {
+          ru: 'автотестов: API, компоненты, сценарии в браузере',
+          en: 'automated tests: API, components, browser flows',
+        },
+      },
+      {
+        value: '3',
+        label: {
+          ru: 'языка интерфейса: русский, английский, испанский',
+          en: 'interface languages: Russian, English, Spanish',
+        },
+      },
+      {
+        value: '0',
+        label: { ru: 'уязвимостей в зависимостях (npm audit)', en: 'vulnerable dependencies (npm audit)' },
+      },
+      {
+        value: '9',
+        label: { ru: 'страниц, от каталога до оплаты', en: 'pages, from catalogue to checkout' },
+      },
+    ],
     title: { ru: 'Сайт игровой студии', en: 'Game Studio Website' },
     category: 'web',
     ru: 'Многостраничный сайт игровой студии: каталог, корзина, оплата через Stripe, 3D-геймпад в первом экране.',
@@ -223,6 +247,24 @@ The server and the database run on free hosting: Node.js on Render, PostgreSQL o
   },
   {
     slug: 'portfolio-site',
+    results: [
+      {
+        value: '126',
+        label: {
+          ru: 'автотестов: модульные и в браузере, с проверкой доступности',
+          en: 'automated tests: unit and in-browser, with accessibility checks',
+        },
+      },
+      { value: '95+', label: { ru: 'баллов Lighthouse на компьютере', en: 'Lighthouse score on desktop' } },
+      {
+        value: '2',
+        label: { ru: 'языка и две темы, светлая и тёмная', en: 'languages and two themes, light and dark' },
+      },
+      {
+        value: '~470 КБ',
+        label: { ru: 'весят картинки главной на телефоне', en: 'of images on the home page on a phone' },
+      },
+    ],
     title: { ru: 'Личный сайт-портфолио', en: 'Personal portfolio site' },
     category: 'web',
     ru: 'Этот сайт: многостраничное портфолио на двух языках с тёмной темой, тестами и быстрой загрузкой.',

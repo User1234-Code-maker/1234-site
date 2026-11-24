@@ -20,11 +20,12 @@ describe('заставка', () => {
   it('убирает заставку не позже жёсткого потолка и запоминает визит', async () => {
     document.documentElement.classList.add('booting')
     finishBoot()
-    await vi.advanceTimersByTimeAsync(1700)
+    // заставка короткая: уходит меньше чем за секунду
+    await vi.advanceTimersByTimeAsync(1000)
     expect(document.getElementById('boot')?.classList.contains('out')).toBe(true)
     expect(document.documentElement.classList.contains('booting')).toBe(false)
     expect(sessionStorage.getItem(BOOT_KEY)).toBe('1')
-    await vi.advanceTimersByTimeAsync(1200)
+    await vi.advanceTimersByTimeAsync(700)
     expect(document.getElementById('boot')).toBeNull()
   })
 

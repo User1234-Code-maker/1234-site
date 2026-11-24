@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Project, Visual } from '../data/types'
+import { srcsets } from '../utils/img'
 
 // Образ проекта. Есть обложка — показываем её; нет (NDA) — рисуем абстрактную иллюстрацию
 // по типу проекта: окно с таблицами для ERP, чат и плитки mini app для ботов,
@@ -10,6 +11,10 @@ const props = withDefaults(defineProps<{ project: Project; eager?: boolean; size
   eager: false,
   sizes: '(max-width: 700px) 100vw, 60vw',
 })
+// AVIF и копия на 800 px для карточек (браузер выберет сам)
+const sets = computed(() =>
+  props.project.cover ? srcsets(props.project.cover) : { webp: undefined, avif: undefined },
+)
 // высоты столбиков звуковой дорожки: детерминированно, чтобы картинка не прыгала между загрузками
 const bars = Array.from({ length: 22 }, (_, i) => 24 + ((i * 37) % 62))
 // иллюстрацию можно задать в данных проекта, иначе её выбирает категория
@@ -20,17 +25,21 @@ const kind = computed<Visual>(
 
 <template>
   <div class="pv" :class="`pv-${project.category}`" :style="{ '--h': project.hue }">
-    <img
-      v-if="project.cover"
-      class="pv-img"
-      :src="project.cover"
-      alt=""
-      width="1600"
-      height="760"
-      :loading="eager ? 'eager' : 'lazy'"
-      :fetchpriority="eager ? 'high' : 'auto'"
-      decoding="async"
-    />
+    <picture v-if="project.cover" class="pv-pic">
+      <source v-if="sets.avif" type="image/avif" :srcset="sets.avif" :sizes="sets.webp ? sizes : undefined" />
+      <img
+        class="pv-img"
+        :src="project.cover"
+        :srcset="sets.webp"
+        :sizes="sets.webp ? sizes : undefined"
+        alt=""
+        width="1600"
+        height="760"
+        :loading="eager ? 'eager' : 'lazy'"
+        :fetchpriority="eager ? 'high' : 'auto'"
+        decoding="async"
+      />
+    </picture>
     <div v-else-if="kind === 'erp'" class="pv-art pv-erp" aria-hidden="true">
       <div class="erp-win">
         <div class="erp-bar"><i></i><i></i><i></i></div>

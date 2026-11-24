@@ -28,7 +28,12 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: /${{ github.event.repository.name }}/
+          # свой домен: в Settings → Secrets and variables → Actions → Variables задать CUSTOM_DOMAIN (например bogdankorzun.dev)
+          VITE_BASE: ${{ vars.CUSTOM_DOMAIN && '/' || format('/{0}/', github.event.repository.name) }}
+          SITE_URL: ${{ vars.CUSTOM_DOMAIN && format('https://{0}', vars.CUSTOM_DOMAIN) || '' }}
+          CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
+          # счётчик посещений без cookie (GoatCounter): переменная GOATCOUNTER = код счётчика
+          VITE_GOATCOUNTER: ${{ vars.GOATCOUNTER }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

@@ -1863,3 +1863,8 @@ nav > a[aria-current]::after {
     flex: none;
   }
 }
+
+/* обёртка <picture> для AVIF не должна менять раскладку: картинка ведёт себя как прямой ребёнок */
+.pv-pic {
+  display: contents;
+}

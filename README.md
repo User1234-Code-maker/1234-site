@@ -13,7 +13,7 @@ Fullstack-разработчик, системный аналитик и муз�
 ![Vue 3](https://img.shields.io/badge/Vue-3.5-42b883?logo=vuedotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-6-3178c6?logo=typescript&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?logo=vite&logoColor=white)
-![Tests](https://img.shields.io/badge/tests-33%20unit%20%2B%2088%20e2e-2fc27a)
+![Tests](https://img.shields.io/badge/tests-36%20unit%20%2B%2090%20e2e-2fc27a)
 ![a11y](https://img.shields.io/badge/axe-0%20violations-2fc27a)
 
 <img src="docs/screenshots/home-light.webp" alt="Главная страница, светлая тема" />
@@ -107,6 +107,10 @@ npm run dev        # локальный сервер с hot reload
 | `npm test`         | юнит-тесты (Vitest)                                      |
 | `npm run test:e2e` | браузерные тесты: Playwright + axe, 3 размера экрана     |
 | `npm run format`   | привести код к стилю Prettier                            |
+| `npm run images`   | AVIF и копии на 800 px для картинок из `src/assets/img`  |
+| `npm run og`       | картинки превью ссылок из `src/data/seo.json`            |
+| `npm run cv`       | резюме RU и EN в PDF (`public/cv`), текст в `scripts/cv` |
+| `npm run mocks`    | перерисовать экраны NDA-проектов из `scripts/mocks`      |
 
 Перед первым запуском e2e: `npx playwright install chromium`.
 
@@ -151,21 +155,30 @@ tests/
 
 ## Качество
 
-| Проверка                      | Результат                                                                                        |
-| ----------------------------- | ------------------------------------------------------------------------------------------------ |
-| Юнит-тесты                    | 33 / 33                                                                                          |
-| E2E (Playwright, 3 экрана)    | 88 / 88                                                                                          |
-| Доступность (axe, обе темы)   | 0 нарушений на всех страницах                                                                    |
-| Lighthouse mobile             | внутренние страницы 91–94, главная около 70 (крупный арт Hero); доступность, практики, SEO — 100 |
-| Сдвиг вёрстки (CLS)           | 0 на всех страницах                                                                              |
-| Консоль и сеть                | 0 ошибок на 80 загрузках (2 темы × 2 языка × 2 устройства)                                       |
-| Аудит зависимостей продакшена | 0 уязвимостей                                                                                    |
+| Проверка                       | Результат                                                                                         |
+| ------------------------------ | ------------------------------------------------------------------------------------------------- |
+| Юнит-тесты                     | 36 / 36                                                                                           |
+| E2E (Playwright, 3 экрана)     | 90 / 90                                                                                           |
+| Доступность (axe, обе темы)    | 0 нарушений на всех страницах                                                                     |
+| Lighthouse mobile              | внутренние страницы 93–94, главная около 79 (заставка и крупный арт Hero); доступность, SEO — 100 |
+| Сдвиг вёрстки (CLS)            | 0 на всех страницах                                                                               |
+| Консоль и сеть                 | 0 ошибок на 80 загрузках (2 темы × 2 языка × 2 устройства)                                        |
+| Аудит зависимостей (npm audit) | 0 уязвимостей                                                                                     |
 
 ## Деплой
 
-Пуш в `main` запускает [`deploy.yml`](.github/workflows/deploy.yml): все проверки, e2e, сборка с `VITE_BASE=/<имя-репозитория>/` и публикация на GitHub Pages. Скрипт `postbuild` копирует `index.html` в `404.html`, чтобы прямые ссылки вроде `/projects` открывались и на Pages.
+Пуш в `main` запускает [`deploy.yml`](.github/workflows/deploy.yml): все проверки, e2e, сборка и публикация на GitHub Pages.
 
-Первый раз: **Settings → Pages → Source: GitHub Actions**. Для своего домена поменяй `VITE_BASE` в `deploy.yml` на `/`.
+После сборки [`scripts/prerender.mjs`](scripts/prerender.mjs) делает для каждой страницы свой HTML с заголовком, описанием и картинкой превью (Telegram и LinkedIn не запускают JavaScript), добавляет политику безопасности (CSP), `sitemap.xml`, `robots.txt` и `404.html`. Заголовки и описания страниц лежат в [`src/data/seo.json`](src/data/seo.json).
+
+Первый раз: **Settings → Pages → Source: GitHub Actions**.
+
+Настройки в **Settings → Secrets and variables → Actions → Variables** (обе необязательные):
+
+| Переменная      | Что делает                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------- |
+| `CUSTOM_DOMAIN` | свой домен, например `bogdankorzun.dev`: сборка сама переключит адреса, превью и файл CNAME |
+| `GOATCOUNTER`   | код счётчика [GoatCounter](https://www.goatcounter.com): статистика посещений без cookie    |
 
 ## Авторство
 

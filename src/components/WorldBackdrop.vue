@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { avifOf } from '../utils/img'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { reducedMotion } from '../utils/pageScroll'
 // «Единый мир»: тот же фон, что под Hero на главной. Сетка, световые пятна, далёкие облака
@@ -37,8 +38,14 @@ onBeforeUnmount(() => {
     <div class="orb o1"></div>
     <div class="orb o2"></div>
     <div class="orb o3"></div>
-    <img class="w-cloud wc1" :src="cloudA" alt="" width="749" height="378" loading="lazy" decoding="async" />
-    <img class="w-cloud wc2" :src="cloudB" alt="" width="770" height="273" loading="lazy" decoding="async" />
+    <picture class="pv-pic"
+      ><source v-if="avifOf(cloudA)" type="image/avif" :srcset="avifOf(cloudA)" />
+      <img class="w-cloud wc1" :src="cloudA" alt="" width="749" height="378" loading="lazy" decoding="async"
+    /></picture>
+    <picture class="pv-pic"
+      ><source v-if="avifOf(cloudB)" type="image/avif" :srcset="avifOf(cloudB)" />
+      <img class="w-cloud wc2" :src="cloudB" alt="" width="770" height="273" loading="lazy" decoding="async"
+    /></picture>
     <img class="w-city" :src="city.sm" alt="" loading="lazy" decoding="async" />
     <img class="w-star ws1" :src="sparkUrl" alt="" width="368" height="368" loading="lazy" decoding="async" />
     <img class="w-star ws2" :src="sparkUrl" alt="" width="368" height="368" loading="lazy" decoding="async" />

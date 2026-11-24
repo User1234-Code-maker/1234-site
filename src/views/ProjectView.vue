@@ -116,6 +116,15 @@ const host = computed(() => {
         </div>
       </section>
 
+      <section v-if="project.results?.length" class="wrap blk" aria-labelledby="res-t">
+        <h2 id="res-t" v-reveal class="blk-kicker">{{ t('p_results') }}</h2>
+        <ul v-reveal class="pd-res stagger">
+          <li v-for="(r, i) in project.results" :key="i" class="glass" :style="{ '--i': i }">
+            <b>{{ r.value }}</b><span>{{ tx(r.label, lang) }}</span>
+          </li>
+        </ul>
+      </section>
+
       <section v-if="project.did?.length" class="wrap blk pd-about" aria-labelledby="did-t">
         <h2 id="did-t" v-reveal class="blk-kicker">{{ t('p_did') }}</h2>
         <ul v-reveal class="pd-did stagger">

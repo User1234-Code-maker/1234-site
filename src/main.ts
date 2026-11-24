@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import { router } from './router'
+import { setupAnalytics } from './analytics'
 import { finishBoot } from './boot'
 import './styles/tokens.css'
 import './styles/main.css'
@@ -16,6 +17,7 @@ addEventListener('keydown', (e) => {
 addEventListener('pointerdown', () => root.classList.remove('kbd'))
 
 const app = createApp(App).use(router)
+setupAnalytics(router)
 router.isReady().then(() => {
   app.mount('#app')
   finishBoot()

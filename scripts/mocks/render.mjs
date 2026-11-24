@@ -1,6 +1,6 @@
 // Рендер макетов NDA-проектов в webp: npm run mocks [имя ...]
 // Экраны ботов рендерятся дважды: «голый» экран и он же в рамке телефона (с прозрачным фоном).
-import { chromium } from 'playwright'
+import { chromium } from '@playwright/test'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'

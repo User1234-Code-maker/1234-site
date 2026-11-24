@@ -275,7 +275,11 @@
 /* фон-иллюстрация на всю высоту страницы: облака из арта, бесшовно повторяются вниз */
 .page {
   background:
-    url(../../assets/img/backdrop-day.webp) center top / max(1400px, 100%) auto repeat-y,
+    image-set(
+        url(../../assets/img/backdrop-day.avif) type('image/avif'),
+        url(../../assets/img/backdrop-day.webp) type('image/webp')
+      )
+      center top / max(1400px, 100%) auto repeat-y,
     var(--bg);
 }
 [data-theme='dark'] .page {
@@ -315,7 +319,11 @@ button.pill {
 .rest {
   background:
     linear-gradient(#e7eafd, rgb(231 234 253 / 0) 320px),
-    url(../../assets/img/backdrop-day.webp) center top / max(1400px, 100%) auto repeat-y,
+    image-set(
+        url(../../assets/img/backdrop-day.avif) type('image/avif'),
+        url(../../assets/img/backdrop-day.webp) type('image/webp')
+      )
+      center top / max(1400px, 100%) auto repeat-y,
     #e7eafd;
 }
 
