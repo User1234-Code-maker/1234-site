@@ -1905,3 +1905,37 @@ nav > a[aria-current]::after {
   background: none;
   animation: none;
 }
+
+/* шапка-логотип на листе перехода: по центру, чуть подпрыгивает, пока лист закрывает экран */
+.veil .veil-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(64px, 9vw, 104px);
+  height: auto;
+  translate: -50% -50%;
+  z-index: 1;
+  filter: drop-shadow(0 14px 24px rgb(30 42 107 / 0.3));
+}
+.veil.run .veil-mark {
+  animation: veil-mark 0.66s cubic-bezier(0.3, 0, 0.3, 1) both;
+}
+@keyframes veil-mark {
+  0%,
+  20% {
+    scale: 0.6;
+    rotate: -12deg;
+  }
+  45% {
+    scale: 1.08;
+    rotate: 4deg;
+  }
+  60% {
+    scale: 1;
+    rotate: 0deg;
+  }
+  100% {
+    scale: 0.9;
+    rotate: 8deg;
+  }
+}
