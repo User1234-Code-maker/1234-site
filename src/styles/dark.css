@@ -322,3 +322,11 @@ img.ic-dk {
 [data-theme='dark'] .ic-swap {
   display: none;
 }
+
+/* планшет и узкое окно ноутбука: персонаж стоит справа внизу, как на большом экране, —
+   затемнение низа (оно для телефона, где персонаж сверху) здесь накрывало бы его самого */
+@media (min-width: 601px) and (max-width: 1100px) {
+  [data-theme='dark'] .l-deco::before {
+    content: none;
+  }
+}
