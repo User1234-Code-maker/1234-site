@@ -294,8 +294,13 @@ test.describe('заставка', () => {
   test('пропускается кликом', async ({ page }) => {
     await page.goto('/')
     await expect(page.locator('#boot')).toBeVisible()
-    await page.locator('#boot').click({ position: { x: 20, y: 20 } })
+    // заставка короткая и может успеть закрыться сама — тогда обычный click() падает на исчезнувшем элементе
+    const t0 = await page.evaluate(() => {
+      document.getElementById('boot')?.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+      return performance.now()
+    })
     await expect(page.locator('#boot')).toHaveCount(0, { timeout: 2500 })
+    expect(await page.evaluate((s) => performance.now() - s, t0)).toBeLessThan(1500)
   })
 
   test('ссылка ?intro показывает заставку снова', async ({ page }) => {
