@@ -69,13 +69,12 @@ const cv = {
       key: 'Key achievements',
       skills: 'Technical skills',
       exp: 'Work experience',
-      earlier: 'Earlier experience: IT sales and consulting',
       edu: 'Education, languages and more',
       resp: 'Responsibilities:',
       ach: 'Achievements:',
     },
     profile:
-      'Fullstack developer and systems analyst at a music label. I build in-house products end to end: gather requirements from the business, design the solution, and write both the front end and the back end — an ERP, Telegram bots and data services that the team uses every day. Before moving into development I spent 3.5+ years in B2B IT/AI sales, so I understand why the business needs each feature and can explain technical decisions to owners and developers alike.',
+      'Fullstack developer and systems analyst. I build internal business products end to end — ERP systems, Telegram bots and data services: from gathering requirements and writing specs to the front end, back end, database and release. Main stack: TypeScript, React, Vue, Node.js, NestJS, PostgreSQL. Before moving fully into development I spent 3.5+ years in B2B IT/AI sales and pre-sale, so I understand why the business needs each feature and speak the language of both owners and developers.',
     key: [
       'Shipped persistent table state for the ERP Distribution and Support sections to production: schema versions, optimistic concurrency, sync between browser tabs',
       'Built and run Telegram bots for distribution, support and payments (Node.js, Telegraf, PostgreSQL, Redis, Docker) used by the team daily',
@@ -125,25 +124,66 @@ const cv = {
         title: 'Business Development Manager (IT / AI Solutions)',
         org: 'Quantum Agency · quantum-dev.ru',
         when: 'Jun 2025 — Mar 2026',
-        text: 'B2B lead generation, negotiations with owners and decision-makers, pre-sale scoping with PM and developers. Closed deals up to 15M RUB.',
+        resp: [
+          'Pre-sale scoping and estimation of web, mobile and AI projects together with the PM and developers',
+          'Writing requirement specs and technical briefs for incoming projects',
+          'Presenting IT products and AI solutions to business owners and decision-makers; outsourcing and outstaffing services',
+          'Running the full deal cycle from first contact to contract; working with KPIs, sales funnel analytics and documentation',
+          'Building a B2B lead-generation process',
+        ],
+        ach: [
+          'Closed deals up to 15M RUB directly with business owners',
+          'Shortened the deal cycle through accurate pre-sale scoping with the dev team',
+          'Built a systematic outbound process with a stable lead flow',
+          'Expanded the line of services sold: IT development, AI, outsourcing / outstaffing',
+        ],
       },
       {
         title: 'IT Sales Manager (B2B/B2C, project-based solutions)',
         org: 'Nomadic Soft · nomadicsoft.io',
         when: 'Jan 2024 — Jun 2025',
-        text: 'Requirements gathering, estimates, proposals and technical briefs together with the dev team. Closed web / mobile / AI projects up to 10M RUB.',
+        resp: [
+          'Requirements gathering, pre-sale and project scoping for web, mobile and AI projects',
+          'Preparing commercial proposals and technical specifications together with the development team',
+          'Coordinating with developers and project managers during estimation and handover',
+          'Using AI tools for lead generation and sales analytics',
+          'Selling outsourced and outstaffed development teams',
+        ],
+        ach: [
+          'Closed web / mobile / AI projects up to 10M RUB',
+          'Improved the quality of proposals and specs, which raised proposal-to-deal conversion',
+        ],
       },
       {
         title: 'Founder & Independent IT Consultant',
-        org: 'Self-employed · Moscow',
+        org: 'Self-employed / freelance · Moscow',
         when: 'Oct 2022 — Jun 2025',
-        text: 'Ran own IT and digital projects, hired a distributed team, automated sales and reporting with scripts and AI tools.',
+        resp: [
+          'Running own IT and digital projects (B2C) from idea to delivery',
+          'Writing scripts and introducing AI tools to automate sales, reporting and analytics',
+          'Hiring and managing a distributed team of contractors',
+          'Setting up operational processes: sales, delivery and quality control',
+          'Finding clients and contractors on freelance platforms',
+        ],
+        ach: [
+          'Launched and scaled own IT projects without external funding',
+          'Cut operational costs through automation and AI tools',
+          'Set up the sales process from scratch: structure, KPIs, scripts and funnel',
+        ],
       },
       {
         title: 'Retail Sales Associate',
         org: 'Inventive Retail Group · inventive.ru',
         when: 'Oct 2023 — Jan 2025',
-        text: 'Floor sales, 1C, KPIs and onboarding of new staff; consistently exceeded sales targets.',
+        resp: [
+          'Processing sales and orders in 1C and helping set up basic document flow',
+          'Consulting customers on electronics, upsell and cross-sell',
+          'Tracking personal and team KPIs; mentoring and onboarding new staff',
+        ],
+        ach: [
+          'Consistently met and exceeded sales targets',
+          'Grew the average ticket through upsell and cross-sell',
+        ],
       },
     ],
     edu: [
@@ -207,13 +247,12 @@ const cv = {
       key: 'Ключевые достижения',
       skills: 'Технические навыки',
       exp: 'Опыт работы',
-      earlier: 'Ранее: продажи IT-решений и консалтинг',
       edu: 'Образование, языки и прочее',
       resp: 'Обязанности:',
       ach: 'Достижения:',
     },
     profile:
-      'Фуллстек-разработчик и системный аналитик в музыкальном лейбле. Делаю внутренние продукты целиком: собираю требования у бизнеса, проектирую решение и пишу и фронтенд, и бэкенд — ERP, Telegram-боты и сервисы данных, которыми команда пользуется каждый день. До разработки 3,5+ года работал в B2B-продажах IT/AI-решений, поэтому понимаю, зачем бизнесу каждая фича, и говорю на одном языке и с собственниками, и с разработчиками.',
+      'Fullstack-разработчик и системный аналитик. Делаю внутренние продукты для бизнеса целиком — ERP-системы, Telegram-боты и сервисы данных: от сбора требований и постановки задач до фронтенда, бэкенда, базы данных и релиза. Основной стек: TypeScript, React, Vue, Node.js, NestJS, PostgreSQL. До перехода в разработку 3,5+ года работал в B2B-продажах и пресейле IT/AI-решений, поэтому понимаю, зачем бизнесу каждая фича, и говорю на одном языке и с собственниками, и с разработчиками.',
     key: [
       'Довёл до продакшена сохранение состояния таблиц в разделах ERP «Дистрибуция» и «Саппорт»: версии схемы, оптимистичная блокировка, синхронизация между вкладками',
       'Сделал и поддерживаю Telegram-боты для дистрибуции, поддержки и оплат (Node.js, Telegraf, PostgreSQL, Redis, Docker), которыми команда пользуется каждый день',
@@ -263,25 +302,63 @@ const cv = {
         title: 'Business Development Manager (IT / AI Solutions)',
         org: 'Quantum Agency · quantum-dev.ru',
         when: 'июнь 2025 — март 2026',
-        text: 'Привлечение B2B-клиентов, переговоры с собственниками и ЛПР, пресейл-оценка вместе с PM и разработкой. Закрывал сделки до 15 млн ₽.',
+        resp: [
+          'Пресейл-оценка web-, mobile- и AI-проектов вместе с PM и разработчиками',
+          'Подготовка требований и технических брифов по входящим проектам',
+          'Презентации IT-продуктов и AI-решений собственникам и ЛПР; аутсорс и аутстафф',
+          'Ведение сделки от первого контакта до договора; KPI, аналитика воронки и документация',
+          'Построение процесса B2B-лидогенерации',
+        ],
+        ach: [
+          'Закрывал сделки до 15 млн ₽ напрямую с собственниками бизнеса',
+          'Сократил цикл сделки за счёт точной пресейл-оценки с командой разработки',
+          'Выстроил системные холодные продажи со стабильным потоком лидов',
+          'Расширил линейку продаваемых услуг: разработка, AI, аутсорс / аутстафф',
+        ],
       },
       {
         title: 'IT Sales Manager (B2B/B2C, проектные продажи)',
         org: 'Nomadic Soft · nomadicsoft.io',
         when: 'январь 2024 — июнь 2025',
-        text: 'Сбор требований, оценка, КП и технические брифы вместе с командой разработки. Закрывал проекты web / mobile / AI до 10 млн ₽.',
+        resp: [
+          'Сбор требований, пресейл и оценка web-, mobile- и AI-проектов',
+          'Подготовка КП и технических заданий вместе с командой разработки',
+          'Координация с разработчиками и PM при оценке и передаче проекта в работу',
+          'AI-инструменты для лидогенерации и аналитики продаж',
+          'Продажа аутсорс- и аутстафф-команд',
+        ],
+        ach: [
+          'Закрывал проекты web / mobile / AI до 10 млн ₽',
+          'Повысил качество КП и ТЗ — выросла конверсия из КП в сделку',
+        ],
       },
       {
         title: 'Основатель и независимый IT-консультант',
         org: 'ИП / фриланс · Москва',
         when: 'октябрь 2022 — июнь 2025',
-        text: 'Вёл собственные IT- и digital-проекты, собрал распределённую команду, автоматизировал продажи и отчётность скриптами и AI-инструментами.',
+        resp: [
+          'Вёл собственные IT- и digital-проекты (B2C) от идеи до сдачи',
+          'Писал скрипты и внедрял AI-инструменты для автоматизации продаж, отчётности и аналитики',
+          'Нанимал распределённую команду подрядчиков и управлял ею',
+          'Выстраивал процессы: продажи, производство и контроль качества',
+          'Искал клиентов и исполнителей на фриланс-площадках',
+        ],
+        ach: [
+          'Запустил и масштабировал собственные IT-проекты без внешних инвестиций',
+          'Снизил операционные расходы за счёт автоматизации и AI',
+          'С нуля выстроил продажи: структура, KPI, скрипты и воронка',
+        ],
       },
       {
         title: 'Продавец-консультант',
         org: 'Inventive Retail Group · inventive.ru',
         when: 'октябрь 2023 — январь 2025',
-        text: 'Продажи в зале, 1С, KPI и наставничество новых сотрудников; стабильно перевыполнял планы продаж.',
+        resp: [
+          'Оформление продаж и заказов в 1С, помощь в настройке базового документооборота',
+          'Консультирование покупателей по технике, допродажи (upsell, cross-sell)',
+          'Личные и командные KPI; наставничество и адаптация новых сотрудников',
+        ],
+        ach: ['Стабильно выполнял и перевыполнял планы продаж', 'Увеличил средний чек за счёт допродаж'],
       },
     ],
     edu: [
@@ -371,12 +448,13 @@ li{break-inside:avoid}
 <h2>${c.h.exp}</h2>
 <div class="job main"><div class="jh"><b>${c.zero.title}</b><span>${c.zero.when}</span></div><div class="org">${c.zero.org}</div>
   <div class="lbl">${c.h.resp}</div>${ul(c.zero.resp)}<div class="lbl">${c.h.ach}</div>${ul(c.zero.ach, 'ok')}</div>
-<h2>${c.h.earlier}</h2><div class="early">${c.earlier
+${c.earlier
   .map(
     (j) =>
-      `<div class="job"><div class="jh"><b>${j.title}</b><span>${j.when}</span></div><div class="org">${j.org}</div><p>${esc(j.text)}</p></div>`,
+      `<div class="job"><div class="jh"><b>${j.title}</b><span>${j.when}</span></div><div class="org">${j.org}</div>
+  <div class="lbl">${c.h.resp}</div>${ul(j.resp)}<div class="lbl">${c.h.ach}</div>${ul(j.ach, 'ok')}</div>`,
   )
-  .join('')}</div>
+  .join('')}
 <h2>${c.h.edu}</h2><div class="edu">${c.edu.map(([t, y]) => `<div><b style="font-weight:400">${t}</b><span>${y}</span></div>`).join('')}<p style="margin-top:1.4mm">${c.langs}</p><p style="margin-top:.8mm">${esc(c.about)}</p></div>
 </body></html>`
 
