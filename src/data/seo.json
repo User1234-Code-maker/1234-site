@@ -7,8 +7,8 @@
       "image": "og.jpg"
     },
     "about": {
-      "title": "About — Bogdan Korzun",
-      "description": "Fullstack developer and systems analyst at a music label: experience, skills and how I work.",
+      "title": "About — Bogdan Korzun, Fullstack Developer & Systems Analyst",
+      "description": "Fullstack developer (React, Vue, Node.js, TypeScript) and systems analyst at a music label. Experience, skills and CV in PDF.",
       "image": "og/about.jpg",
       "og": {
         "kicker": "About me",
@@ -91,13 +91,21 @@
       "title": "Game Studio Website — Bogdan Korzun",
       "description": "A multi-page game studio site: catalogue, cart, Stripe payments, a 3D gamepad on the first screen.",
       "image": "og/game-studio-website.jpg",
-      "og": { "kicker": "Open project", "headline": "Game Studio Website", "art": "cover-game-studio.webp" }
+      "og": {
+        "kicker": "Open project",
+        "headline": "Game Studio Website",
+        "art": "cover-game-studio.webp"
+      }
     },
     "projects/portfolio-site": {
       "title": "Personal portfolio site — Bogdan Korzun",
       "description": "This site: a multi-page bilingual portfolio with a dark theme, tests and fast loading.",
       "image": "og/portfolio-site.jpg",
-      "og": { "kicker": "Open project", "headline": "Personal portfolio site", "art": "cover-portfolio.webp" }
+      "og": {
+        "kicker": "Open project",
+        "headline": "Personal portfolio site",
+        "art": "cover-portfolio.webp"
+      }
     }
   }
 }

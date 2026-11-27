@@ -45,6 +45,53 @@ const tag = (re, html, value) => {
   return html.replace(re, value)
 }
 
+// Разметка schema.org о человеке: по ней Google понимает, кто это, кем работает и где резюме
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Bogdan Korzun',
+  alternateName: 'Богдан Корзун',
+  jobTitle: 'Fullstack Developer / Systems Analyst',
+  worksFor: { '@type': 'Organization', name: 'Zero to Infinity' },
+  url: `${site}/`,
+  image: `${site}/og.jpg`,
+  knowsAbout: [
+    'TypeScript',
+    'React',
+    'Vue',
+    'Node.js',
+    'NestJS',
+    'PostgreSQL',
+    'Telegram bots',
+    'ERP',
+    'Systems analysis',
+  ],
+  knowsLanguage: ['ru', 'en', 'ja'],
+  sameAs: [
+    'https://github.com/User1234-Code-maker',
+    'https://www.linkedin.com/in/bogdankorzun/',
+    'https://t.me/OpalineDream',
+    'https://soundcloud.com/user1234user1234user1234',
+  ],
+  subjectOf: [
+    {
+      '@type': 'DigitalDocument',
+      name: 'CV (English)',
+      encodingFormat: 'application/pdf',
+      url: `${site}/cv/Bogdan-Korzun-CV-EN.pdf`,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'DigitalDocument',
+      name: 'Резюме (русский)',
+      encodingFormat: 'application/pdf',
+      url: `${site}/cv/Bogdan-Korzun-CV-RU.pdf`,
+      inLanguage: 'ru',
+    },
+  ],
+}
+const personTag = `    <script type="application/ld+json">${JSON.stringify(person)}</script>\n`
+
 function render(route, meta) {
   const url = `${site}/${route}`
   const image = `${site}/${meta.image}`
@@ -71,7 +118,10 @@ function render(route, meta) {
     h,
     `<meta property="og:image" content="${image}" />`,
   )
-  h = h.replace('</head>', `    <link rel="canonical" href="${url}" />\n  </head>`)
+  h = h.replace(
+    '</head>',
+    `    <link rel="canonical" href="${url}" />\n${route === '' || route === 'about' ? personTag : ''}  </head>`,
+  )
   return h
 }
 
@@ -93,9 +143,13 @@ const today = new Date().toISOString().slice(0, 10)
 const urls = Object.keys(pages)
   .map((r) => `  <url><loc>${site}/${r}</loc><lastmod>${today}</lastmod></url>`)
   .join('\n')
+// резюме тоже в карте сайта: так поисковики быстрее находят и индексируют PDF
+const cvs = ['Bogdan-Korzun-CV-EN.pdf', 'Bogdan-Korzun-CV-RU.pdf']
+  .map((f) => `  <url><loc>${site}/cv/${f}</loc><lastmod>${today}</lastmod></url>`)
+  .join('\n')
 writeFileSync(
   path.join(dist, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n${cvs}\n</urlset>\n`,
 )
 writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${site}/sitemap.xml\n`)
 // GitHub Pages узнаёт свой домен из файла CNAME

@@ -2,7 +2,8 @@
 // Классический формат, который хорошо читают и люди, и системы отбора (ATS): текстовый PDF,
 // разделы с линиями, «Обязанности / Достижения». Шрифты Source Serif 4 и Source Sans 3 (лицензия OFL) лежат в ./fonts.
 import { chromium } from '@playwright/test'
-import { writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
+import { PDFDocument } from 'pdf-lib'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -23,6 +24,40 @@ const cv = {
   en: {
     file: 'Bogdan-Korzun-CV-EN.pdf',
     lang: 'en',
+    meta: {
+      title: 'Bogdan Korzun — Fullstack Developer (React, Node.js, TypeScript) / Systems Analyst — CV',
+      subject:
+        'CV: Fullstack developer and systems analyst. React, Vue, Node.js, NestJS, PostgreSQL, Telegram bots, ERP. Remote or relocation.',
+      keywords: [
+        ...[
+          'Fullstack',
+          'Full-stack',
+          'Frontend',
+          'Backend',
+          'TypeScript',
+          'JavaScript',
+          'React',
+          'Vue',
+          'Node.js',
+          'NestJS',
+          'Express',
+          'PostgreSQL',
+          'Prisma',
+          'Redis',
+          'Telegram Bot API',
+          'REST API',
+          'ERP',
+          'AG Grid',
+          'Playwright',
+          'Docker',
+        ],
+        'Systems Analyst',
+        'Business Analyst',
+        'CV',
+        'Resume',
+        'Remote',
+      ],
+    },
     name: 'Bogdan Korzun',
     title: 'Fullstack Developer / Systems Analyst',
     tagline: 'TypeScript · React · Vue · Node.js · NestJS · PostgreSQL · Telegram Bots · ERP',
@@ -51,11 +86,11 @@ const cv = {
     skills: [
       ['Languages', 'TypeScript · JavaScript · SQL · HTML · CSS'],
       [
-        'Front end',
+        'Frontend',
         'React 19 · Vue 3 · Vite · Tailwind v4 · HeroUI · AG Grid Enterprise · responsive layout · accessibility (axe)',
       ],
       [
-        'Back end',
+        'Backend',
         'Node.js · NestJS · Express · REST APIs · Telegraf / Telegram Bot API · Stripe · Google Sheets API',
       ],
       ['Data', 'PostgreSQL · Prisma · Redis · ClickHouse'],
@@ -123,8 +158,46 @@ const cv = {
   ru: {
     file: 'Bogdan-Korzun-CV-RU.pdf',
     lang: 'ru',
+    meta: {
+      title:
+        'Богдан Корзун — Fullstack-разработчик (React, Node.js, TypeScript) / Системный аналитик — резюме',
+      subject:
+        'Резюме: Fullstack-разработчик и системный аналитик. React, Vue, Node.js, NestJS, PostgreSQL, Telegram-боты, ERP. Удалённо или релокация.',
+      keywords: [
+        ...[
+          'Fullstack',
+          'Full-stack',
+          'Frontend',
+          'Backend',
+          'TypeScript',
+          'JavaScript',
+          'React',
+          'Vue',
+          'Node.js',
+          'NestJS',
+          'Express',
+          'PostgreSQL',
+          'Prisma',
+          'Redis',
+          'Telegram Bot API',
+          'REST API',
+          'ERP',
+          'AG Grid',
+          'Playwright',
+          'Docker',
+        ],
+        'Фуллстек',
+        'Фронтенд',
+        'Бэкенд',
+        'Системный аналитик',
+        'Бизнес-аналитик',
+        'Разработчик',
+        'Резюме',
+        'Удалённая работа',
+      ],
+    },
     name: 'Богдан Корзун',
-    title: 'Фуллстек-разработчик / Системный аналитик',
+    title: 'Fullstack-разработчик / Системный аналитик',
     tagline: 'TypeScript · React · Vue · Node.js · NestJS · PostgreSQL · Telegram-боты · ERP',
     phones: '+7 (924) 118-13-24',
     place: 'Хабаровск / Таиланд · готов к релокации и удалённой работе',
@@ -151,11 +224,11 @@ const cv = {
     skills: [
       ['Языки', 'TypeScript · JavaScript · SQL · HTML · CSS'],
       [
-        'Фронтенд',
+        'Frontend',
         'React 19 · Vue 3 · Vite · Tailwind v4 · HeroUI · AG Grid Enterprise · адаптивная вёрстка · доступность (axe)',
       ],
       [
-        'Бэкенд',
+        'Backend',
         'Node.js · NestJS · Express · REST API · Telegraf / Telegram Bot API · Stripe · Google Sheets API',
       ],
       ['Данные', 'PostgreSQL · Prisma · Redis · ClickHouse'],
@@ -167,7 +240,7 @@ const cv = {
       ['Инструменты', 'Cursor · Figma · Notion · Bitrix24 · 1С · MS Excel · Logic Pro X'],
     ],
     zero: {
-      title: 'Фуллстек-разработчик / Системный аналитик',
+      title: 'Fullstack-разработчик / Системный аналитик',
       org: 'Zero to Infinity (музыкальный лейбл)',
       when: 'апрель 2025 — сейчас',
       resp: [
@@ -249,14 +322,14 @@ ${fonts}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:S,serif;color:#1b1f2a;font-size:10pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 a{color:inherit;text-decoration:none}
-h1{font-family:H,sans-serif;font-weight:700;font-size:25pt;color:#1f4e8c;letter-spacing:-.2pt;line-height:1.05}
+h1{font-family:H,sans-serif;font-weight:700;font-size:25pt;color:#1f4e8c;line-height:1.05}
 .title{font-weight:700;font-size:12.2pt;margin-top:1.6mm}
 .tag{font-style:italic;color:#4a5263;margin-top:.6mm}
 .contacts{margin-top:2.6mm;font-size:9.4pt;color:#2b3242;line-height:1.55}
 .contacts span+span::before{content:" · ";color:#8a93a6}
 .contacts b{font-weight:600;color:#1f4e8c}
 .top{padding-bottom:3.2mm;border-bottom:1.4pt solid #1f4e8c}
-h2{font-family:H,sans-serif;font-weight:700;font-size:10.6pt;letter-spacing:1.1pt;text-transform:uppercase;color:#1f4e8c;
+h2{font-family:H,sans-serif;font-weight:700;font-size:10.6pt;letter-spacing:0;text-transform:uppercase;color:#1f4e8c;
  margin:4.4mm 0 1.9mm;padding-bottom:1mm;border-bottom:.6pt solid #c9d3e6;break-after:avoid}
 p{text-align:left}
 ul{list-style:none}
@@ -313,12 +386,26 @@ for (const c of [cv.ru, cv.en]) {
   const tmp = path.join(process.env.TMPDIR || '/tmp', `${c.file}.html`)
   writeFileSync(tmp, html(c))
   await p.goto('file://' + tmp, { waitUntil: 'load' })
+  const out = path.join(root, 'public/cv', c.file)
+  // tagged: структура (заголовки, списки) для скринридеров и систем отбора; outline: закладки по разделам
   await p.pdf({
-    path: path.join(root, 'public/cv', c.file),
+    path: out,
     format: 'A4',
     printBackground: true,
     preferCSSPageSize: true,
+    tagged: true,
+    outline: true,
   })
+  // метаданные: по ним PDF находят поисковики и HR-системы (название, автор, ключевые слова, язык)
+  const doc = await PDFDocument.load(readFileSync(out), { updateMetadata: false })
+  doc.setTitle(c.meta.title, { showInWindowTitleBar: true })
+  doc.setAuthor('Bogdan Korzun (Богдан Корзун)')
+  doc.setSubject(c.meta.subject)
+  doc.setKeywords(c.meta.keywords)
+  doc.setLanguage(c.lang)
+  doc.setCreator('Bogdan Korzun')
+  doc.setProducer('Bogdan Korzun')
+  writeFileSync(out, await doc.save())
   console.log('cv', c.file)
 }
 await b.close()
